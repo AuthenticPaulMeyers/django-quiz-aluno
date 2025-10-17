@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Aluno</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <script src="/static/js/index.js" type="text/javaScript"></script>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200">
+  <div class="flex min-h-screen flex-col">
+    <header
+      class="border-b border-gray-200/80 dark:border-gray-700/80 bg-white/50 dark:bg-background-dark/50 backdrop-blur-sm sticky top-0 z-10">
+      <div class="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 py-3">
+        <div class="flex items-center gap-4">
+          <h1 class="text-3xl font-black">Aluno<span class="text-primary text-5xl">.</span></h1>
+        </div>
+        <div class="flex items-center gap-6">
+          <div class="flex items-center gap-4">
+            <img alt="User avatar" class="size-10 rounded-full"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBswydEHtwFDlrQKOwSNvOcZtdQRo1HmdhnUTo1Ei18GbsaFzeDW0B_wiuTAX8JB8ONlrBegMqLvMaA394m4lKpxkyBrT8_K_0kw6zP3PxQepxQvpuv1dXoFeNjLfMFdzQ3tKCbrZnGXoEuw6CDpZIzxk4i2AMhgUcH7_cp81-h3ho0_0GvUMANDmOK4Z0nIAM7ffigKkyv8n1vztAhHsL9MS2jYT2bHbC4BCaqTLq3wEplZljCqben8c_hagZzkxwopvTncHtE1FR5" />
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="flex-1">
+      <div class="mx-auto max-w-3xl px-4 py-8 sm:px-6 lg:px-8">
+        <div class="space-y-8">
+          <div>
+            <div class="mb-4">
+              <div class="flex items-center justify-between mb-1">
+                <p class="font-medium text-gray-700 dark:text-gray-300">
+                  Progress
+                </p>
+                <p class="text-sm font-medium text-primary">25%</p>
+              </div>
+              <div class="h-2 w-full rounded-full bg-gray-200 dark:bg-gray-700">
+                <div class="h-2 rounded-full bg-primary" style="width: 25%"></div>
+              </div>
+              <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                Question 1 of 4
+              </p>
+            </div>
+            <div class="bg-white dark:bg-gray-800/50 p-6 rounded-lg shadow-sm">
+              <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+                What is the capital of France?
+              </h2>
+              <div class="space-y-4">
+                <label
+                  class="flex items-center gap-4 rounded-lg border border-gray-200 dark:border-gray-700 p-4 cursor-pointer hover:border-primary dark:hover:border-primary has-[:checked]:border-primary has-[:checked]:bg-primary/10 dark:has-[:checked]:bg-primary/20 transition-all">
+                  <input
+                    class="h-5 w-5 appearance-none rounded-full border-2 border-gray-300 dark:border-gray-600 checked:bg-primary checked:border-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800 focus:ring-primary"
+                    name="capital" type="radio" />
+                  <span class="text-base font-medium text-gray-800 dark:text-gray-200">London</span>
+                </label>
+                <label
+                  class="flex items-center gap-4 rounded-lg border border-gray-200 dark:border-gray-700 p-4 cursor-pointer hover:border-primary dark:hover:border-primary has-[:checked]:border-primary has-[:checked]:bg-primary/10 dark:has-[:checked]:bg-primary/20 transition-all">
+                  <input checked=""
+                    class="h-5 w-5 appearance-none rounded-full border-2 border-gray-300 dark:border-gray-600 checked:bg-primary checked:border-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800 focus:ring-primary"
+                    name="capital" type="radio" />
+                  <span class="text-base font-medium text-gray-800 dark:text-gray-200">Paris</span>
+                </label>
+                <label
+                  class="flex items-center gap-4 rounded-lg border border-gray-200 dark:border-gray-700 p-4 cursor-pointer hover:border-primary dark:hover:border-primary has-[:checked]:border-primary has-[:checked]:bg-primary/10 dark:has-[:checked]:bg-primary/20 transition-all">
+                  <input
+                    class="h-5 w-5 appearance-none rounded-full border-2 border-gray-300 dark:border-gray-600 checked:bg-primary checked:border-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800 focus:ring-primary"
+                    name="capital" type="radio" />
+                  <span class="text-base font-medium text-gray-800 dark:text-gray-200">Berlin</span>
+                </label>
+                <label
+                  class="flex items-center gap-4 rounded-lg border border-gray-200 dark:border-gray-700 p-4 cursor-pointer hover:border-primary dark:hover:border-primary has-[:checked]:border-primary has-[:checked]:bg-primary/10 dark:has-[:checked]:bg-primary/20 transition-all">
+                  <input
+                    class="h-5 w-5 appearance-none rounded-full border-2 border-gray-300 dark:border-gray-600 checked:bg-primary checked:border-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800 focus:ring-primary"
+                    name="capital" type="radio" />
+                  <span class="text-base font-medium text-gray-800 dark:text-gray-200">Rome</span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="flex justify-end pt-4">
+            <button
+              class="flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 text-base font-bold text-white shadow-sm hover:bg-primary/90 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+              <a href="/students/quiz-results.html"><span>Next Question</span></a>
+              <span class="material-symbols-outlined"> arrow_forward </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+
+</html>

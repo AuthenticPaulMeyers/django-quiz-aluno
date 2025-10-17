@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect" />
+  <link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B700%3B900"
+    onload="this.rel='stylesheet'" rel="stylesheet" />
+  <title>Aluno - Student Dashboard</title>
+  <link href="data:image/x-icon;base64," rel="icon" type="image/x-icon" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script type="text/javaScript" src="/static/js/index.js"></script>
+  <!-- link to Font awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200">
+  <div class="flex h-screen relative">
+    <!-- Menu button in mobile view -->
+    <!-- <button class="menu-button absolute top-10 left-10 text-bold">
+      <i class="fa-solid fa-bars"></i>
+    </button> -->
+    <aside class="w-64 flex-shrink-0 bg-white dark:bg-gray-900/50 p-6 flex flex-col justify-between">
+      <div>
+        <div class="flex items-center gap-3 mb-8">
+          <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-12" style="
+                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDDDmRbGNrD_IVk8h9fuJc9de9ROsinpjeYC_tGNuEx9URX2g_WObnVPbANSANWTJlsjlb7CHP29BYZl95C4iUpno2_Q9WmLUavRyWauVm4PBfKl_SxHpTHZ-XgGOQG-QrKc9QYbNcPHPRQ8HnPULxZ0D_z_A74sEnq4gpJbZbwhW60V1mW-Xj-fhoEPgYfJLKL2SVdz-oam9KuUQmBjrGe-gjKdAhoMKuc5ER1CV_jW7hgcYg6-XXaXr-3cbMKLNiHVlqCP55UEcYL');
+              "></div>
+          <h1 class="text-lg font-bold text-gray-900 dark:text-white">
+            Jane Doe
+          </h1>
+        </div>
+        <nav class="flex flex-col gap-2">
+          <a class="flex items-center gap-3 px-4 py-2 rounded-lg bg-primary/10 dark:bg-primary/20 text-primary font-bold"
+            href="#">
+            <svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M224,115.55V208a16,16,0,0,1-16,16H168a16,16,0,0,1-16-16V168a8,8,0,0,0-8-8H112a8,8,0,0,0-8,8v40a16,16,0,0,1-16,16H48a16,16,0,0,1-16-16V115.55a16,16,0,0,1,5.17-11.78l80-75.48.11-.11a16,16,0,0,1,21.53,0,1.14,1.14,0,0,0,.11.11l80,75.48A16,16,0,0,1,224,115.55Z">
+              </path>
+            </svg>
+            <span>Home</span>
+          </a>
+          <a class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
+            href="/students/view-all-quizzes.html">
+            <svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M213.66,82.34l-56-56A8,8,0,0,0,152,24H56A16,16,0,0,0,40,40V216a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V88A8,8,0,0,0,213.66,82.34ZM160,51.31,188.69,80H160ZM200,216H56V40h88V88a8,8,0,0,0,8,8h48V216Z">
+              </path>
+            </svg>
+            <span>Quizzes</span>
+          </a>
+          <a class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
+            href="/students/quiz-history.html">
+            <svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M216,40H136V24a8,8,0,0,0-16,0V40H40A16,16,0,0,0,24,56V176a16,16,0,0,0,16,16H79.36L57.75,219a8,8,0,0,0,12.5,10l29.59-37h56.32l29.59,37a8,8,0,1,0,12.5-10l-21.61-27H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,136H40V56H216V176ZM104,120v24a8,8,0,0,1-16,0V120a8,8,0,0,1,16,0Zm32-16v40a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm32-16v56a8,8,0,0,1-16,0V88a8,8,0,0,1,16,0Z">
+              </path>
+            </svg>
+            <span>History</span>
+          </a>
+          <a class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
+            href="/students/student-profile.html">
+            <svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M230.92,212c-15.23-26.33-38.7-45.21-66.09-54.16a72,72,0,1,0-73.66,0C63.78,166.78,40.31,185.66,25.08,212a8,8,0,1,0,13.85,8c18.84-32.56,52.14-52,89.07-52s70.23,19.44,89.07,52a8,8,0,1,0,13.85-8ZM72,96a56,56,0,1,1,56,56A56.06,56.06,0,0,1,72,96Z">
+              </path>
+            </svg>
+            <span>Profile</span>
+          </a>
+          <!-- <a class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
+            href="/students/quiz-calendar.html">
+            <svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M208,32H184V24a8,8,0,0,0-16,0v8H88V24a8,8,0,0,0-16,0v8H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM72,48v8a8,8,0,0,0,16,0V48h80v8a8,8,0,0,0,16,0V48h24V80H48V48ZM208,208H48V96H208V208Zm-96-88v64a8,8,0,0,1-16,0V132.94l-4.42,2.22a8,8,0,0,1-7.16-14.32l16-8A8,8,0,0,1,112,120Zm59.16,30.45L152,176h16a8,8,0,0,1,0,16H136a8,8,0,0,1-6.4-12.8l28.78-38.37A8,8,0,1,0,145.07,132a8,8,0,1,1-13.85-8A24,24,0,0,1,176,136,23.76,23.76,0,0,1,171.16,150.45Z">
+              </path>
+            </svg>
+            <span>Calendar</span>
+          </a> -->
+        </nav>
+      </div>
+      <div>
+        <a class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
+          href="/login.html">
+          <svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z">
+            </path>
+          </svg>
+          <span>Logout</span>
+        </a>
+      </div>
+    </aside>
+    <main class="flex-1 overflow-y-auto">
+      <div class="p-8">
+        <header class="mb-8">
+          <h1 class="text-4xl font-bold text-gray-900 dark:text-white">
+            Dashboard
+          </h1>
+          <p class="text-gray-500 dark:text-gray-400">
+            Welcome, Jane Doe
+          </p>
+        </header>
+        <section class="mb-8">
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
+              Active Quizzes
+            </h2>
+            <!-- <div class="flex gap-2">
+              <button class="px-4 py-2 rounded-full text-sm font-medium bg-primary text-white">
+                All
+              </button>
+              <button
+                class="px-4 py-2 rounded-full text-sm font-medium bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                Math
+              </button>
+              <button
+                class="px-4 py-2 rounded-full text-sm font-medium bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                Science
+              </button>
+              <button
+                class="px-4 py-2 rounded-full text-sm font-medium bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                History
+              </button>
+            </div> -->
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-6">
+            <div
+              class="bg-white dark:bg-gray-900/50 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300">
+              <div class="h-40 md:h-60 bg-cover bg-center" style="
+                    background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDK6dpZjxSsu_DILbpotFZqB08HsRlI96wIGVoPWSYiCUIq7D2LR1dbBhC0Zd-b_SsCYSyUJjhzbbBfjIZA5NIjWd9Y6dWHqWY2IKK_YlOXPGu2g5FTlXsbLqKOPCtNXgL5LjG9rU6UOVIeUKTRsnjZvOwudhQWqNNM9NRxVe1NIX9xGMW3AjwhH_1A_bL59fTrE3e-rhlbDqhBGT9KMcgX38ObzvHJHBpzXZMmznOQsquHsoJlXMo4dFRk8NTJBdHCf7SsLwBBOPNh');
+                  "></div>
+              <div class="p-4">
+                <h3 class="font-bold text-lg text-gray-900 dark:text-white">
+                  <a href="/students/quiz-details.html">Math Quiz 1</a>
+                </h3>
+                <p class="text-gray-500 dark:text-gray-400 text-sm">
+                  Due: May 15, 2024
+                </p>
+              </div>
+            </div>
+            <div
+              class="bg-white dark:bg-gray-900/50 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300">
+              <div class="h-40 md:h-60 bg-cover bg-center" style="
+                    background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC_1O3B2F9ffZ5prjHFtzWigbKaIrF-0qzLMCzT6Fip_7VL_eAthcRQ_hXfYnVpA3KBaYgMa5s37yCOsnTRzg6gfGHqtjFDoO8i99kHuOEvZsYENgsqIpnR6F4KLOBA0zH725HduvmGpviVpBJopzrD9Iy1ZMXo3yoPTjKoBtb6J8Kwoew16R9WMuENLRCZr42fJWdAwuAoatHulvY434MOrxtWeVHU3zK7tomTtKXEFH3bXXwpZKDXluhezGhiGmbAr-YpaAAf8obD');
+                  "></div>
+              <div class="p-4">
+                <h3 class="font-bold text-lg text-gray-900 dark:text-white">
+                  <a href="/students/quiz-details.html">Science Quiz</a>
+                </h3>
+                <p class="text-gray-500 dark:text-gray-400 text-sm">
+                  Due: May 20, 2024
+                </p>
+              </div>
+            </div>
+            <div
+              class="bg-white dark:bg-gray-900/50 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300">
+              <div class="h-40 md:h-60 bg-cover bg-center" style="
+                    background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB_QYo-newoJrnATk1efVbAzOpyXGJxxA4QcuNfjgnOKYVQRveQ7QAi-8D_tpJ8y9ECAVoSELgFSNRd5sFZDqF_VabPkjyXENVUdQjb4bthJBrx6H4rD6Mu4JD2zEoFJdEwvohUZ-HZsRmmMgosJR4eMaMjctaV0QCz1UXafK92rehAFlTZzzo7em9Xuc_KEU6B9J69gfzv-Pmix51TYgTIalRC-Smbq9REOHle-mikq7CTfPxz1IdKEtEC5p3bkbEBc9mMiVUKLls9');
+                  "></div>
+              <div class="p-4">
+                <h3 class="font-bold text-lg text-gray-900 dark:text-white">
+                  <a href="/students/quiz-details.html">History Quiz 2</a>
+                </h3>
+                <p class="text-gray-500 dark:text-gray-400 text-sm">
+                  Due: May 25, 2024
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- <section class="mb-8">
+          <h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+            Performance Overview
+          </h2>
+          <div class="grid grid-cols-1 lg:grid-cols-1 gap-6"> -->
+            <!-- <div class="bg-white dark:bg-gray-900/50 p-6 rounded-xl shadow-sm">
+              <h3 class="font-bold text-lg mb-1 text-gray-900 dark:text-white">
+                Overall Score
+              </h3>
+              <p class="text-4xl font-bold text-gray-900 dark:text-white">
+                85%
+              </p>
+              <div class="flex items-center text-sm">
+                <span class="text-gray-500 dark:text-gray-400 mr-1">Last 30 Days</span>
+                <span class="text-green-500 font-semibold">+5%</span>
+              </div>
+              <div class="mt-4 h-48">
+                <svg fill="none" height="100%" preserveAspectRatio="none" viewBox="0 0 472 150" width="100%"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M0 109C18.1538 109 18.1538 21 36.3077 21C54.4615 21 54.4615 41 72.6154 41C90.7692 41 90.7692 93 108.923 93C127.077 93 127.077 33 145.231 33C163.385 33 163.385 101 181.538 101C199.692 101 199.692 61 217.846 61C236 61 236 45 254.154 45C272.308 45 272.308 121 290.462 121C308.615 121 308.615 149 326.769 149C344.923 149 344.923 1 363.077 1C381.231 1 381.231 81 399.385 81C417.538 81 417.538 129 435.692 129C453.846 129 453.846 25 472 25"
+                    stroke="#1173d4" stroke-linecap="round" stroke-width="3"></path>
+                  <path
+                    d="M0 109C18.1538 109 18.1538 21 36.3077 21C54.4615 21 54.4615 41 72.6154 41C90.7692 41 90.7692 93 108.923 93C127.077 93 127.077 33 145.231 33C163.385 33 163.385 101 181.538 101C199.692 101 199.692 61 217.846 61C236 61 236 45 254.154 45C272.308 45 272.308 121 290.462 121C308.615 121 308.615 149 326.769 149C344.923 149 344.923 1 363.077 1C381.231 1 381.231 81 399.385 81C417.538 81 417.538 129 435.692 129C453.846 129 453.846 25 472 25V149H0V109Z"
+                    fill="url(#paint0_linear_area)"></path>
+                  <defs>
+                    <linearGradient gradientUnits="userSpaceOnUse" id="paint0_linear_area" x1="236" x2="236" y1="1"
+                      y2="149">
+                      <stop stop-color="#1173d4" stop-opacity="0.2"></stop>
+                      <stop offset="1" stop-color="#1173d4" stop-opacity="0"></stop>
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </div>
+            </div> -->
+            <!-- <div class="bg-white dark:bg-gray-900/50 p-6 rounded-xl shadow-sm">
+              <h3 class="font-bold text-lg mb-1 text-gray-900 dark:text-white">
+                Subject Scores
+              </h3>
+              <p class="text-4xl font-bold text-gray-900 dark:text-white">
+                78%
+              </p>
+              <div class="flex items-center text-sm">
+                <span class="text-gray-500 dark:text-gray-400 mr-1">Last 30 Days</span>
+                <span class="text-red-500 font-semibold">-2%</span>
+              </div>
+              <div class="mt-4 h-48 flex items-end justify-around gap-4">
+                <div class="text-center">
+                  <div class="h-16 w-8 bg-primary/20 dark:bg-primary/30 rounded-t"></div>
+                  <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                    Math
+                  </p>
+                </div>
+                <div class="text-center">
+                  <div class="h-32 w-8 bg-primary/20 dark:bg-primary/30 rounded-t"></div>
+                  <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                    Science
+                  </p>
+                </div>
+                <div class="text-center">
+                  <div class="h-24 w-8 bg-primary/20 dark:bg-primary/30 rounded-t"></div>
+                  <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                    History
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section> -->
+        <!-- calendar section starts -->
+        <!-- <section>
+          <h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+            Upcoming Quizzes
+          </h2>
+          <div class="bg-white dark:bg-gray-900/50 p-6 rounded-xl shadow-sm">
+            <div class="flex items-center justify-between mb-4">
+              <button class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800">
+                <svg fill="currentColor" height="18" viewBox="0 0 256 256" width="18"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M165.66,202.34a8,8,0,0,1-11.32,11.32l-80-80a8,8,0,0,1,0-11.32l80-80a8,8,0,0,1,11.32,11.32L91.31,128Z">
+                  </path>
+                </svg>
+              </button>
+              <h3 class="font-bold text-lg text-gray-900 dark:text-white">
+                May 2024
+              </h3>
+              <button class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800">
+                <svg fill="currentColor" height="18" viewBox="0 0 256 256" width="18"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z">
+                  </path>
+                </svg>
+              </button>
+            </div>
+            <div class="grid grid-cols-7 gap-1 text-center">
+              <div class="font-bold text-sm text-gray-500 dark:text-gray-400">
+                S
+              </div>
+              <div class="font-bold text-sm text-gray-500 dark:text-gray-400">
+                M
+              </div>
+              <div class="font-bold text-sm text-gray-500 dark:text-gray-400">
+                T
+              </div>
+              <div class="font-bold text-sm text-gray-500 dark:text-gray-400">
+                W
+              </div>
+              <div class="font-bold text-sm text-gray-500 dark:text-gray-400">
+                T
+              </div>
+              <div class="font-bold text-sm text-gray-500 dark:text-gray-400">
+                F
+              </div>
+              <div class="font-bold text-sm text-gray-500 dark:text-gray-400">
+                S
+              </div>
+              <div class="col-start-4 h-10 flex items-center justify-center">
+                1
+              </div>
+              <div class="h-10 flex items-center justify-center">2</div>
+              <div class="h-10 flex items-center justify-center">3</div>
+              <div class="h-10 flex items-center justify-center">4</div>
+              <div class="h-10 flex items-center justify-center">
+                <span class="w-8 h-8 flex items-center justify-center rounded-full bg-primary text-white">5</span>
+              </div>
+              <div class="h-10 flex items-center justify-center">6</div>
+              <div class="h-10 flex items-center justify-center">7</div>
+              <div class="h-10 flex items-center justify-center">8</div>
+              <div class="h-10 flex items-center justify-center">9</div>
+              <div class="h-10 flex items-center justify-center">10</div>
+              <div class="h-10 flex items-center justify-center">11</div>
+              <div class="h-10 flex items-center justify-center">12</div>
+              <div class="h-10 flex items-center justify-center">13</div>
+              <div class="h-10 flex items-center justify-center">14</div>
+              <div class="h-10 flex items-center justify-center">15</div>
+              <div class="h-10 flex items-center justify-center">16</div>
+              <div class="h-10 flex items-center justify-center">17</div>
+              <div class="h-10 flex items-center justify-center">18</div>
+              <div class="h-10 flex items-center justify-center">19</div>
+              <div class="h-10 flex items-center justify-center">20</div>
+              <div class="h-10 flex items-center justify-center">21</div>
+              <div class="h-10 flex items-center justify-center">22</div>
+              <div class="h-10 flex items-center justify-center">23</div>
+              <div class="h-10 flex items-center justify-center">24</div>
+              <div class="h-10 flex items-center justify-center">25</div>
+              <div class="h-10 flex items-center justify-center">26</div>
+              <div class="h-10 flex items-center justify-center">27</div>
+              <div class="h-10 flex items-center justify-center">28</div>
+              <div class="h-10 flex items-center justify-center">29</div>
+              <div class="h-10 flex items-center justify-center">30</div>
+            </div>
+          </div>
+        </section> -->
+      </div>
+    </main>
+  </div>
+</body>
+
+</html>

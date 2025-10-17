@@ -6,7 +6,7 @@ from django.contrib.auth import login, logout, authenticate, get_user_model
 User = get_user_model()
 
 def login_view(request):
-    pass
+    return render(request, 'login.html')
 
 def logout_view(request):
     pass

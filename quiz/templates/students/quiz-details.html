@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Quiz Details</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <script src="/static/js/index.js" type="text/javaScript"></script>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display">
+  <div class="flex flex-col min-h-screen">
+    <header
+      class="bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm sticky top-0 z-10 border-b border-border-light dark:border-border-dark">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+          <div class="flex items-center gap-4">
+            <h1 class="text-3xl font-black">Aluno<span class="text-primary text-5xl">.</span></h1>
+          </div>
+          <div class="flex items-center gap-8">
+            <div class="flex items-center gap-4">
+
+              <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" style="
+                    background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCbkypXzgmow7ckDz7yZW7RCaYZwz3najfEnMW2IoazjujwJP-gVjV91pcKuoidfqCH-1_fGkFc8OyUe1la0vTq8ZeLIlAwpqmklqrlJoB5KyjA9VriaBn0mwblMALWJSz6Mivl8JWsgYh7OaWoZw4IaAL8hyuKFpCAWuNLUrkIHgE6nHYPo9982h2PDYNodrqZtQO3AkUD7id-lJ9sfd-mx0-laC5heVxvH_Y38dcru7SwZ28W6rEF9XggmwSqyPXFv3o_QGf7CK05');
+                  "></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+      <div
+        class="max-w-4xl mx-auto bg-white dark:bg-background-dark border border-border-light dark:border-border-dark rounded-xl shadow-sm overflow-hidden">
+        <div class="p-6 md:p-8">
+          <div class="mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-foreground-light dark:text-foreground-dark">
+              Quiz Details
+            </h1>
+            <p class="text-muted-light dark:text-muted-dark mt-2">
+              Learn more about the quiz before you start.
+            </p>
+          </div>
+          <div class="space-y-6">
+            <div
+              class="grid grid-cols-1 md:grid-cols-3 gap-y-4 gap-x-8 pb-6 border-b border-border-light dark:border-border-dark">
+              <p class="text-sm font-medium text-muted-light dark:text-muted-dark">
+                Subject
+              </p>
+              <p class="md:col-span-2 text-sm text-foreground-light dark:text-foreground-dark font-semibold">
+                Mathematics
+              </p>
+            </div>
+            <div
+              class="grid grid-cols-1 md:grid-cols-3 gap-y-4 gap-x-8 pb-6 border-b border-border-light dark:border-border-dark">
+              <p class="text-sm font-medium text-muted-light dark:text-muted-dark">
+                Total Questions
+              </p>
+              <p class="md:col-span-2 text-sm text-foreground-light dark:text-foreground-dark font-semibold">
+                20
+              </p>
+            </div>
+            <div
+              class="grid grid-cols-1 md:grid-cols-3 gap-y-4 gap-x-8 pb-6 border-b border-border-light dark:border-border-dark">
+              <p class="text-sm font-medium text-muted-light dark:text-muted-dark">
+                Time Allocated
+              </p>
+              <p class="md:col-span-2 text-sm text-foreground-light dark:text-foreground-dark font-semibold">
+                60 minutes
+              </p>
+            </div>
+            <div
+              class="grid grid-cols-1 md:grid-cols-3 gap-y-4 gap-x-8 pb-6 border-b border-border-light dark:border-border-dark">
+              <p class="text-sm font-medium text-muted-light dark:text-muted-dark">
+                Date
+              </p>
+              <p class="md:col-span-2 text-sm text-foreground-light dark:text-foreground-dark font-semibold">
+                October 26, 2024
+              </p>
+            </div>
+            <div
+              class="grid grid-cols-1 md:grid-cols-3 gap-y-4 gap-x-8 pb-6 border-b border-border-light dark:border-border-dark">
+              <p class="text-sm font-medium text-muted-light dark:text-muted-dark">
+                Teacher
+              </p>
+              <p class="md:col-span-2 text-sm text-foreground-light dark:text-foreground-dark font-semibold">
+                Ms. Johnson
+              </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-y-4 gap-x-8">
+              <p class="text-sm font-medium text-muted-light dark:text-muted-dark">
+                Instructions
+              </p>
+              <p class="md:col-span-2 text-sm text-foreground-light dark:text-foreground-dark">
+                Read each question carefully and select the best answer. You
+                have 60 minutes to complete the quiz.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          class="px-6 md:px-8 py-4 bg-background-light dark:bg-background-dark/50 border-t border-border-light dark:border-border-dark flex justify-end">
+          <a href="/students/quiz-page.html"
+            class="inline-flex items-center justify-center rounded-lg h-12 px-8 bg-primary text-white text-base font-bold tracking-wide shadow-lg hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary/50 dark:focus:ring-offset-background-dark transition-all">
+
+            <span class="material-symbols-outlined mr-2"> play_arrow </span>
+            <span>Start Quiz</span>
+          </a>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+
+</html>

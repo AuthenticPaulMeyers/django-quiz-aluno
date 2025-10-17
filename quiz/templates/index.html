@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Aluno - A School Quiz Platform</title>
+  <script src="https://cdn.tailwindcss.com?plugins=container-queries"></script>
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet" />
+  <script type="text/javaScript" src="/static/js/index.js"></script>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-content-light dark:text-content-dark">
+  <div class="flex flex-col min-h-screen">
+    <header
+      class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm border-b border-border-light dark:border-border-dark">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+          <div class="flex items-center gap-4">
+            <h1 class="text-3xl font-black">Aluno<span class="text-primary text-5xl">.</span></h1>
+          </div>
+          <div class="flex items-center gap-4">
+            <button
+              class="hidden md:flex items-center justify-center rounded-lg h-10 px-4 text-sm font-bold bg-primary text-white hover:bg-primary/10 hover:text-primary transition-colors dark:bg-primary dark:hover:bg-primary/10">
+              <a href="/login.html">Log In</a>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="flex-grow">
+      <section class="relative">
+        <div class="absolute inset-0 bg-cover bg-center" style="
+              background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBR0iHpfXGS_OWpB9pt8yOVB5CX3P9oW2Mlj9KDzi3W7Xsumkm-o_WEbDic6Rm3qIXsu-qx5BoE0FIva0MlBLvfNlbz2hIGgomOEi0VxVSWmsIMM7T70mZmGvyUDQFIhnWWNpObPtt4kYdDU2EVt-XvRYpsG5cQbyXilfTva-uoqhGvQdCr__sxuPFwbh2ur4ptkVw-glCI_KrR78fikdZEnJWx7GOuJH3_bVYZBt-8r6P_hi0H6KWuLz7j-jfrnMgnW2qjfEqVw9sQ');
+            "></div>
+        <div class="absolute inset-0 bg-background-dark/60"></div>
+        <div class="relative container mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 lg:py-40 text-center text-white">
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter mb-4">
+            Engage Students, Empower Teachers
+          </h1>
+          <p class="max-w-3xl mx-auto text-base md:text-lg lg:text-xl text-white/80 mb-8">
+            Transform your classroom with Aluno, the ultimate platform for
+            creating, managing, and participating in interactive quizzes.
+            Whether you're a student looking to test your knowledge or a
+            teacher aiming to enhance learning, Aluno has you covered.
+          </p>
+        </div>
+      </section>
+      <section class="py-16 md:py-24 bg-background-light dark:bg-background-dark">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="max-w-3xl mx-auto text-center mb-12 md:mb-16">
+            <h2 class="text-3xl md:text-4xl font-black tracking-tight">
+              Key Features
+            </h2>
+            <p class="mt-4 text-base md:text-lg text-subtle-light dark:text-subtle-dark">
+              Aluno offers a range of powerful features designed to make
+              learning fun and effective for students, while providing
+              teachers with the tools they need to create engaging and
+              insightful quizzes.
+            </p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div
+              class="bg-white dark:bg-background-dark/50 p-6 rounded-lg border border-border-light dark:border-border-dark flex flex-col items-start gap-4">
+              <div class="bg-primary/10 dark:bg-primary/20 p-3 rounded-full text-primary">
+                <svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M216,40H136V24a8,8,0,0,0-16,0V40H40A16,16,0,0,0,24,56V176a16,16,0,0,0,16,16H79.36L57.75,219a8,8,0,0,0,12.5,10l29.59-37h56.32l29.59,37a8,8,0,1,0,12.5-10l-21.61-27H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,136H40V56H216V176Z">
+                  </path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold">Interactive Quizzes</h3>
+              <p class="text-sm text-subtle-light dark:text-subtle-dark">
+                Create dynamic quizzes with multiple question types, including
+                multiple choice, true/false, and short answer, to keep
+                students engaged and motivated.
+              </p>
+            </div>
+            <div
+              class="bg-white dark:bg-background-dark/50 p-6 rounded-lg border border-border-light dark:border-border-dark flex flex-col items-start gap-4">
+              <div class="bg-primary/10 dark:bg-primary/20 p-3 rounded-full text-primary">
+                <svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M227.31,73.37,182.63,28.68a16,16,0,0,0-22.63,0L36.69,152A15.86,15.86,0,0,0,32,163.31V208a16,16,0,0,0,16,16H92.69A15.86,15.86,0,0,0,104,219.31L227.31,96a16,16,0,0,0,0-22.63ZM92.69,208H48V163.31l88-88L180.69,120ZM192,108.68,147.31,64l24-24L216,84.68Z">
+                  </path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold">Customizable Content</h3>
+              <p class="text-sm text-subtle-light dark:text-subtle-dark">
+                Tailor quizzes to your specific curriculum. Add images,
+                videos, and audio to enhance the learning experience with our
+                easy-to-use quiz builder.
+              </p>
+            </div>
+            <div
+              class="bg-white dark:bg-background-dark/50 p-6 rounded-lg border border-border-light dark:border-border-dark flex flex-col items-start gap-4">
+              <div class="bg-primary/10 dark:bg-primary/20 p-3 rounded-full text-primary">
+                <svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M244.8,150.4a8,8,0,0,1-11.2-1.6A51.6,51.6,0,0,0,192,128a8,8,0,0,1-7.37-4.89,8,8,0,0,1,0-6.22A8,8,0,0,1,192,112a24,24,0,1,0-23.24-30,8,8,0,1,1-15.5-4A40,40,0,1,1,219,117.51a67.94,67.94,0,0,1,27.43,21.68A8,8,0,0,1,244.8,150.4ZM190.92,212a8,8,0,1,1-13.84,8,57,57,0,0,0-98.16,0,8,8,0,1,1-13.84-8,72.06,72.06,0,0,1,33.74-29.92,48,48,0,1,1,58.36,0A72.06,72.06,0,0,1,190.92,212ZM128,176a32,32,0,1,0-32-32A32,32,0,0,0,128,176ZM72,120a8,8,0,0,0-8-8A24,24,0,1,1,87.24,82a8,8,0,1,0,15.5-4A40,40,0,1,0,37,117.51,67.94,67.94,0,0,0,9.6,139.19a8,8,0,1,0,12.8,9.61A51.6,51.6,0,0,1,64,128,8,8,0,0,0,72,120Z">
+                  </path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold">Role-Based Access</h3>
+              <p class="text-sm text-subtle-light dark:text-subtle-dark">
+                Students and teachers have distinct access levels, ensuring a
+                secure environment. Teachers manage quizzes, while students
+                participate and view results.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="py-16 md:py-24 bg-white dark:bg-background-dark/50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="max-w-3xl mx-auto text-center mb-12 md:mb-16">
+            <h2 class="text-3xl md:text-4xl font-black tracking-tight">
+              Benefits for Everyone
+            </h2>
+            <p class="mt-4 text-base md:text-lg text-subtle-light dark:text-subtle-dark">
+              Aluno provides unique benefits for both students and teachers,
+              fostering a collaborative and effective learning environment.
+            </p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div class="flex flex-col gap-4">
+              <img alt="Students using Aluno" class="w-full aspect-video object-cover rounded-lg"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmwbkxVvsV_d9c3JLu523nkN_Il4nqE1zGHZmhrySZc1dpS04dkFj1r42lmwxSNOOECgN9wyzhAv6VFmVetVMEjgy5MztvgTgF9pBlnI01C5pvCP2Ezu98TP-r0k-nT_G-7--CSaz_eFG0w7e3JoEslivXFq5n9cd1O2HFZHQdyS4lFlwvcsLs_Yyv3u8VcK8OA_JZhoFnbARLbieuYt5HN_79sFvCJnQql1dexYjjqk3cBwj1I0I07IN1MOIkfwewYFXqc_gucU5d" />
+              <h3 class="text-xl font-bold">For Students</h3>
+              <p class="text-subtle-light dark:text-subtle-dark">
+                Engaging and interactive quizzes that make learning fun. Get
+                immediate feedback on your performance to identify areas for
+                improvement and access a wide range of quizzes covering
+                various subjects.
+              </p>
+            </div>
+            <div class="flex flex-col gap-4">
+              <img alt="Teacher creating a quiz on Aluno" class="w-full aspect-video object-cover rounded-lg"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDR4cbn7FaS6JMShY6uBrEVwG0rAjIzPciJHC3ERtY_xmIyClsoPt7eGMyHjQg9B5rm0SqVpN5XiaojPq3yKtA3-5wL-bbOOhRZ3yFGyytM3cknunrmwHbqFP570BBUJP-oaYRMt4hT8ei-tyu1y2KkF551nKD8VY3F96rQYPE7Wv2Q0k6LGK_B391deU3X4FHyRLHo52t5om4ZVjjZyk4A57KHOf0lnPtsMRi5RG5WTwei9sdCVoX5NbMVikTT73prrGh_H147ZteP" />
+              <h3 class="text-xl font-bold">For Teachers</h3>
+              <p class="text-subtle-light dark:text-subtle-dark">
+                An easy-to-use quiz builder to create customized assessments.
+                Track student progress and performance in real-time on a
+                secure platform with role-based access for students and
+                teachers.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- <section
+          class="bg-background-light dark:bg-background-dark py-16 md:py-24"
+        >
+          <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2
+              class="text-3xl md:text-4xl font-black tracking-tight max-w-2xl mx-auto"
+            >
+              Ready to Transform Your Classroom?
+            </h2>
+            <p
+              class="mt-4 text-base md:text-lg text-subtle-light dark:text-subtle-dark max-w-2xl mx-auto"
+            >
+              Join Aluno today and experience the future of interactive
+              learning. 
+            </p>
+            <div class="mt-8 flex justify-center">
+            </div>
+          </div>
+        </section> -->
+    </main>
+    <footer class="bg-white dark:bg-background-dark/50 border-t border-border-light dark:border-border-dark">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+          <div class="flex flex-wrap justify-center gap-x-6 gap-y-2">
+            <a class="text-sm text-subtle-light dark:text-subtle-dark hover:text-primary transition-colors"
+              href="#">Academic Policy</a>
+            <a class="text-sm text-subtle-light dark:text-subtle-dark hover:text-primary transition-colors"
+              href="#">Privacy Policy</a>
+          </div>
+          <p class="text-sm text-subtle-light dark:text-subtle-dark">
+            © 2025 Aluno. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+
+</html>

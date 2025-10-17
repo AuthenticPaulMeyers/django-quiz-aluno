@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect" />
+  <link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B700%3B900"
+    onload="this.rel='stylesheet'" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#1173d4",
+            "background-light": "#f6f7f8",
+            "background-dark": "#101922",
+          },
+          fontFamily: {
+            display: ["Inter"],
+          },
+          borderRadius: {
+            DEFAULT: "0.25rem",
+            lg: "0.5rem",
+            xl: "0.75rem",
+            full: "9999px",
+          },
+        },
+      },
+    };
+  </script>
+  <title>Results History</title>
+  <link href="data:image/x-icon;base64," rel="icon" type="image/x-icon" />
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display">
+  <div class="flex min-h-screen w-full flex-col">
+    <header
+      class="sticky top-0 z-10 border-b border-zinc-200 bg-background-light/80 backdrop-blur-sm dark:border-zinc-800 dark:bg-background-dark/80">
+      <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center gap-3">
+          <h1 class="text-3xl font-black">Aluno<span class="text-primary text-5xl">.</span></h1>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <div class="h-10 w-10 rounded-full bg-cover bg-center" style="
+                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDu8MF3qzvXBxNXjyxKH_I__bULqX6t0l-tVRLC2bVngDSU_opjAXilpoclUyc2fZcXjUZP5F65kTCZhKfYmRtLmOKtxH0OPVThxKfiD5Zfvr2ffGfpdahvE885uGuegmWcKZHVpI6UIZdVFPZ20jUE_AEWHYlXzJ_sB4kBTlF9NehU1wiN_fs_8gs1pOMCOjYVcV_0DUkOJZHyVSQH1xvA6T0ZxEaQq6baFAW114JFbz_K1wRqkkecTFFzaT_4oZf_jCxiEg4ePm4T');
+              "></div>
+        </div>
+      </div>
+    </header>
+    <main class="flex-1">
+      <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+        <div class="mb-8">
+          <h2 class="text-3xl font-bold tracking-tight text-zinc-900 dark:text-white">
+            My Results
+          </h2>
+          <p class="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+            Review your quiz history and performance metrics.
+          </p>
+        </div>
+        <div class="mb-8 border-b border-zinc-200 dark:border-zinc-800">
+          <nav aria-label="Tabs" class="-mb-px flex space-x-8">
+            <a class="border-primary text-primary whitespace-nowrap border-b-2 px-1 py-4 text-sm font-medium"
+              href="#">Subject</a>
+          </nav>
+        </div>
+        <div class="space-y-12">
+          <div>
+            <h3 class="text-xl font-semibold text-zinc-900 dark:text-white">
+              Overall Performance
+            </h3>
+            <div class="mt-4 grid grid-cols-1 gap-5 sm:grid-cols-1 lg:grid-cols-3">
+              <div
+                class="overflow-hidden rounded-lg bg-white p-5 shadow-sm ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-800">
+                <p class="truncate text-sm font-medium text-zinc-500 dark:text-zinc-400">
+                  Average Score
+                </p>
+                <p class="mt-1 text-3xl font-semibold text-zinc-900 dark:text-white">
+                  85%
+                </p>
+              </div>
+              <div
+                class="overflow-hidden rounded-lg bg-white p-5 shadow-sm ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-800">
+                <p class="truncate text-sm font-medium text-zinc-500 dark:text-zinc-400">
+                  Quizzes Taken
+                </p>
+                <p class="mt-1 text-3xl font-semibold text-zinc-900 dark:text-white">
+                  12
+                </p>
+              </div>
+              <div
+                class="overflow-hidden rounded-lg bg-white p-5 shadow-sm ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-800">
+                <p class="truncate text-sm font-medium text-zinc-500 dark:text-zinc-400">
+                  Subjects Covered
+                </p>
+                <p class="mt-1 text-3xl font-semibold text-zinc-900 dark:text-white">
+                  4
+                </p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold text-zinc-900 dark:text-white">
+              Subject Performance
+            </h3>
+            <div class="mt-4 flow-root">
+              <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                  <div class="overflow-hidden rounded-lg shadow-sm ring-1 ring-zinc-200 dark:ring-zinc-800">
+                    <table class="min-w-full divide-y divide-zinc-200 dark:divide-zinc-800">
+                      <thead class="bg-zinc-50 dark:bg-zinc-900/50">
+                        <tr>
+                          <th
+                            class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-zinc-500 dark:text-zinc-400"
+                            scope="col">
+                            Subject
+                          </th>
+                          <th
+                            class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-zinc-500 dark:text-zinc-400"
+                            scope="col">
+                            Average Score
+                          </th>
+                          <th
+                            class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-zinc-500 dark:text-zinc-400"
+                            scope="col">
+                            Quizzes Taken
+                          </th>
+                          <th
+                            class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-zinc-500 dark:text-zinc-400"
+                            scope="col">
+                            Last Attempt
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody class="divide-y divide-zinc-200 bg-white dark:divide-zinc-800 dark:bg-zinc-900">
+                        <tr>
+                          <td class="whitespace-nowrap px-6 py-4 text-sm font-medium text-zinc-900 dark:text-white">
+                            Mathematics
+                          </td>
+                          <td class="whitespace-nowrap px-6 py-4 text-sm text-zinc-500 dark:text-zinc-400">
+                            92%
+                          </td>
+                          <td class="whitespace-nowrap px-6 py-4 text-sm text-zinc-500 dark:text-zinc-400">
+                            3
+                          </td>
+                          <td class="whitespace-nowrap px-6 py-4 text-sm text-zinc-500 dark:text-zinc-400">
+                            2023-11-15
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="whitespace-nowrap px-6 py-4 text-sm font-medium text-zinc-900 dark:text-white">
+                            Science
+                          </td>
+                          <td class="whitespace-nowrap px-6 py-4 text-sm text-zinc-500 dark:text-zinc-400">
+                            88%
+                          </td>
+                          <td class="whitespace-nowrap px-6 py-4 text-sm text-zinc-500 dark:text-zinc-400">
+                            4
+                          </td>
+                          <td class="whitespace-nowrap px-6 py-4 text-sm text-zinc-500 dark:text-zinc-400">
+                            2023-11-12
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="whitespace-nowrap px-6 py-4 text-sm font-medium text-zinc-900 dark:text-white">
+                            History
+                          </td>
+                          <td class="whitespace-nowrap px-6 py-4 text-sm text-zinc-500 dark:text-zinc-400">
+                            78%
+                          </td>
+                          <td class="whitespace-nowrap px-6 py-4 text-sm text-zinc-500 dark:text-zinc-400">
+                            2
+                          </td>
+                          <td class="whitespace-nowrap px-6 py-4 text-sm text-zinc-500 dark:text-zinc-400">
+                            2023-11-08
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="whitespace-nowrap px-6 py-4 text-sm font-medium text-zinc-900 dark:text-white">
+                            Literature
+                          </td>
+                          <td class="whitespace-nowrap px-6 py-4 text-sm text-zinc-500 dark:text-zinc-400">
+                            85%
+                          </td>
+                          <td class="whitespace-nowrap px-6 py-4 text-sm text-zinc-500 dark:text-zinc-400">
+                            3
+                          </td>
+                          <td class="whitespace-nowrap px-6 py-4 text-sm text-zinc-500 dark:text-zinc-400">
+                            2023-11-05
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+
+</html>

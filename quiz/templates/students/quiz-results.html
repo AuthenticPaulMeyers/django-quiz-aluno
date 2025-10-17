@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Quiz Results</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+  <script src="/static/js/index.js" type="text/javaScript"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display">
+  <div class="flex flex-col min-h-screen">
+    <header
+      class="bg-background-light dark:bg-background-dark/50 backdrop-blur-sm sticky top-0 z-10 border-b border-border-light dark:border-border-dark">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+          <h1 class="text-3xl font-black">Aluno<span class="text-primary text-5xl">.</span></h1>
+          <div class="flex items-center gap-4">
+            <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" style="
+                  background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAYL9qWtEuqLTct794rM6sGtp5Cw_yPlOpmXIIA7Gkl0Qj8RT4B2J4l2i6cag9eWZLOa0_HPO0DL_FqNyPVqr_JSoAY4TCf4e6V3pCgnicFFXtmZcOTUhSGSxKq6yBdmj6PFabqm6NDA8Fj9toZoJPxGFAmr5BJP6wIjLi8z-8DOevcMk4mRiF6hTWioUclx9Gd_sz4JZ2xsiVVxitMwhZJicoW8-BmlYCv3n4LDEGsMOU3PGH8S5YEN15sEVj5GYfRDEyHRYEDYFWX');
+                "></div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
+      <div class="max-w-4xl mx-auto">
+        <div class="mb-8">
+          <h2 class="text-3xl font-bold tracking-tight text-foreground-light dark:text-foreground-dark">
+            Quiz Results
+          </h2>
+          <p class="mt-2 text-lg text-subtle-light dark:text-subtle-dark">
+            Here's your performance on the recent quiz.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
+          <div
+            class="bg-white dark:bg-background-dark/70 p-6 rounded-xl border border-border-light dark:border-border-dark">
+            <p class="text-sm font-medium text-subtle-light dark:text-subtle-dark">
+              Score
+            </p>
+            <p class="text-4xl font-bold text-primary mt-2">85%</p>
+            <span class="text-sm font-medium text-subtle-light dark:text-subtle-dark">PASSED</span>
+          </div>
+          <div
+            class="bg-white dark:bg-background-dark/70 p-6 rounded-xl border border-border-light dark:border-border-dark">
+            <p class="text-sm font-medium text-subtle-light dark:text-subtle-dark">
+              Correct Answers
+            </p>
+            <p class="text-4xl font-bold text-foreground-light dark:text-foreground-dark mt-2">
+              17/20
+            </p>
+          </div>
+        </div>
+        <div>
+          <h3 class="text-2xl font-bold text-foreground-light dark:text-foreground-dark mb-6">
+            Answer Review
+          </h3>
+          <div class="space-y-4">
+            <div
+              class="flex items-start gap-4 p-4 bg-white dark:bg-background-dark/70 rounded-lg border border-border-light dark:border-border-dark">
+              <div
+                class="flex-shrink-0 size-10 rounded-full flex items-center justify-center bg-success-light/10 dark:bg-success-dark/10 text-success-light dark:text-success-dark">
+                <span class="material-symbols-outlined">check</span>
+              </div>
+              <div class="flex-grow">
+                <p class="font-medium text-foreground-light dark:text-foreground-dark">
+                  Question 1: What is the capital of France?
+                </p>
+                <p class="text-sm text-subtle-light dark:text-subtle-dark">
+                  Your answer: Paris
+                </p>
+              </div>
+            </div>
+            <div
+              class="flex flex-col gap-4 p-4 bg-white dark:bg-background-dark/70 rounded-lg border border-border-light dark:border-border-dark">
+              <div class="flex items-start gap-4">
+                <div
+                  class="flex-shrink-0 size-10 rounded-full flex items-center justify-center bg-danger-light/10 dark:bg-danger-dark/10 text-danger-light dark:text-danger-dark">
+                  <span class="material-symbols-outlined">close</span>
+                </div>
+                <div class="flex-grow">
+                  <p class="font-medium text-foreground-light dark:text-foreground-dark">
+                    Question 3: What is the largest planet in our solar
+                    system?
+                  </p>
+                  <p class="text-sm text-subtle-light dark:text-subtle-dark">
+                    <span class="line-through">Your answer: Saturn</span>
+                  </p>
+                </div>
+              </div>
+
+            </div>
+            <div
+              class="flex items-start gap-4 p-4 bg-white dark:bg-background-dark/70 rounded-lg border border-border-light dark:border-border-dark">
+              <div
+                class="flex-shrink-0 size-10 rounded-full flex items-center justify-center bg-success-light/10 dark:bg-success-dark/10 text-success-light dark:text-success-dark">
+                <span class="material-symbols-outlined">check</span>
+              </div>
+              <div class="flex-grow">
+                <p class="font-medium text-foreground-light dark:text-foreground-dark">
+                  Question 4: What is the chemical symbol for water?
+                </p>
+                <p class="text-sm text-subtle-light dark:text-subtle-dark">
+                  Your answer: H₂O
+                </p>
+              </div>
+            </div>
+            <div
+              class="flex items-start gap-4 p-4 bg-white dark:bg-background-dark/70 rounded-lg border border-border-light dark:border-border-dark">
+              <div
+                class="flex-shrink-0 size-10 rounded-full flex items-center justify-center bg-success-light/10 dark:bg-success-dark/10 text-success-light dark:text-success-dark">
+                <span class="material-symbols-outlined">check</span>
+              </div>
+              <div class="flex-grow">
+                <p class="font-medium text-foreground-light dark:text-foreground-dark">
+                  Question 5: Who wrote 'Romeo and Juliet'?
+                </p>
+                <p class="text-sm text-subtle-light dark:text-subtle-dark">
+                  Your answer: William Shakespeare
+                </p>
+              </div>
+            </div>
+            <div
+              class="flex flex-col gap-4 p-4 bg-white dark:bg-background-dark/70 rounded-lg border border-border-light dark:border-border-dark">
+              <div class="flex items-start gap-4">
+                <div
+                  class="flex-shrink-0 size-10 rounded-full flex items-center justify-center bg-danger-light/10 dark:bg-danger-dark/10 text-danger-light dark:text-danger-dark">
+                  <span class="material-symbols-outlined">close</span>
+                </div>
+                <div class="flex-grow">
+                  <p class="font-medium text-foreground-light dark:text-foreground-dark">
+                    Question 18: What is the chemical symbol for sodium?
+                  </p>
+                  <p class="text-sm text-subtle-light dark:text-subtle-dark">
+                    <span class="line-through">Your answer: So</span>
+                  </p>
+                </div>
+              </div>
+
+            </div>
+            <div
+              class="flex items-start gap-4 p-4 bg-white dark:bg-background-dark/70 rounded-lg border border-border-light dark:border-border-dark">
+              <div
+                class="flex-shrink-0 size-10 rounded-full flex items-center justify-center bg-success-light/10 dark:bg-success-dark/10 text-success-light dark:text-success-dark">
+                <span class="material-symbols-outlined">check</span>
+              </div>
+              <div class="flex-grow">
+                <p class="font-medium text-foreground-light dark:text-foreground-dark">
+                  Question 19: What is the capital of Canada?
+                </p>
+                <p class="text-sm text-subtle-light dark:text-subtle-dark">
+                  Your answer: Ottawa
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="mt-12 text-center">
+            <button
+              class="bg-primary text-white font-medium px-6 py-3 rounded-lg hover:bg-primary/90 transition-all duration-300">
+              <a href="/students/student-dashboard.html">Back to Dashboard</a>
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+
+</html>
