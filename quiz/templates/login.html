@@ -1,3 +1,5 @@
+{% load widget_tweaks %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,36 +24,39 @@
                     <h1 class="text-3xl font-black">Aluno<span class="text-primary text-5xl">.</span></h1>
                 </div>
         </header>
-        <main class="flex-grow flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+
+        <main class="flex-grow flex-col flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
             <div
                 class="w-full max-w-md space-y-8 bg-white dark:bg-gray-900/50 p-8 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700/50">
                 <div>
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="text-center text-sm text-red-600">{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
                     <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-white">Login</h2>
                     <p class="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
                         Log in as a student or teacher.
                     </p>
                 </div>
-                <form action="#" class="mt-8 space-y-6" method="POST">
+                <form action="{% url 'quiz:login' %}" class="mt-8 space-y-6" method="POST">
+                    {% csrf_token %}
                     <input name="remember" type="hidden" value="true" />
                     <div class="rounded-lg space-y-4">
                         <div>
                             <label class="sr-only" for="username">Username</label>
-                            <input
-                                class="form-input appearance-none relative block w-full px-3 py-3 border border-gray-300 dark:border-gray-700 bg-background-light dark:bg-background-dark text-gray-900 dark:text-white rounded-lg focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
-                                id="username" name="username" placeholder="Username" type="text" />
+                            {% render_field form.username class="form-input appearance-none relative block w-full px-3 py-3 border border-gray-300 dark:border-gray-700 bg-background-light dark:bg-background-dark text-gray-900 dark:text-white rounded-lg focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm" %}
                         </div>
                         <div>
                             <label class="sr-only" for="password">Password</label>
-                            <input autocomplete="current-password"
-                                class="form-input appearance-none relative block w-full px-3 py-3 border border-gray-300 dark:border-gray-700 bg-background-light dark:bg-background-dark text-gray-900 dark:text-white rounded-lg focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
-                                id="password" name="password" placeholder="Password" type="password" />
+                            {% render_field form.password class="form-input appearance-none relative block w-full px-3 py-3 border border-gray-300 dark:border-gray-700 bg-background-light dark:bg-background-dark text-gray-900 dark:text-white rounded-lg focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm" %}
                         </div>
                     </div>
                     <div>
                         <button
                             class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-bold rounded-lg text-white bg-primary hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors"
                             type="submit">
-                            <a href="/students/student-dashboard.html">Log In</a>
+                            Log In
                         </button>
                     </div>
                 </form>

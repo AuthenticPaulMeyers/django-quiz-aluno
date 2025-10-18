@@ -1,12 +1,26 @@
 from django.contrib import admin
 from .models import Class, ClassEnrollment, Teacher, CustomUser, Student, Attempt, AttemptAnswer, Question, Quiz, MultipleChoice, Subject
 
+from django.contrib.auth.admin import UserAdmin
+from .models import CustomUser
+from .forms import CustomUserCreationForm, CustomUserChangeForm
+
+class CustomUserAdmin(UserAdmin):
+    add_form = CustomUserCreationForm
+    form = CustomUserChangeForm
+    model = CustomUser
+    list_display = ['username', 'first_name', 'last_name', 'role', 'is_active']
+
+    fieldsets = UserAdmin.fieldsets + (
+        ('User Role', {'fields': ('role',)}),
+    )
+    
 # Register your models here.
 admin.site.register(Class)
 admin.site.register(ClassEnrollment)
 admin.site.register(Teacher)
-admin.site.register(CustomUser)
 admin.site.register(Student)
+admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(Attempt)
 admin.site.register(AttemptAnswer)
 admin.site.register(Question)

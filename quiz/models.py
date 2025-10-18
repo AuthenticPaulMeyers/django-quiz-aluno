@@ -11,7 +11,7 @@ class CustomUser(AbstractUser):
     first_name = models.CharField(max_length=30, null=False)
     last_name = models.CharField(max_length=30, null=False)
     username = models.CharField(max_length=30, null=False, unique=True)
-    password_hash = models.CharField(max_length=255)
+    password = models.CharField(max_length=255)
     role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='admin')
 
     def __str__(self):
