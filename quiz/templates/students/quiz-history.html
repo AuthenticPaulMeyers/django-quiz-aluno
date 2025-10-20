@@ -78,7 +78,7 @@
                   Average Score
                 </p>
                 <p class="mt-1 text-3xl font-semibold text-zinc-900 dark:text-white">
-                  85%
+                  {{ average_score }}
                 </p>
               </div>
               <div
@@ -87,7 +87,7 @@
                   Quizzes Taken
                 </p>
                 <p class="mt-1 text-3xl font-semibold text-zinc-900 dark:text-white">
-                  12
+                  {{ quizzes_taken }}
                 </p>
               </div>
               <div
@@ -96,7 +96,7 @@
                   Subjects Covered
                 </p>
                 <p class="mt-1 text-3xl font-semibold text-zinc-900 dark:text-white">
-                  4
+                  {{ subjects_covered }}
                 </p>
               </div>
             </div>
@@ -135,62 +135,28 @@
                         </tr>
                       </thead>
                       <tbody class="divide-y divide-zinc-200 bg-white dark:divide-zinc-800 dark:bg-zinc-900">
-                        <tr>
-                          <td class="whitespace-nowrap px-6 py-4 text-sm font-medium text-zinc-900 dark:text-white">
-                            Mathematics
-                          </td>
-                          <td class="whitespace-nowrap px-6 py-4 text-sm text-zinc-500 dark:text-zinc-400">
-                            92%
-                          </td>
-                          <td class="whitespace-nowrap px-6 py-4 text-sm text-zinc-500 dark:text-zinc-400">
-                            3
-                          </td>
-                          <td class="whitespace-nowrap px-6 py-4 text-sm text-zinc-500 dark:text-zinc-400">
-                            2023-11-15
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="whitespace-nowrap px-6 py-4 text-sm font-medium text-zinc-900 dark:text-white">
-                            Science
-                          </td>
-                          <td class="whitespace-nowrap px-6 py-4 text-sm text-zinc-500 dark:text-zinc-400">
-                            88%
-                          </td>
-                          <td class="whitespace-nowrap px-6 py-4 text-sm text-zinc-500 dark:text-zinc-400">
-                            4
-                          </td>
-                          <td class="whitespace-nowrap px-6 py-4 text-sm text-zinc-500 dark:text-zinc-400">
-                            2023-11-12
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="whitespace-nowrap px-6 py-4 text-sm font-medium text-zinc-900 dark:text-white">
-                            History
-                          </td>
-                          <td class="whitespace-nowrap px-6 py-4 text-sm text-zinc-500 dark:text-zinc-400">
-                            78%
-                          </td>
-                          <td class="whitespace-nowrap px-6 py-4 text-sm text-zinc-500 dark:text-zinc-400">
-                            2
-                          </td>
-                          <td class="whitespace-nowrap px-6 py-4 text-sm text-zinc-500 dark:text-zinc-400">
-                            2023-11-08
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="whitespace-nowrap px-6 py-4 text-sm font-medium text-zinc-900 dark:text-white">
-                            Literature
-                          </td>
-                          <td class="whitespace-nowrap px-6 py-4 text-sm text-zinc-500 dark:text-zinc-400">
-                            85%
-                          </td>
-                          <td class="whitespace-nowrap px-6 py-4 text-sm text-zinc-500 dark:text-zinc-400">
-                            3
-                          </td>
-                          <td class="whitespace-nowrap px-6 py-4 text-sm text-zinc-500 dark:text-zinc-400">
-                            2023-11-05
-                          </td>
-                        </tr>
+                        {% if subject_performance %}
+                          {% for s in subject_performance %}
+                            <tr>
+                              <td class="whitespace-nowrap px-6 py-4 text-sm font-medium text-zinc-900 dark:text-white">
+                                {{ s.subject.name }}
+                              </td>
+                              <td class="whitespace-nowrap px-6 py-4 text-sm text-zinc-500 dark:text-zinc-400">
+                                {{ s.average_score }}%
+                              </td>
+                              <td class="whitespace-nowrap px-6 py-4 text-sm text-zinc-500 dark:text-zinc-400">
+                                {{ s.quizzes_taken }}
+                              </td>
+                              <td class="whitespace-nowrap px-6 py-4 text-sm text-zinc-500 dark:text-zinc-400">
+                                {{ s.last_attempt|date:"Y-m-d" }}
+                              </td>
+                            </tr>
+                          {% endfor %}
+                        {% else %}
+                          <tr>
+                            <td colspan="4" class="px-6 py-4 text-sm text-zinc-500 dark:text-zinc-400">No performance data available.</td>
+                          </tr>
+                        {% endif %}
                       </tbody>
                     </table>
                   </div>

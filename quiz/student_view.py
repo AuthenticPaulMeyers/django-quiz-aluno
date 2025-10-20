@@ -54,8 +54,45 @@ def all_quizzes_view(request):
 
     return render(request, 'students/view-all-quizzes.html', context)
 
-def quiz_history_view(request, student_id):
-    return render(request, 'students/quiz-history.html')
+def quiz_history_view(request, student_id=None):
+    # Show the quiz history for the logged-in student
+    if not request.user.is_authenticated:
+        return redirect('login')
+
+    user = request.user
+    try:
+        # prefer the logged-in user's student object
+        student_obj = getattr(user, 'student', None)
+        if student_obj is None and student_id:
+            # fallback: try to get by id
+            from .models import Student
+            student_obj = Student.objects.filter(pk=student_id).first()
+
+        if student_obj is None:
+            messages.error(request, 'Student record not found.')
+            return redirect('student-dashboard')
+
+        # overall metrics
+        avg_score = student_obj.average_score()
+        quizzes_taken = student_obj.total_quizzes_taken()
+        subjects_count = student_obj.subjects_covered_count()
+        subject_perf = student_obj.subject_performance()
+
+        context = {
+            'user': user,
+            'average_score': f"{avg_score}%" if avg_score is not None else 'N/A',
+            'quizzes_taken': quizzes_taken,
+            'subjects_covered': subjects_count,
+            'subject_performance': subject_perf,
+        }
+
+        return render(request, 'students/quiz-history.html', context)
+
+    except Exception as e:
+        # for debugging purposes
+        print('Error in quiz_history_view:', e)
+        messages.error(request, 'Unable to load quiz history.')
+        return redirect('student-dashboard')
 
 def quiz_details_view(request, quiz_id):
     quiz = Quiz.objects.filter(pk=quiz_id).first()
