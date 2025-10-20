@@ -1,19 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'students/base.html' %}
 
-<head>
-  <meta charset="utf-8" />
-  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <title>All Quizzes</title>
-  <link href="https://fonts.googleapis.com" rel="preconnect" />
-  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <script src="/static/js/index.js" type="text/javaScript"></script>
-</head>
+{% load widget_tweaks %}
 
-<body class="bg-background-light dark:bg-background-dark font-display">
+{% load static %}
+
+{% block content %}
   <div class="flex flex-col min-h-screen">
     <header
       class="bg-background-light dark:bg-background-dark/80 backdrop-blur-sm sticky top-0 z-20 border-b border-background-dark/10 dark:border-background-light/10">
@@ -51,12 +42,14 @@
       <div
         class="bg-background-light dark:bg-background-dark/80 rounded-xl overflow-hidden border border-background-dark/10 dark:border-background-light/10">
         <div class="overflow-x-auto">
+        {% if all_quizzes %}
           <table class="w-full text-sm text-left text-background-dark/80 dark:text-background-light/80">
             <thead
               class="text-xs uppercase bg-background-light dark:bg-background-dark border-b border-background-dark/10 dark:border-background-light/10">
               <tr>
                 <th class="px-6 py-3 font-medium" scope="col">Quiz Title</th>
                 <th class="px-6 py-3 font-medium" scope="col">Subject</th>
+                <th class="px-6 py-3 font-medium" scope="col">Teacher</th>
                 <th class="px-6 py-3 font-medium" scope="col">Date</th>
                 <th class="px-6 py-3 font-medium text-center" scope="col">
                   Status
@@ -66,58 +59,34 @@
                 </th>
               </tr>
             </thead>
+            
             <tbody>
+              {% for quiz in all_quizzes %}
               <tr
                 class="border-b border-background-dark/10 dark:border-background-light/10 hover:bg-primary/5 dark:hover:bg-primary/10">
                 <td class="px-6 py-4 font-medium text-background-dark dark:text-background-light whitespace-nowrap">
-                  History of the Americas
+                  {{ quiz.title }}
                 </td>
-                <td class="px-6 py-4">History</td>
-                <td class="px-6 py-4">2024-07-15</td>
+                <td class="px-6 py-4">{{ quiz.subject.name }}</td>
+                <td class="px-6 py-4">{{ quiz.teacher.name }}</td>
+                <td class="px-6 py-4">{{ quiz.end_time }}</td>
                 <td class="px-6 py-4 text-center">
                   <span
-                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/20 text-primary">Active</span>
+                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/20 text-primary">{{ quiz.duration }}</span>
                 </td>
                 <td class="px-6 py-4 text-right">
-                  <a class="font-medium text-primary hover:underline" href="/students/quiz-details.html">View</a>
+                  <a class="font-medium text-primary hover:underline" href="{% url 'quiz:quiz-details' quiz.id %}">View</a>
                 </td>
               </tr>
-              <tr
-                class="border-b border-background-dark/10 dark:border-background-light/10 hover:bg-primary/5 dark:hover:bg-primary/10">
-                <td class="px-6 py-4 font-medium text-background-dark dark:text-background-light whitespace-nowrap">
-                  Algebra I - Midterm
-                </td>
-                <td class="px-6 py-4">Mathematics</td>
-                <td class="px-6 py-4">2024-07-10</td>
-                <td class="px-6 py-4 text-center">
-                  <span
-                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-background-dark/10 dark:bg-background-light/10 text-background-dark/60 dark:text-background-light/60">Inactive</span>
-                </td>
-                <td class="px-6 py-4 text-right">
-                  <a class="font-medium text-primary hover:underline" href="/students/quiz-details.html">View</a>
-                </td>
-              </tr>
-              <tr
-                class="border-b border-background-dark/10 dark:border-background-light/10 hover:bg-primary/5 dark:hover:bg-primary/10">
-                <td class="px-6 py-4 font-medium text-background-dark dark:text-background-light whitespace-nowrap">
-                  Introduction to Biology
-                </td>
-                <td class="px-6 py-4">Science</td>
-                <td class="px-6 py-4">2024-07-05</td>
-                <td class="px-6 py-4 text-center">
-                  <span
-                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/20 text-primary">Active</span>
-                </td>
-                <td class="px-6 py-4 text-right">
-                  <a class="font-medium text-primary hover:underline" href="/students/quiz-details.html">View</a>
-                </td>
-              </tr>
+              {% endfor %}
             </tbody>
+            {% endif %}
           </table>
         </div>
       </div>
+        {% if message %}
+        <span class="text-sm text-center text-red-600 mt-8 ">{{ message }}</span>
+          {% endif %}
     </main>
   </div>
-</body>
-
-</html>
+{% endblock %}

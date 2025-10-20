@@ -1,5 +1,6 @@
-{% load static %}
 {% extends 'students/base.html' %}
+
+{% load static %}
 
 {% block content %}
   <div class="flex flex-col min-h-screen">
@@ -13,9 +14,9 @@
           <div class="flex items-center gap-8">
             <div class="flex items-center gap-4">
 
-              <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" style="
-                    background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCbkypXzgmow7ckDz7yZW7RCaYZwz3najfEnMW2IoazjujwJP-gVjV91pcKuoidfqCH-1_fGkFc8OyUe1la0vTq8ZeLIlAwpqmklqrlJoB5KyjA9VriaBn0mwblMALWJSz6Mivl8JWsgYh7OaWoZw4IaAL8hyuKFpCAWuNLUrkIHgE6nHYPo9982h2PDYNodrqZtQO3AkUD7id-lJ9sfd-mx0-laC5heVxvH_Y38dcru7SwZ28W6rEF9XggmwSqyPXFv3o_QGf7CK05');
-                  "></div>
+              <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10">
+                <img src="{% static 'images/user.png' %}" alt="User placeholder" class="rounded-full">              
+              </div>
             </div>
           </div>
         </div>
@@ -58,7 +59,7 @@
                 Time Allocated
               </p>
               <p class="md:col-span-2 text-sm text-foreground-light dark:text-foreground-dark font-semibold">
-                60 minutes
+                {{ quiz.duration }}
               </p>
             </div>
             <div
@@ -91,10 +92,10 @@
         </div>
         <div
           class="px-6 md:px-8 py-4 bg-background-light dark:bg-background-dark/50 border-t border-border-light dark:border-border-dark flex justify-end">
-          <a href="/students/quiz-page.html"
+          <a href="{% url 'quiz:attempt-quiz' quiz.id %}"
             class="inline-flex items-center justify-center rounded-lg h-12 px-8 bg-primary text-white text-base font-bold tracking-wide shadow-lg hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary/50 dark:focus:ring-offset-background-dark transition-all">
 
-            <span class="material-symbols-outlined mr-2"> play_arrow </span>
+            <span class="mr-2"> <i class="fa-solid fa-play"></i></span>
             <span>Start Quiz</span>
           </a>
         </div>

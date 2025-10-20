@@ -4,25 +4,26 @@
 
 {% block content %}
   <div class="flex h-screen relative">
-    <!-- Menu button in mobile view -->
-    <!-- <button class="menu-button absolute top-10 left-10 text-bold">
-      <i class="fa-solid fa-bars"></i>
-    </button> -->
+
     <aside class="w-64 flex-shrink-0 bg-white dark:bg-gray-900/50 p-6 flex flex-col justify-between">
       <div>
         <div class="flex items-center gap-3 mb-8">
-          <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-12" style="
-                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDDDmRbGNrD_IVk8h9fuJc9de9ROsinpjeYC_tGNuEx9URX2g_WObnVPbANSANWTJlsjlb7CHP29BYZl95C4iUpno2_Q9WmLUavRyWauVm4PBfKl_SxHpTHZ-XgGOQG-QrKc9QYbNcPHPRQ8HnPULxZ0D_z_A74sEnq4gpJbZbwhW60V1mW-Xj-fhoEPgYfJLKL2SVdz-oam9KuUQmBjrGe-gjKdAhoMKuc5ER1CV_jW7hgcYg6-XXaXr-3cbMKLNiHVlqCP55UEcYL');
-              "></div>
+          <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-12">
+            <img src="{% static 'images/user.png' %}" alt="User placeholder" class="rounded-full">
+          </div>
           {% if user %}
-          <h1 class="text-lg font-bold text-gray-900 dark:text-white">
+          <div>
+            <h1 class="text-lg font-bold text-gray-900 dark:text-white">
             {{ user.first_name }} {{ user.last_name }}
-          </h1>
+            </h1>
+            <span class="text-sm text-gray-500">{{ user.student.class_enrolled.name }}</span>
+          </div>
+
           {% endif %}
         </div>
         <nav class="flex flex-col gap-2">
           <a class="flex items-center gap-3 px-4 py-2 rounded-lg bg-primary/10 dark:bg-primary/20 text-primary font-bold"
-            href="#">
+            href="{% url 'quiz:student-dashboard' %}">
             <svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M224,115.55V208a16,16,0,0,1-16,16H168a16,16,0,0,1-16-16V168a8,8,0,0,0-8-8H112a8,8,0,0,0-8,8v40a16,16,0,0,1-16,16H48a16,16,0,0,1-16-16V115.55a16,16,0,0,1,5.17-11.78l80-75.48.11-.11a16,16,0,0,1,21.53,0,1.14,1.14,0,0,0,.11.11l80,75.48A16,16,0,0,1,224,115.55Z">
@@ -31,7 +32,7 @@
             <span>Home</span>
           </a>
           <a class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
-            href="/students/view-all-quizzes.html">
+            href="{% url 'quiz:all-quizzes' %}">
             <svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M213.66,82.34l-56-56A8,8,0,0,0,152,24H56A16,16,0,0,0,40,40V216a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V88A8,8,0,0,0,213.66,82.34ZM160,51.31,188.69,80H160ZM200,216H56V40h88V88a8,8,0,0,0,8,8h48V216Z">
@@ -40,7 +41,7 @@
             <span>Quizzes</span>
           </a>
           <a class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
-            href="/students/quiz-history.html">
+            href="{% url 'quiz:quiz-history' user.id %}">
             <svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M216,40H136V24a8,8,0,0,0-16,0V40H40A16,16,0,0,0,24,56V176a16,16,0,0,0,16,16H79.36L57.75,219a8,8,0,0,0,12.5,10l29.59-37h56.32l29.59,37a8,8,0,1,0,12.5-10l-21.61-27H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,136H40V56H216V176ZM104,120v24a8,8,0,0,1-16,0V120a8,8,0,0,1,16,0Zm32-16v40a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm32-16v56a8,8,0,0,1-16,0V88a8,8,0,0,1,16,0Z">
@@ -49,7 +50,7 @@
             <span>History</span>
           </a>
           <a class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
-            href="/students/student-profile.html">
+            href="{% url 'quiz:student-profile' user.id %}">
             <svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M230.92,212c-15.23-26.33-38.7-45.21-66.09-54.16a72,72,0,1,0-73.66,0C63.78,166.78,40.31,185.66,25.08,212a8,8,0,1,0,13.85,8c18.84-32.56,52.14-52,89.07-52s70.23,19.44,89.07,52a8,8,0,1,0,13.85-8ZM72,96a56,56,0,1,1,56,56A56.06,56.06,0,0,1,72,96Z">
@@ -80,8 +81,10 @@
         </a>
       </div>
     </aside>
+
     <main class="flex-1 overflow-y-auto">
       <div class="p-8">
+
         <header class="mb-8">
           <h1 class="text-4xl font-bold text-gray-900 dark:text-white">
             Dashboard
@@ -91,30 +94,48 @@
             Welcome {{ user.first_name }} {{ user.last_name }}
           </p>
           {% endif %}
-          
         </header>
-        <section class="mb-8">
-          <div class="flex justify-between items-center mb-4">
+
+        <section class="mb-8 space-y-12">
+          <div>
+            <h3 class="text-xl font-semibold text-zinc-900 dark:text-white">
+              Overall Performance
+            </h3>
+            <div class="mt-4 grid grid-cols-1 gap-5 sm:grid-cols-1 lg:grid-cols-3">
+              <div
+                class="overflow-hidden rounded-lg bg-white p-5 shadow-sm ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-800">
+                <p class="truncate text-sm font-medium text-zinc-500 dark:text-zinc-400">
+                  Average Score
+                </p>
+                <p class="mt-1 text-3xl font-semibold text-zinc-900 dark:text-white">
+                  85%
+                </p>
+              </div>
+              <div
+                class="overflow-hidden rounded-lg bg-white p-5 shadow-sm ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-800">
+                <p class="truncate text-sm font-medium text-zinc-500 dark:text-zinc-400">
+                  Quizzes Taken
+                </p>
+                <p class="mt-1 text-3xl font-semibold text-zinc-900 dark:text-white">
+                  12
+                </p>
+              </div>
+              <div
+                class="overflow-hidden rounded-lg bg-white p-5 shadow-sm ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-800">
+                <p class="truncate text-sm font-medium text-zinc-500 dark:text-zinc-400">
+                  Subjects Covered
+                </p>
+                <p class="mt-1 text-3xl font-semibold text-zinc-900 dark:text-white">
+                  4
+                </p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="flex justify-between items-center mb-4">
             <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
               Active Quizzes
             </h2>
-            <!-- <div class="flex gap-2">
-              <button class="px-4 py-2 rounded-full text-sm font-medium bg-primary text-white">
-                All
-              </button>
-              <button
-                class="px-4 py-2 rounded-full text-sm font-medium bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
-                Math
-              </button>
-              <button
-                class="px-4 py-2 rounded-full text-sm font-medium bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
-                Science
-              </button>
-              <button
-                class="px-4 py-2 rounded-full text-sm font-medium bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
-                History
-              </button>
-            </div> -->
           </div>
           {% if message %}
             <span class="text-sm text-center text-red-600">{{ message }}</span>
@@ -123,21 +144,20 @@
 
             {% for quiz in all_quizzes %}
               <div
-                class="bg-white dark:bg-gray-900/50 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300">
-                <div class="h-40 md:h-60 bg-cover bg-center" style="
-                      background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDK6dpZjxSsu_DILbpotFZqB08HsRlI96wIGVoPWSYiCUIq7D2LR1dbBhC0Zd-b_SsCYSyUJjhzbbBfjIZA5NIjWd9Y6dWHqWY2IKK_YlOXPGu2g5FTlXsbLqKOPCtNXgL5LjG9rU6UOVIeUKTRsnjZvOwudhQWqNNM9NRxVe1NIX9xGMW3AjwhH_1A_bL59fTrE3e-rhlbDqhBGT9KMcgX38ObzvHJHBpzXZMmznOQsquHsoJlXMo4dFRk8NTJBdHCf7SsLwBBOPNh');
-                    "></div>
+                class="bg-white dark:bg-gray-900/50 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 ">
                 <div class="p-4">
                   <h3 class="font-bold text-lg text-gray-900 dark:text-white">
-                    <a href="{% url 'quiz:quiz-details' quiz.id %}">{{ quiz.title }}</a>
+                    <a href="{% url 'quiz:quiz-details' quiz.id %}">{{ quiz.subject.name }}</a>
                   </h3>
                   <p class="text-gray-500 dark:text-gray-400 text-sm">
-                    <b>Due:</b> {{ quiz.end_time }} <br>
-                    <b>Duration:</b> {{ quiz.duration }}
+                    <span class="text-sm">{{ quiz.end_time }} </span><br>
+                    <b>Time allocated:</b> {{ quiz.duration }}
                   </p>
+                  <button class="rounded bg-primary text-white py-2 px-4 mt-6 "><a href="{% url 'quiz:quiz-details' quiz.id %}"> <i class="fa-solid fa-eye"></i> View details</a></button>
                 </div>
               </div>
             {% endfor %}
+          </div>
           </div>
         </section>
         <!-- <section class="mb-8">
