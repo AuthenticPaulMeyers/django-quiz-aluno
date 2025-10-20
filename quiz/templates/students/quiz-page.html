@@ -15,20 +15,7 @@
 
 <body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200">
   <div class="flex min-h-screen flex-col">
-    <header
-      class="border-b border-gray-200/80 dark:border-gray-700/80 bg-white/50 dark:bg-background-dark/50 backdrop-blur-sm sticky top-0 z-10">
-      <div class="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 py-3">
-        <div class="flex items-center gap-4">
-          <h1 class="text-3xl font-black">Aluno<span class="text-primary text-5xl">.</span></h1>
-        </div>
-        <div class="flex items-center gap-6">
-          <div class="flex items-center gap-4">
-            <img alt="User avatar" class="size-10 rounded-full"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBswydEHtwFDlrQKOwSNvOcZtdQRo1HmdhnUTo1Ei18GbsaFzeDW0B_wiuTAX8JB8ONlrBegMqLvMaA394m4lKpxkyBrT8_K_0kw6zP3PxQepxQvpuv1dXoFeNjLfMFdzQ3tKCbrZnGXoEuw6CDpZIzxk4i2AMhgUcH7_cp81-h3ho0_0GvUMANDmOK4Z0nIAM7ffigKkyv8n1vztAhHsL9MS2jYT2bHbC4BCaqTLq3wEplZljCqben8c_hagZzkxwopvTncHtE1FR5" />
-          </div>
-        </div>
-      </div>
-    </header>
+    {% include 'students/partials/student-header.html' %}
     <main class="flex-1">
       <div class="mx-auto max-w-3xl px-4 py-8 sm:px-6 lg:px-8">
         <div class="space-y-8">

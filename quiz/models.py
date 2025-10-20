@@ -22,13 +22,16 @@ class Teacher(models.Model):
 
     def __str__(self):
         return self.user.username
+    
+    def fullname(self):
+        return f'{self.user.first_name} {self.user.last_name}'
 
 class Class(models.Model):
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
     name = models.CharField(max_length=30, null=False, unique=True)
 
     def __str__(self):
-        return f'{self.name} class is headed by {self.teacher.user.first_name} {self.teacher.user.last_name}'
+        return f'{self.name} class is headed by {self.teacher.fullname()}'
     
 class Student(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
@@ -82,7 +85,7 @@ class Student(models.Model):
             else:
                 entry['total_score'] += a.score
                 entry['count'] += 1
-                # compare last attempt by pk (not ideal but simple)
+                # compare last attempt by pk
                 if a.pk and a.pk > getattr(entry['last_attempt'], 'pk', 0):
                     entry['last_attempt'] = a
 
@@ -104,6 +107,17 @@ class Student(models.Model):
 
         return results
     
+    # get enrolled subjects
+    def get_enrolled_subjects(self):
+        subjects = Subject.objects.filter(
+            subjectclass__in=SubjectClass.objects.filter(
+                id__in=studentSubject.objects.filter(student=self).values_list('class_subject_id', flat=True)
+            )
+        ).distinct()
+        return subjects
+    
+    def get_full_name(self):
+        return f'{self.user.first_name} {self.user.last_name}'
     
 class Subject(models.Model):
     name = models.CharField(max_length=30, null=False, unique=True)
@@ -114,9 +128,17 @@ class Subject(models.Model):
 class SubjectClass(models.Model):
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
     classname = models.ForeignKey(Class, on_delete=models.CASCADE)
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.subject.name} for {self.classname.name}'
+        return f'{self.subject.name} for {self.classname.name} taught by {self.teacher.fullname()}'
+    
+class studentSubject(models.Model):
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    class_subject = models.ForeignKey(SubjectClass, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.student.user.first_name} {self.student.user.last_name} enrolled in {self.class_subject.subject.name} for {self.class_subject.classname.name}'
 
 class Quiz(models.Model):
     title = models.CharField(max_length=255, null=False)
@@ -125,16 +147,9 @@ class Quiz(models.Model):
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
     quizclass = models.ForeignKey(Class, on_delete=models.CASCADE)
     max_score = models.IntegerField()
-    start_time = models.DateField()
-    end_time = models.DateField()
-    duration = models.DurationField()
+    duration = models.PositiveIntegerField(help_text='Duration in minutes')
+    due_date = models.DateTimeField(help_text='Due date for the quiz')
     date_created = models.DateField()
-
-    # Calculate the quiz duration
-    def save(self, *args, **kwargs):
-        if self.start_time and self.end_time and not self.duration:
-            self.duration = self.end_time - self.start_time
-        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.title

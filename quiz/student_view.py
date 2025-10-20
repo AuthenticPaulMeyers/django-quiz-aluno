@@ -10,47 +10,75 @@ def student_dashboard_view(request):
 
         try:
             student_obj = user.student
+            if student_obj is None:
+                messages.error(request, 'Student record not found.')
+                return redirect('login')
             # get the class the current user is enrolled in
             class_enrolled = student_obj.class_enrolled
 
-            # get the quizzes all quizzes for the current user class
-            class_quizzes = Quiz.objects.filter(quizclass=class_enrolled.id).all()
+            from django.utils import timezone
+            current_time = timezone.now()
             
-            if not class_quizzes:
+            # get all quizzes for the current user class with due status
+            all_quizzes = Quiz.objects.filter(quizclass=class_enrolled.id).all()
+            
+            if not all_quizzes:
                 return render(request, 'students/student-dashboard.html', {'message': 'You do not have active quizzes.'})
             
+            active_quizzes = [quiz for quiz in all_quizzes if quiz.due_date > current_time]
+            
+            # overall metrics
+            avg_score = student_obj.average_score()
+            quizzes_taken = student_obj.total_quizzes_taken()
+            subjects_count = student_obj.subjects_covered_count()
+
             context = {
                 'user': user,
-                'all_quizzes': class_quizzes
+                'all_quizzes': active_quizzes,
+                'current_time': current_time,
+                'average_score': f"{avg_score}%" if avg_score is not None else 'N/A',
+                'quizzes_taken': quizzes_taken,
+                'subjects_covered': subjects_count,
             }
+            return render(request, 'students/student-dashboard.html', context)
 
         except Student.DoesNotExist:
             print("Student does not exist.")
+            messages.error(request, 'Student record not found.')
+            return redirect('login')
 
-        return render(request, 'students/student-dashboard.html', context)
 
 def all_quizzes_view(request):
-    if request.user.is_authenticated:
-        user = request.user
+    if not request.user.is_authenticated:
+        return redirect('login')
+    
+    user = request.user
 
-        try:
-            student_obj = user.student
-            # get the class the current user is enrolled in
-            class_enrolled = student_obj.class_enrolled
+    try:
+        student_obj = user.student
+        # get the class the current user is enrolled in
+        class_enrolled = student_obj.class_enrolled
+        
+        from django.utils import timezone
+        current_time = timezone.now()
 
-            # get the quizzes all quizzes for the current user class
-            class_quizzes = Quiz.objects.filter(quizclass=class_enrolled.id).all()
-            
-            if not class_quizzes:
-                return render(request, 'students/view-all-quizzes.html', {'message': 'You do not have active quizzes.'})
-            
-            context = {
-                'user': user,
-                'all_quizzes': class_quizzes
-            }
+        # get the quizzes all quizzes for the current user class
+        class_quizzes = Quiz.objects.filter(quizclass=class_enrolled.id).all()
+        
+        if not class_quizzes:
+            messages.info(request, 'You do not have active quizzes.')
+            return render(request, 'students/view-all-quizzes.html')
 
-        except Student.DoesNotExist:
-            print("Student does not exist.")
+        context = {
+            'user': user,
+            'all_quizzes': class_quizzes,
+            'current_time': current_time,
+        }
+
+    except Student.DoesNotExist:
+        print("Student record not found.")
+        messages.error(request, 'Student record not found.')
+        return redirect('student-dashboard')
 
     return render(request, 'students/view-all-quizzes.html', context)
 
@@ -95,20 +123,48 @@ def quiz_history_view(request, student_id=None):
         return redirect('student-dashboard')
 
 def quiz_details_view(request, quiz_id):
-    quiz = Quiz.objects.filter(pk=quiz_id).first()
-    total = Question.objects.filter(quiz=quiz.id).count()
 
-    context = {
-        'quiz': quiz,
-        'total': total
-    }
-    return render(request, 'students/quiz-details.html', context=context)
+    if not request.user.is_authenticated:
+        return redirect('login')
+    
+    try:
+        quiz = Quiz.objects.filter(pk=quiz_id).first()
+        if quiz is None:
+            messages.error(request, 'Quiz not found.')
+            return redirect('student-dashboard')
+        total = Question.objects.filter(quiz=quiz.id).count()
+
+        from django.utils import timezone
+        current_time = timezone.now()
+
+        context = {
+            'quiz': quiz,
+            'total': total,
+            'current_time': current_time
+        }
+        return render(request, 'students/quiz-details.html', context=context)
+
+    except Exception as e:
+        print('Error in quiz_details_view:', e)
+        messages.error(request, 'Unable to load quiz details.')
+        return redirect('student-dashboard')
 
 def attempt_quiz_view(request, quiz_id):
+    if not request.user.is_authenticated:
+        return redirect('login')
     return render(request, 'students/quiz-page.html')
 
 def quiz_results_view(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
     return render(request, 'students/quiz-results.html')
 
-def student_profile_view(request, student_id):
-    return render(request, 'students/student-profile.html')
+def student_profile_view(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
+
+    user = request.user
+    context = {
+        'user': user,
+    }
+    return render(request, 'students/student-profile.html', context)

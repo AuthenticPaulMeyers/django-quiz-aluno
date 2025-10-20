@@ -6,16 +6,7 @@
 
 {% block content %}
   <div class="flex flex-col min-h-screen">
-    <header
-      class="bg-background-light dark:bg-background-dark/80 backdrop-blur-sm sticky top-0 z-20 border-b border-background-dark/10 dark:border-background-light/10">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between h-16">
-          <div class="flex items-center gap-4">
-            <h1 class="text-3xl font-black">Aluno<span class="text-primary text-5xl">.</span></h1>
-          </div>
-        </div>
-      </div>
-    </header>
+    {% include 'students/partials/student-header.html' %}
     <main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
         <h2 class="text-3xl font-bold text-background-dark dark:text-background-light">
@@ -47,10 +38,11 @@
             <thead
               class="text-xs uppercase bg-background-light dark:bg-background-dark border-b border-background-dark/10 dark:border-background-light/10">
               <tr>
+                <th class="px-6 py-3 font-medium" scope="col">Date</th>
+                <th class="px-6 py-3 font-medium" scope="col">Time</th>
                 <th class="px-6 py-3 font-medium" scope="col">Quiz Title</th>
                 <th class="px-6 py-3 font-medium" scope="col">Subject</th>
-                <th class="px-6 py-3 font-medium" scope="col">Teacher</th>
-                <th class="px-6 py-3 font-medium" scope="col">Date</th>
+                <th class="px-6 py-3 font-medium" scope="col">Time allowed</th>
                 <th class="px-6 py-3 font-medium text-center" scope="col">
                   Status
                 </th>
@@ -64,15 +56,21 @@
               {% for quiz in all_quizzes %}
               <tr
                 class="border-b border-background-dark/10 dark:border-background-light/10 hover:bg-primary/5 dark:hover:bg-primary/10">
-                <td class="px-6 py-4 font-medium text-background-dark dark:text-background-light whitespace-nowrap">
-                  {{ quiz.title }}
+                <td class="px-6 py-4 text-gray-600 font-medium text-background-dark dark:text-background-light whitespace-nowrap">
+                  {{ quiz.due_date|date:"F j, Y" }}
                 </td>
+                <td class="px-6 py-4 text-gray-600 font-medium text-background-dark dark:text-background-light whitespace-nowrap">
+                  {{ quiz.due_date|date:"g:i a" }}
+                </td>
+                <td class="px-6 py-4">{{ quiz.title }}</td>
                 <td class="px-6 py-4">{{ quiz.subject.name }}</td>
-                <td class="px-6 py-4">{{ quiz.teacher.name }}</td>
-                <td class="px-6 py-4">{{ quiz.end_time }}</td>
+                <td class="px-6 py-4">{{ quiz.duration }} mins</td>
                 <td class="px-6 py-4 text-center">
-                  <span
-                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/20 text-primary">{{ quiz.duration }}</span>
+                {% if quiz.due_date < current_time %}
+                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-200 text-red-500">Expired</span>
+                {% elif quiz.due_date|timeuntil:current_time %}
+                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-200 text-green-500">Due in {{ quiz.due_date|timeuntil:current_time }}</span>
+                {% endif %}
                 </td>
                 <td class="px-6 py-4 text-right">
                   <a class="font-medium text-primary hover:underline" href="{% url 'quiz:quiz-details' quiz.id %}">View</a>

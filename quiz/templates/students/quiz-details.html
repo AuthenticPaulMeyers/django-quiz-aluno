@@ -9,7 +9,9 @@
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16">
           <div class="flex items-center gap-4">
-            <h1 class="text-3xl font-black">Aluno<span class="text-primary text-5xl">.</span></h1>
+            <a href="{% url 'quiz:student-dashboard' %}">
+              <h1 class="text-3xl font-black">Aluno<span class="text-primary text-5xl">.</span></h1>
+            </a>
           </div>
           <div class="flex items-center gap-8">
             <div class="flex items-center gap-4">
@@ -59,7 +61,7 @@
                 Time Allocated
               </p>
               <p class="md:col-span-2 text-sm text-foreground-light dark:text-foreground-dark font-semibold">
-                {{ quiz.duration }}
+                {{ quiz.duration }} minutes
               </p>
             </div>
             <div
@@ -67,8 +69,30 @@
               <p class="text-sm font-medium text-muted-light dark:text-muted-dark">
                 Date
               </p>
+              <p class="md:col-span-2 text-gray-600 text-sm text-foreground-light dark:text-foreground-dark font-semibold">
+                {{ quiz.due_date|date:"F j, Y" }}
+              </p>
+            </div>
+            <div
+              class="grid grid-cols-1 md:grid-cols-3 gap-y-4 gap-x-8 pb-6 border-b border-border-light dark:border-border-dark">
+              <p class="text-sm font-medium text-muted-light dark:text-muted-dark">
+                Time
+              </p>
+              <p class="md:col-span-2 text-gray-600 text-sm text-foreground-light dark:text-foreground-dark font-semibold">
+                {{ quiz.due_date|date:"g:i a" }}
+              </p>
+            </div>
+            <div
+              class="grid grid-cols-1 md:grid-cols-3 gap-y-4 gap-x-8 pb-6 border-b border-border-light dark:border-border-dark">
+              <p class="text-sm font-medium text-muted-light dark:text-muted-dark">
+                Status
+              </p>
               <p class="md:col-span-2 text-sm text-foreground-light dark:text-foreground-dark font-semibold">
-                {{ quiz.end_time }}
+                {% if quiz.due_date < current_time %}
+                  <span class="text-red-500 rounded-full bg-red-200 px-4 py-1">Expired</span>
+                {% elif quiz.due_date|timeuntil:current_time %}
+                  <span class="text-green-500">Due in {{ quiz.due_date|timeuntil:current_time }}</span>
+                {% endif %}
               </p>
             </div>
             <div
@@ -92,12 +116,20 @@
         </div>
         <div
           class="px-6 md:px-8 py-4 bg-background-light dark:bg-background-dark/50 border-t border-border-light dark:border-border-dark flex justify-end">
-          <a href="{% url 'quiz:attempt-quiz' quiz.id %}"
+          {% if quiz.due_date < current_time %}
+            <button disabled
+              class="inline-flex items-center justify-center rounded-lg h-12 px-8 bg-gray-400 text-white text-base font-bold tracking-wide shadow-lg cursor-not-allowed">
+              <span class="mr-2"> <i class="fa-solid fa-lock"></i></span>
+              <span>Quiz Expired</span>
+            </button>
+          {% elif quiz.due_date|timeuntil:current_time %}
+            <a href="{% url 'quiz:attempt-quiz' quiz.id %}"
             class="inline-flex items-center justify-center rounded-lg h-12 px-8 bg-primary text-white text-base font-bold tracking-wide shadow-lg hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary/50 dark:focus:ring-offset-background-dark transition-all">
-
             <span class="mr-2"> <i class="fa-solid fa-play"></i></span>
             <span>Start Quiz</span>
           </a>
+          {% endif %}
+       
         </div>
       </div>
     </main>

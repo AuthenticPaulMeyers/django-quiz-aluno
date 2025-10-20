@@ -1,0 +1,19 @@
+{% load static %}
+
+<header
+      class="bg-background-light dark:bg-background-dark/80 backdrop-blur-sm sticky top-0 z-20 border-b border-background-dark/10 dark:border-background-light/10">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+          <div class="flex items-center gap-4">
+            <a href="{% url 'quiz:student-dashboard' %}">
+              <h1 class="text-3xl font-black">Aluno<span class="text-primary text-5xl">.</span></h1>
+            </a>
+          </div>
+        <div class="flex items-center gap-4">
+            <div class="h-10 w-10 rounded-full bg-cover bg-center">
+              <img src="{% static 'images/user.png' %}" alt="User placeholder" class="rounded-full">
+            </div>
+          </div>
+        </div>
+      </div>
+</header>

@@ -50,7 +50,7 @@
             <span>History</span>
           </a>
           <a class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
-            href="{% url 'quiz:student-profile' user.id %}">
+            href="{% url 'quiz:student-profile' %}">
             <svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M230.92,212c-15.23-26.33-38.7-45.21-66.09-54.16a72,72,0,1,0-73.66,0C63.78,166.78,40.31,185.66,25.08,212a8,8,0,1,0,13.85,8c18.84-32.56,52.14-52,89.07-52s70.23,19.44,89.07,52a8,8,0,1,0,13.85-8ZM72,96a56,56,0,1,1,56,56A56.06,56.06,0,0,1,72,96Z">
@@ -58,15 +58,6 @@
             </svg>
             <span>Profile</span>
           </a>
-          <!-- <a class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
-            href="/students/quiz-calendar.html">
-            <svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M208,32H184V24a8,8,0,0,0-16,0v8H88V24a8,8,0,0,0-16,0v8H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM72,48v8a8,8,0,0,0,16,0V48h80v8a8,8,0,0,0,16,0V48h24V80H48V48ZM208,208H48V96H208V208Zm-96-88v64a8,8,0,0,1-16,0V132.94l-4.42,2.22a8,8,0,0,1-7.16-14.32l16-8A8,8,0,0,1,112,120Zm59.16,30.45L152,176h16a8,8,0,0,1,0,16H136a8,8,0,0,1-6.4-12.8l28.78-38.37A8,8,0,1,0,145.07,132a8,8,0,1,1-13.85-8A24,24,0,0,1,176,136,23.76,23.76,0,0,1,171.16,150.45Z">
-              </path>
-            </svg>
-            <span>Calendar</span>
-          </a> -->
         </nav>
       </div>
       <div>
@@ -108,7 +99,7 @@
                   Average Score
                 </p>
                 <p class="mt-1 text-3xl font-semibold text-zinc-900 dark:text-white">
-                  85%
+                  {{ average_score }}
                 </p>
               </div>
               <div
@@ -117,7 +108,7 @@
                   Quizzes Taken
                 </p>
                 <p class="mt-1 text-3xl font-semibold text-zinc-900 dark:text-white">
-                  12
+                  {{ quizzes_taken }}
                 </p>
               </div>
               <div
@@ -126,7 +117,7 @@
                   Subjects Covered
                 </p>
                 <p class="mt-1 text-3xl font-semibold text-zinc-900 dark:text-white">
-                  4
+                  {{ subjects_covered }}
                 </p>
               </div>
             </div>
@@ -138,7 +129,11 @@
             </h2>
           </div>
           {% if message %}
-            <span class="text-sm text-center text-red-600">{{ message }}</span>
+            <span class="text-sm text-center text-gray-600 dark:text-gray-400">{{ message }}</span>
+          {% endif %}
+
+          {% if not all_quizzes %}
+            <span class="text-sm text-center text-gray-600 dark:text-gray-400">No active quizzes available.</span>
           {% endif %}
           <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-6">
 
@@ -150,8 +145,14 @@
                     <a href="{% url 'quiz:quiz-details' quiz.id %}">{{ quiz.subject.name }}</a>
                   </h3>
                   <p class="text-gray-500 dark:text-gray-400 text-sm">
-                    <span class="text-sm">{{ quiz.end_time }} </span><br>
-                    <b>Time allocated:</b> {{ quiz.duration }}
+                    <b>Time allocated:</b> {{ quiz.duration }} minutes<br>
+                    <b>Due Date:</b> {{ quiz.due_date|date:"F j, Y, g:i a" }}<br>
+                    <b>Status:</b>
+                    {% if quiz.due_date < current_time %}
+                      <span class="text-red-500">Expired</span>
+                    {% elif quiz.due_date|timeuntil:current_time %}
+                      <span class="text-green-500">Due in {{ quiz.due_date|timeuntil:current_time }}</span>
+                    {% endif %}
                   </p>
                   <button class="rounded bg-primary text-white py-2 px-4 mt-6 "><a href="{% url 'quiz:quiz-details' quiz.id %}"> <i class="fa-solid fa-eye"></i> View details</a></button>
                 </div>
