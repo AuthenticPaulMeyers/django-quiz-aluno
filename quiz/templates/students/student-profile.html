@@ -13,11 +13,11 @@
               </div>
               <div class="flex flex-col">
                 <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
-                  {{ user.first_name }} {{ user.last_name }}
+                  {{ user.student.get_full_name }}
 
                 </h2>
                 <p class="text-base text-gray-500 dark:text-gray-400">
-                  {{ user.student.class_enrolled.name }}
+                 <b>Class:</b> {{ user.student.class_enrolled.name }}
                 </p>
                 <div class="mt-4 flex gap-4">
                   <button

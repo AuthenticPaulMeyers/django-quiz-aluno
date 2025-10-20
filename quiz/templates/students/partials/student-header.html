@@ -9,11 +9,44 @@
               <h1 class="text-3xl font-black">Aluno<span class="text-primary text-5xl">.</span></h1>
             </a>
           </div>
-        <div class="flex items-center gap-4">
-            <div class="h-10 w-10 rounded-full bg-cover bg-center">
-              <img src="{% static 'images/user.png' %}" alt="User placeholder" class="rounded-full">
+          <div class="flex items-center gap-4">
+            <button class="h-10 w-10 rounded-full bg-cover bg-center user-menu-button" aria-label="User menu">
+              <div class="h-10 w-10 overflow-hidden">
+                <img src="{% static 'images/user.png' %}" alt="User placeholder" class="rounded-full">
+              </div>
+            </button>
+
+            <!-- User Menu -->
+            <div class="relative">
+              <div class="absolute right-4 mt-5 w-40 bg-white dark:bg-gray-800 rounded-md shadow-lg z-100 user-menu hide">
+                <ul class="py-1">
+                  <li>
+                    <a href="{% url 'quiz:student-profile' %}" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Profile</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'quiz:logout' %}" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Logout</a>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
       </div>
+      <style>
+        .hide {
+          display: none;
+        }
+        .show {
+          display: inline-block;
+        }
+      </style>
+      <script>
+        // JavaScript to toggle user menu visibility can be added here
+        const userMenuButton = document.querySelector('.user-menu-button');
+        const userMenu = document.querySelector('.user-menu');
+
+        userMenuButton.addEventListener('click', () => {
+          userMenu.classList.toggle('hide');
+        });
+      </script>
 </header>
