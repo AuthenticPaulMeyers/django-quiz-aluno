@@ -1,19 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+{% load static %}
+{% extends 'students/base.html' %}
 
-<head>
-  <meta charset="utf-8" />
-  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <title>Quiz Details</title>
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <link href="https://fonts.googleapis.com" rel="preconnect" />
-  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-  <script src="/static/js/index.js" type="text/javaScript"></script>
-</head>
-
-<body class="bg-background-light dark:bg-background-dark font-display">
+{% block content %}
   <div class="flex flex-col min-h-screen">
     <header
       class="bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm sticky top-0 z-10 border-b border-border-light dark:border-border-dark">
@@ -52,7 +40,7 @@
                 Subject
               </p>
               <p class="md:col-span-2 text-sm text-foreground-light dark:text-foreground-dark font-semibold">
-                Mathematics
+                {{ quiz.subject.name }}
               </p>
             </div>
             <div
@@ -61,7 +49,7 @@
                 Total Questions
               </p>
               <p class="md:col-span-2 text-sm text-foreground-light dark:text-foreground-dark font-semibold">
-                20
+                {{ total }}
               </p>
             </div>
             <div
@@ -79,7 +67,7 @@
                 Date
               </p>
               <p class="md:col-span-2 text-sm text-foreground-light dark:text-foreground-dark font-semibold">
-                October 26, 2024
+                {{ quiz.end_time }}
               </p>
             </div>
             <div
@@ -88,7 +76,7 @@
                 Teacher
               </p>
               <p class="md:col-span-2 text-sm text-foreground-light dark:text-foreground-dark font-semibold">
-                Ms. Johnson
+                {{ quiz.teacher.user.first_name }} {{ quiz.teacher.user.last_name }}
               </p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-y-4 gap-x-8">
@@ -96,8 +84,7 @@
                 Instructions
               </p>
               <p class="md:col-span-2 text-sm text-foreground-light dark:text-foreground-dark">
-                Read each question carefully and select the best answer. You
-                have 60 minutes to complete the quiz.
+                {{ quiz.description }}
               </p>
             </div>
           </div>
@@ -114,6 +101,4 @@
       </div>
     </main>
   </div>
-</body>
-
-</html>
+{% endblock %}

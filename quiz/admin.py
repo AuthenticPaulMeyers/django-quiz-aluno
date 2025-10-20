@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Class, ClassEnrollment, Teacher, CustomUser, Student, Attempt, AttemptAnswer, Question, Quiz, MultipleChoice, Subject
+from .models import Class, Teacher, CustomUser, Student, Attempt, AttemptAnswer, Question, Quiz, MultipleChoice, Subject, SubjectClass
 
 from django.contrib.auth.admin import UserAdmin
 from .models import CustomUser
@@ -17,9 +17,9 @@ class CustomUserAdmin(UserAdmin):
     
 # Register your models here.
 admin.site.register(Class)
-admin.site.register(ClassEnrollment)
 admin.site.register(Teacher)
 admin.site.register(Student)
+admin.site.register(SubjectClass)
 admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(Attempt)
 admin.site.register(AttemptAnswer)

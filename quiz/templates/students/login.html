@@ -1,22 +1,10 @@
+{% extends 'students/base.html' %}
+
 {% load widget_tweaks %}
 
-<!DOCTYPE html>
-<html lang="en">
+{% load static %}
 
-<head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Aluno - Login</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com" rel="preconnect" />
-    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap"
-        rel="stylesheet" />
-    <script type="text/javaScript" src="/static/js/index.js"></script>
-
-</head>
-
-<body class="font-display bg-background-light dark:bg-background-dark text-gray-800 dark:text-gray-200">
+{% block content %}
     <div class="flex flex-col min-h-screen">
         <header class="w-full">
             <div class="container mx-auto px-6 py-4 flex justify-between items-center">
@@ -63,7 +51,4 @@
             </div>
         </main>
     </div>
-
-</body>
-
-</html>
+{% endblock %}

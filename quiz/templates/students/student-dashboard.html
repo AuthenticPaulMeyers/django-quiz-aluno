@@ -1,21 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'students/base.html' %}
 
-<head>
-  <meta charset="utf-8" />
-  <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect" />
-  <link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B700%3B900"
-    onload="this.rel='stylesheet'" rel="stylesheet" />
-  <title>Aluno - Student Dashboard</title>
-  <link href="data:image/x-icon;base64," rel="icon" type="image/x-icon" />
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <script type="text/javaScript" src="/static/js/index.js"></script>
-  <!-- link to Font awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="/static/css/style.css">
-</head>
+{% load static %}
 
-<body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200">
+{% block content %}
   <div class="flex h-screen relative">
     <!-- Menu button in mobile view -->
     <!-- <button class="menu-button absolute top-10 left-10 text-bold">
@@ -27,9 +14,11 @@
           <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-12" style="
                 background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDDDmRbGNrD_IVk8h9fuJc9de9ROsinpjeYC_tGNuEx9URX2g_WObnVPbANSANWTJlsjlb7CHP29BYZl95C4iUpno2_Q9WmLUavRyWauVm4PBfKl_SxHpTHZ-XgGOQG-QrKc9QYbNcPHPRQ8HnPULxZ0D_z_A74sEnq4gpJbZbwhW60V1mW-Xj-fhoEPgYfJLKL2SVdz-oam9KuUQmBjrGe-gjKdAhoMKuc5ER1CV_jW7hgcYg6-XXaXr-3cbMKLNiHVlqCP55UEcYL');
               "></div>
+          {% if user %}
           <h1 class="text-lg font-bold text-gray-900 dark:text-white">
-            Jane Doe
+            {{ user.first_name }} {{ user.last_name }}
           </h1>
+          {% endif %}
         </div>
         <nav class="flex flex-col gap-2">
           <a class="flex items-center gap-3 px-4 py-2 rounded-lg bg-primary/10 dark:bg-primary/20 text-primary font-bold"
@@ -97,9 +86,12 @@
           <h1 class="text-4xl font-bold text-gray-900 dark:text-white">
             Dashboard
           </h1>
+          {% if user %}
           <p class="text-gray-500 dark:text-gray-400">
-            Welcome, Jane Doe
+            Welcome {{ user.first_name }} {{ user.last_name }}
           </p>
+          {% endif %}
+          
         </header>
         <section class="mb-8">
           <div class="flex justify-between items-center mb-4">
@@ -124,49 +116,28 @@
               </button>
             </div> -->
           </div>
+          {% if message %}
+            <span class="text-sm text-center text-red-600">{{ message }}</span>
+          {% endif %}
           <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-6">
-            <div
-              class="bg-white dark:bg-gray-900/50 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300">
-              <div class="h-40 md:h-60 bg-cover bg-center" style="
-                    background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDK6dpZjxSsu_DILbpotFZqB08HsRlI96wIGVoPWSYiCUIq7D2LR1dbBhC0Zd-b_SsCYSyUJjhzbbBfjIZA5NIjWd9Y6dWHqWY2IKK_YlOXPGu2g5FTlXsbLqKOPCtNXgL5LjG9rU6UOVIeUKTRsnjZvOwudhQWqNNM9NRxVe1NIX9xGMW3AjwhH_1A_bL59fTrE3e-rhlbDqhBGT9KMcgX38ObzvHJHBpzXZMmznOQsquHsoJlXMo4dFRk8NTJBdHCf7SsLwBBOPNh');
-                  "></div>
-              <div class="p-4">
-                <h3 class="font-bold text-lg text-gray-900 dark:text-white">
-                  <a href="/students/quiz-details.html">Math Quiz 1</a>
-                </h3>
-                <p class="text-gray-500 dark:text-gray-400 text-sm">
-                  Due: May 15, 2024
-                </p>
+
+            {% for quiz in all_quizzes %}
+              <div
+                class="bg-white dark:bg-gray-900/50 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300">
+                <div class="h-40 md:h-60 bg-cover bg-center" style="
+                      background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDK6dpZjxSsu_DILbpotFZqB08HsRlI96wIGVoPWSYiCUIq7D2LR1dbBhC0Zd-b_SsCYSyUJjhzbbBfjIZA5NIjWd9Y6dWHqWY2IKK_YlOXPGu2g5FTlXsbLqKOPCtNXgL5LjG9rU6UOVIeUKTRsnjZvOwudhQWqNNM9NRxVe1NIX9xGMW3AjwhH_1A_bL59fTrE3e-rhlbDqhBGT9KMcgX38ObzvHJHBpzXZMmznOQsquHsoJlXMo4dFRk8NTJBdHCf7SsLwBBOPNh');
+                    "></div>
+                <div class="p-4">
+                  <h3 class="font-bold text-lg text-gray-900 dark:text-white">
+                    <a href="{% url 'quiz:quiz-details' quiz.id %}">{{ quiz.title }}</a>
+                  </h3>
+                  <p class="text-gray-500 dark:text-gray-400 text-sm">
+                    <b>Due:</b> {{ quiz.end_time }} <br>
+                    <b>Duration:</b> {{ quiz.duration }}
+                  </p>
+                </div>
               </div>
-            </div>
-            <div
-              class="bg-white dark:bg-gray-900/50 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300">
-              <div class="h-40 md:h-60 bg-cover bg-center" style="
-                    background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC_1O3B2F9ffZ5prjHFtzWigbKaIrF-0qzLMCzT6Fip_7VL_eAthcRQ_hXfYnVpA3KBaYgMa5s37yCOsnTRzg6gfGHqtjFDoO8i99kHuOEvZsYENgsqIpnR6F4KLOBA0zH725HduvmGpviVpBJopzrD9Iy1ZMXo3yoPTjKoBtb6J8Kwoew16R9WMuENLRCZr42fJWdAwuAoatHulvY434MOrxtWeVHU3zK7tomTtKXEFH3bXXwpZKDXluhezGhiGmbAr-YpaAAf8obD');
-                  "></div>
-              <div class="p-4">
-                <h3 class="font-bold text-lg text-gray-900 dark:text-white">
-                  <a href="/students/quiz-details.html">Science Quiz</a>
-                </h3>
-                <p class="text-gray-500 dark:text-gray-400 text-sm">
-                  Due: May 20, 2024
-                </p>
-              </div>
-            </div>
-            <div
-              class="bg-white dark:bg-gray-900/50 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300">
-              <div class="h-40 md:h-60 bg-cover bg-center" style="
-                    background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB_QYo-newoJrnATk1efVbAzOpyXGJxxA4QcuNfjgnOKYVQRveQ7QAi-8D_tpJ8y9ECAVoSELgFSNRd5sFZDqF_VabPkjyXENVUdQjb4bthJBrx6H4rD6Mu4JD2zEoFJdEwvohUZ-HZsRmmMgosJR4eMaMjctaV0QCz1UXafK92rehAFlTZzzo7em9Xuc_KEU6B9J69gfzv-Pmix51TYgTIalRC-Smbq9REOHle-mikq7CTfPxz1IdKEtEC5p3bkbEBc9mMiVUKLls9');
-                  "></div>
-              <div class="p-4">
-                <h3 class="font-bold text-lg text-gray-900 dark:text-white">
-                  <a href="/students/quiz-details.html">History Quiz 2</a>
-                </h3>
-                <p class="text-gray-500 dark:text-gray-400 text-sm">
-                  Due: May 25, 2024
-                </p>
-              </div>
-            </div>
+            {% endfor %}
           </div>
         </section>
         <!-- <section class="mb-8">
@@ -327,6 +298,4 @@
       </div>
     </main>
   </div>
-</body>
-
-</html>
+{% endblock %}

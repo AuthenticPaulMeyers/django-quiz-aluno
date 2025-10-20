@@ -1,18 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'students/base.html' %}
+{% load static %}
 
-<head>
-  <meta charset="utf-8" />
-  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <title>Aluno - A School Quiz Platform</title>
-  <script src="https://cdn.tailwindcss.com?plugins=container-queries"></script>
-  <link href="https://fonts.googleapis.com" rel="preconnect" />
-  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet" />
-  <script type="text/javaScript" src="/static/js/index.js"></script>
-</head>
-
-<body class="bg-background-light dark:bg-background-dark font-display text-content-light dark:text-content-dark">
+{% block content %}
   <div class="flex flex-col min-h-screen">
     <header
       class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm border-b border-border-light dark:border-border-dark">
@@ -189,6 +178,4 @@
       </div>
     </footer>
   </div>
-</body>
-
-</html>
+{% endblock %}

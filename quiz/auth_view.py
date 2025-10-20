@@ -41,7 +41,7 @@ def login_view(request):
                 return HttpResponseRedirect(reverse('quiz:student-dashboard'))
     else:
         form = LoginForm()
-    return render(request, 'login.html', {'form': form})
+    return render(request, 'students/login.html', {'form': form, 'title': 'Login'})
 
 # @login_required
 def logout_view(request):
