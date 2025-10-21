@@ -8,11 +8,13 @@
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16">
           <div class="flex items-center gap-4">
-            <h1 class="text-3xl font-black">Aluno<span class="text-primary text-5xl">.</span></h1>
+            <a href="{% url 'quiz:index' %}">
+              <h1 class="text-3xl font-black">Aluno<span class="text-primary text-5xl">.</span></h1>
+            </a>
           </div>
           <div class="flex items-center gap-4">
             <button
-              class="hidden md:flex items-center justify-center rounded-lg h-10 px-4 text-sm font-bold bg-primary text-white hover:bg-primary/10 hover:text-primary transition-colors dark:bg-primary dark:hover:bg-primary/10">
+              class="hidden md:flex items-center justify-center rounded h-10 px-4 text-sm font-bold bg-primary text-white hover:bg-primary/80 hover:text-white transition-colors dark:bg-primary dark:hover:bg-primary/10">
               <a href="{% url 'quiz:login' %}">Log In</a>
             </button>
           </div>
@@ -22,9 +24,9 @@
     <main class="flex-grow">
       <section class="relative">
         <div class="absolute inset-0 bg-cover bg-center" style="
-              background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBR0iHpfXGS_OWpB9pt8yOVB5CX3P9oW2Mlj9KDzi3W7Xsumkm-o_WEbDic6Rm3qIXsu-qx5BoE0FIva0MlBLvfNlbz2hIGgomOEi0VxVSWmsIMM7T70mZmGvyUDQFIhnWWNpObPtt4kYdDU2EVt-XvRYpsG5cQbyXilfTva-uoqhGvQdCr__sxuPFwbh2ur4ptkVw-glCI_KrR78fikdZEnJWx7GOuJH3_bVYZBt-8r6P_hi0H6KWuLz7j-jfrnMgnW2qjfEqVw9sQ');
+              background-image: url('{% static "images/home.jpg" %}');
             "></div>
-        <div class="absolute inset-0 bg-background-dark/60"></div>
+        <div class="absolute inset-0 bg-background-dark/90"></div>
         <div class="relative container mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 lg:py-40 text-center text-white">
           <h1 class="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter mb-4">
             Engage Students, Empower Teachers
@@ -32,8 +34,7 @@
           <p class="max-w-3xl mx-auto text-base md:text-lg lg:text-xl text-white/80 mb-8">
             Transform your classroom with Aluno, the ultimate platform for
             creating, managing, and participating in interactive quizzes.
-            Whether you're a student looking to test your knowledge or a
-            teacher aiming to enhance learning, Aluno has you covered.
+            Easy to use and fun for students.
           </p>
         </div>
       </section>
@@ -81,8 +82,7 @@
               <h3 class="text-lg font-bold">Customizable Content</h3>
               <p class="text-sm text-subtle-light dark:text-subtle-dark">
                 Tailor quizzes to your specific curriculum. Add images,
-                videos, and audio to enhance the learning experience with our
-                easy-to-use quiz builder.
+                videos, and audio to enhance the learning experience.
               </p>
             </div>
             <div
@@ -119,7 +119,7 @@
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div class="flex flex-col gap-4">
               <img alt="Students using Aluno" class="w-full aspect-video object-cover rounded-lg"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmwbkxVvsV_d9c3JLu523nkN_Il4nqE1zGHZmhrySZc1dpS04dkFj1r42lmwxSNOOECgN9wyzhAv6VFmVetVMEjgy5MztvgTgF9pBlnI01C5pvCP2Ezu98TP-r0k-nT_G-7--CSaz_eFG0w7e3JoEslivXFq5n9cd1O2HFZHQdyS4lFlwvcsLs_Yyv3u8VcK8OA_JZhoFnbARLbieuYt5HN_79sFvCJnQql1dexYjjqk3cBwj1I0I07IN1MOIkfwewYFXqc_gucU5d" />
+                src="{% static 'images/student-vector.png' %}" />
               <h3 class="text-xl font-bold">For Students</h3>
               <p class="text-subtle-light dark:text-subtle-dark">
                 Engaging and interactive quizzes that make learning fun. Get
@@ -130,7 +130,7 @@
             </div>
             <div class="flex flex-col gap-4">
               <img alt="Teacher creating a quiz on Aluno" class="w-full aspect-video object-cover rounded-lg"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDR4cbn7FaS6JMShY6uBrEVwG0rAjIzPciJHC3ERtY_xmIyClsoPt7eGMyHjQg9B5rm0SqVpN5XiaojPq3yKtA3-5wL-bbOOhRZ3yFGyytM3cknunrmwHbqFP570BBUJP-oaYRMt4hT8ei-tyu1y2KkF551nKD8VY3F96rQYPE7Wv2Q0k6LGK_B391deU3X4FHyRLHo52t5om4ZVjjZyk4A57KHOf0lnPtsMRi5RG5WTwei9sdCVoX5NbMVikTT73prrGh_H147ZteP" />
+                src="{% static 'images/teacher-vector.png' %}" />
               <h3 class="text-xl font-bold">For Teachers</h3>
               <p class="text-subtle-light dark:text-subtle-dark">
                 An easy-to-use quiz builder to create customized assessments.
