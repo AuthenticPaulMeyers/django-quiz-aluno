@@ -14,7 +14,7 @@
           {% if user %}
           <div>
             <h1 class="text-lg font-bold text-gray-900 dark:text-white">
-            {{ user.first_name }} {{ user.last_name }}
+            {{ user.student.get_full_name }}
             </h1>
             <span class="text-sm text-gray-500">{{ user.student.class_enrolled.name }}</span>
           </div>
@@ -82,7 +82,7 @@
           </h1>
           {% if user %}
           <p class="text-gray-500 dark:text-gray-400">
-            Welcome {{ user.first_name }} {{ user.last_name }}
+            Welcome {{ user.student.get_full_name }}!
           </p>
           {% endif %}
         </header>
@@ -145,16 +145,16 @@
                     <a href="{% url 'quiz:quiz-details' quiz.id %}">{{ quiz.subject.name }}</a>
                   </h3>
                   <p class="text-gray-500 dark:text-gray-400 text-sm">
-                    <b>Time allocated:</b> {{ quiz.duration }} minutes<br>
-                    <b>Due Date:</b> {{ quiz.due_date|date:"F j, Y, g:i a" }}<br>
+                    <!-- <b>Time allocated:</b> {{ quiz.duration }} minutes<br>
+                    <b>Due Date:</b> {{ quiz.due_date|date:"F j, Y, g:i a" }}<br> -->
                     <b>Status:</b>
                     {% if quiz.due_date < current_time %}
                       <span class="text-red-500">Expired</span>
                     {% elif quiz.due_date|timeuntil:current_time %}
-                      <span class="text-green-500">Due in {{ quiz.due_date|timeuntil:current_time }}</span>
+                      <span class="text-green-500">Active</span>
                     {% endif %}
                   </p>
-                  <button class="rounded bg-primary text-white py-2 px-4 mt-6 "><a href="{% url 'quiz:quiz-details' quiz.id %}"> <i class="fa-solid fa-eye"></i> View details</a></button>
+                  <button class="rounded bg-primary text-white py-2 px-3 text-sm mt-4 "><a href="{% url 'quiz:quiz-details' quiz.id %}"> <i class="fa-solid fa-eye"></i> see details</a></button>
                 </div>
               </div>
             {% endfor %}

@@ -62,11 +62,17 @@ def all_quizzes_view(request):
         from django.utils import timezone
         current_time = timezone.now()
 
-        # get the quizzes all quizzes for the current user class
-        class_quizzes = Quiz.objects.filter(quizclass=class_enrolled.id).all()
+        # get all quizzes for the current user class for the subject the current user is enrolled
+        if not class_enrolled:
+            messages.error(request, 'You are not enrolled in any class.')
+            return redirect('student-dashboard')
+        
+        class_quizzes = student_obj.get_quizzes()
+
+         # if no quizzes found, return with message
         
         if not class_quizzes:
-            messages.info(request, 'You do not have active quizzes.')
+            messages.info(request, 'You do not have quiz history.')
             return render(request, 'students/view-all-quizzes.html')
 
         context = {

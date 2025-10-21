@@ -21,23 +21,23 @@ class Teacher(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.user.username
+        return f'{self.user.first_name} {self.user.last_name}'
     
     def fullname(self):
         return f'{self.user.first_name} {self.user.last_name}'
 
 class Class(models.Model):
-    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
     name = models.CharField(max_length=30, null=False, unique=True)
 
     def __str__(self):
-        return f'{self.name} class is headed by {self.teacher.fullname()}'
+        return self.name
     
 class Student(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     class_enrolled = models.ForeignKey(Class, null=True, on_delete=models.SET_NULL)
+
     def __str__(self):
-        return self.user.username
+        return f'{self.user.first_name} {self.user.last_name}'
 
     # Performance helper methods used by the student views / templates
     def quizzes_taken(self):
@@ -107,18 +107,19 @@ class Student(models.Model):
 
         return results
     
-    # get enrolled subjects
-    def get_enrolled_subjects(self):
-        subjects = Subject.objects.filter(
-            subjectclass__in=SubjectClass.objects.filter(
-                id__in=studentSubject.objects.filter(student=self).values_list('class_subject_id', flat=True)
-            )
-        ).distinct()
-        return subjects
+    # get enrolled subjects for this student
     
+    # get full name of the student
     def get_full_name(self):
         return f'{self.user.first_name} {self.user.last_name}'
     
+    # get quizzes for this student
+    # it returns all quizzes for the subjects the student is enrolled in
+    # it uses the studentSubject model to filter quizzes by subject class
+    # it returns a QuerySet of Quiz objects
+    # it is used in the student dashboard to show quizzes for the subjects the student is enrolled in
+    # filter the results using the subject class and the student subjects enrolled
+
 class Subject(models.Model):
     name = models.CharField(max_length=30, null=False, unique=True)
 
@@ -128,25 +129,40 @@ class Subject(models.Model):
 class SubjectClass(models.Model):
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
     classname = models.ForeignKey(Class, on_delete=models.CASCADE)
-    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.subject.name} for {self.classname.name} taught by {self.teacher.fullname()}'
+        return f'{self.subject.name} for {self.classname.name}'
     
-class studentSubject(models.Model):
+    # get students enrolled in this subject class
+    
+class StudentSubject(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     class_subject = models.ForeignKey(SubjectClass, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.student.user.first_name} {self.student.user.last_name} enrolled in {self.class_subject.subject.name} for {self.class_subject.classname.name}'
+        return f'{self.student.get_full_name()} enrolled in {self.class_subject.subject.name} for {self.class_subject.classname.name}'
+    
+    # get quizzes for this student subject
+
+class SubjectTeacher(models.Model):
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.teacher.fullname()} teaches {self.subject.name}'
+    
+class TeacherSubjectClass(models.Model):
+    subject_teacher = models.ForeignKey(SubjectTeacher, on_delete=models.CASCADE)
+    classname = models.ForeignKey(Class, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.subject_teacher.teacher.fullname()} teaches {self.subject_teacher.subject.name} for {self.classname.name}'
 
 class Quiz(models.Model):
     title = models.CharField(max_length=255, null=False)
     description = models.CharField(max_length=255)
-    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
-    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
-    quizclass = models.ForeignKey(Class, on_delete=models.CASCADE)
-    max_score = models.IntegerField()
+    teacher_subject_class = models.ForeignKey(TeacherSubjectClass, on_delete=models.CASCADE)
+    total_marks = models.IntegerField()
     duration = models.PositiveIntegerField(help_text='Duration in minutes')
     due_date = models.DateTimeField(help_text='Due date for the quiz')
     date_created = models.DateField()

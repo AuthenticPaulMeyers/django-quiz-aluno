@@ -8,28 +8,24 @@
   <div class="flex flex-col min-h-screen">
     {% include 'students/partials/student-header.html' %}
     <main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+      <div class="flex flex-row justify-between">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
         <h2 class="text-3xl font-bold text-background-dark dark:text-background-light">
           All Quizzes
         </h2>
       </div>
-      <!-- <div class="flex flex-wrap gap-4 mb-8">
+      <div class="flex flex-wrap gap-2 mb-8 align-center justify-center text-center">
+        <span class="text-sm">Filter by Status:</span>
         <button
-          class="flex items-center gap-2 px-4 py-2 rounded-lg bg-background-light dark:bg-background-dark border border-background-dark/10 dark:border-background-light/10 text-background-dark/80 dark:text-background-light/80 hover:bg-primary/10 dark:hover:bg-primary/20 text-sm font-medium transition-colors">
-          <span>Date</span>
-          <span class="material-symbols-outlined text-lg">expand_more</span>
+          class="flex items-center gap-1 px-4 py-2 rounded-lg bg-background-light dark:bg-background-dark border border-background-dark/10 dark:border-background-light/10 text-background-dark/80 dark:text-background-light/80 hover:bg-primary/10 dark:hover:bg-primary/20 text-sm font-medium transition-colors">
+          <span>Active</span>
         </button>
         <button
-          class="flex items-center gap-2 px-4 py-2 rounded-lg bg-background-light dark:bg-background-dark border border-background-dark/10 dark:border-background-light/10 text-background-dark/80 dark:text-background-light/80 hover:bg-primary/10 dark:hover:bg-primary/20 text-sm font-medium transition-colors">
-          <span>Subject</span>
-          <span class="material-symbols-outlined text-lg">expand_more</span>
+          class="flex items-center gap-1 px-4 py-2 rounded-lg bg-background-light dark:bg-background-dark border border-background-dark/10 dark:border-background-light/10 text-background-dark/80 dark:text-background-light/80 hover:bg-primary/10 dark:hover:bg-primary/20 text-sm font-medium transition-colors">
+          <span>Expired</span>
         </button>
-        <button
-          class="flex items-center gap-2 px-4 py-2 rounded-lg bg-background-light dark:bg-background-dark border border-background-dark/10 dark:border-background-light/10 text-background-dark/80 dark:text-background-light/80 hover:bg-primary/10 dark:hover:bg-primary/20 text-sm font-medium transition-colors">
-          <span>Status</span>
-          <span class="material-symbols-outlined text-lg">expand_more</span>
-        </button>
-      </div> -->
+      </div>
+      </div>
       <div
         class="bg-background-light dark:bg-background-dark/80 rounded-xl overflow-hidden border border-background-dark/10 dark:border-background-light/10">
         <div class="overflow-x-auto">
@@ -69,7 +65,7 @@
                 {% if quiz.due_date < current_time %}
                   <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-200 text-red-500">Expired</span>
                 {% elif quiz.due_date|timeuntil:current_time %}
-                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-200 text-green-500">Due in {{ quiz.due_date|timeuntil:current_time }}</span>
+                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-200 text-green-500">Active</span>
                 {% endif %}
                 </td>
                 <td class="px-6 py-4 text-right">
