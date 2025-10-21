@@ -33,7 +33,11 @@
                   Average Score
                 </p>
                 <p class="mt-1 text-3xl font-semibold text-zinc-900 dark:text-white">
-                  {{ average_score }}
+                  {% if average_score is None %}
+                    0
+                  {% else %}
+                    {{ average_score }}
+                  {% endif %}
                 </p>
               </div>
               <div
@@ -42,7 +46,11 @@
                   Quizzes Taken
                 </p>
                 <p class="mt-1 text-3xl font-semibold text-zinc-900 dark:text-white">
-                  {{ quizzes_taken }}
+                  {% if quizzes_taken is None %}
+                    0
+                  {% else %}
+                    {{ quizzes_taken }}
+                  {% endif %}
                 </p>
               </div>
               <div
@@ -51,7 +59,11 @@
                   Subjects Covered
                 </p>
                 <p class="mt-1 text-3xl font-semibold text-zinc-900 dark:text-white">
-                  {{ subjects_covered }}
+                  {% if subjects_covered is None %}
+                    0
+                  {% else %}
+                    {{ subjects_covered }}
+                  {% endif %}
                 </p>
               </div>
             </div>

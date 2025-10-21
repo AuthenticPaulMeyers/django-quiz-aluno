@@ -99,7 +99,11 @@
                   Average Score
                 </p>
                 <p class="mt-1 text-3xl font-semibold text-zinc-900 dark:text-white">
-                  {{ average_score }}
+                  {% if average_score is None %}
+                    0
+                  {% else %}
+                    {{ average_score }}
+                  {% endif %}
                 </p>
               </div>
               <div
@@ -108,7 +112,11 @@
                   Quizzes Taken
                 </p>
                 <p class="mt-1 text-3xl font-semibold text-zinc-900 dark:text-white">
-                  {{ quizzes_taken }}
+                  {% if quizzes_taken is None %}
+                    0
+                  {% else %}
+                    {{ quizzes_taken }}
+                  {% endif %}
                 </p>
               </div>
               <div
@@ -117,7 +125,11 @@
                   Subjects Covered
                 </p>
                 <p class="mt-1 text-3xl font-semibold text-zinc-900 dark:text-white">
-                  {{ subjects_covered }}
+                  {% if subjects_covered is None %}
+                    0
+                  {% else %}
+                    {{ subjects_covered }}
+                  {% endif %}
                 </p>
               </div>
             </div>
@@ -130,10 +142,6 @@
           </div>
           {% if message %}
             <span class="text-sm text-center text-gray-600 dark:text-gray-400">{{ message }}</span>
-          {% endif %}
-
-          {% if not all_quizzes %}
-            <span class="text-sm text-center text-gray-600 dark:text-gray-400">No active quizzes available.</span>
           {% endif %}
           <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-6">
 

@@ -15,12 +15,14 @@ def student_dashboard_view(request):
                 return redirect('login')
             # get the class the current user is enrolled in
             class_enrolled = student_obj.class_enrolled
+            if not class_enrolled:
+                return redirect('login')
 
             from django.utils import timezone
             current_time = timezone.now()
             
             # get all quizzes for the current user class with due status
-            all_quizzes = Quiz.objects.filter(quizclass=class_enrolled.id).all()
+            all_quizzes = student_obj.get_quizzes()
             
             if not all_quizzes:
                 return render(request, 'students/student-dashboard.html', {'message': 'You do not have active quizzes.'})
@@ -44,9 +46,7 @@ def student_dashboard_view(request):
 
         except Student.DoesNotExist:
             print("Student does not exist.")
-            messages.error(request, 'Student record not found.')
             return redirect('login')
-
 
 def all_quizzes_view(request):
     if not request.user.is_authenticated:
@@ -64,16 +64,12 @@ def all_quizzes_view(request):
 
         # get all quizzes for the current user class for the subject the current user is enrolled
         if not class_enrolled:
-            messages.error(request, 'You are not enrolled in any class.')
             return redirect('student-dashboard')
         
         class_quizzes = student_obj.get_quizzes()
-
          # if no quizzes found, return with message
-        
         if not class_quizzes:
-            messages.info(request, 'You do not have quiz history.')
-            return render(request, 'students/view-all-quizzes.html')
+            return render(request, 'students/view-all-quizzes.html', {'message': 'You do not have quiz history.'})
 
         context = {
             'user': user,
@@ -114,7 +110,7 @@ def quiz_history_view(request, student_id=None):
 
         context = {
             'user': user,
-            'average_score': f"{avg_score}%" if avg_score is not None else 'N/A',
+            'average_score': f"{avg_score}%" if avg_score is not None else '0',
             'quizzes_taken': quizzes_taken,
             'subjects_covered': subjects_count,
             'subject_performance': subject_perf,

@@ -112,8 +112,8 @@ class Student(models.Model):
     # number of subjects covered
     def subjects_covered_count(self):
         # subjects from completed attempts
-        attempts = self.quizzes_taken().filter(is_completed=True).select_related('quiz__subject')
-        subject_ids = set(a.quiz.subject_id for a in attempts)
+        attempts = self.quizzes_taken().filter(is_completed=True).select_related('quiz__teacher_subject_class__subject_teacher__subject')
+        subject_ids = set(a.quiz.teacher_subject_class.subject_teacher.subject_id for a in attempts)
         return len(subject_ids)
 
     def subject_performance(self):
@@ -123,11 +123,11 @@ class Student(models.Model):
         """
         from django.db.models import Avg, Max, Count
 
-        completed_attempts = self.quizzes_taken().filter(is_completed=True).select_related('quiz__subject')
+        completed_attempts = self.quizzes_taken().filter(is_completed=True).select_related('quiz__teacher_subject_class__subject_teacher__subject')
         # Aggregate per subject
         perf = {}
         for a in completed_attempts:
-            subj = a.quiz.subject
+            subj = a.quiz.teacher_subject_class.subject_teacher.subject
             sid = subj.id
             entry = perf.get(sid)
             if not entry:
