@@ -16,16 +16,20 @@
       </div>
       <div class="flex flex-wrap gap-2 mb-8 text-center">
         <span class="text-sm">Filter by Status:</span>
-        <button
-          class="flex items-center gap-1 px-4 py-2 rounded-lg bg-background-light dark:bg-background-dark border border-background-dark/10 dark:border-background-light/10 text-background-dark/80 dark:text-background-light/80 hover:bg-primary/10 dark:hover:bg-primary/20 text-sm font-medium transition-colors">
+        <button data-filter="all"
+          class="js-filter-btn flex items-center gap-1 px-4 py-2 rounded-lg bg-primary text-white text-sm font-medium transition-colors" aria-pressed="true">
+          <span>All</span>
+        </button>
+        <button data-filter="active"
+          class="js-filter-btn flex items-center gap-1 px-4 py-2 rounded-lg bg-background-light dark:bg-background-dark border border-background-dark/10 dark:border-background-light/10 text-background-dark/80 dark:text-background-light/80 hover:bg-primary/10 dark:hover:bg-primary/20 text-sm font-medium transition-colors">
           <span>Active</span>
         </button>
-        <button
-          class="flex items-center gap-1 px-4 py-2 rounded-lg bg-background-light dark:bg-background-dark border border-background-dark/10 dark:border-background-light/10 text-background-dark/80 dark:text-background-light/80 hover:bg-primary/10 dark:hover:bg-primary/20 text-sm font-medium transition-colors">
+        <button data-filter="expired"
+          class="js-filter-btn flex items-center gap-1 px-4 py-2 rounded-lg bg-background-light dark:bg-background-dark border border-background-dark/10 dark:border-background-light/10 text-background-dark/80 dark:text-background-light/80 hover:bg-primary/10 dark:hover:bg-primary/20 text-sm font-medium transition-colors">
           <span>Expired</span>
         </button>
-        <button
-          class="flex items-center gap-1 px-4 py-2 rounded-lg bg-background-light dark:bg-background-dark border border-background-dark/10 dark:border-background-light/10 text-background-dark/80 dark:text-background-light/80 hover:bg-primary/10 dark:hover:bg-primary/20 text-sm font-medium transition-colors">
+        <button data-filter="upcoming"
+          class="js-filter-btn flex items-center gap-1 px-4 py-2 rounded-lg bg-background-light dark:bg-background-dark border border-background-dark/10 dark:border-background-light/10 text-background-dark/80 dark:text-background-light/80 hover:bg-primary/10 dark:hover:bg-primary/20 text-sm font-medium transition-colors">
           <span>Upcoming</span>
         </button>
       </div>
@@ -56,6 +60,7 @@
             <tbody>
               {% for quiz in all_quizzes %}
               <tr
+                data-status="{% if quiz.due_date < current_time %}expired{% elif quiz.start_date > current_time %}upcoming{% else %}active{% endif %}"
                 class="border-b border-background-dark/10 dark:border-background-light/10 hover:bg-primary/5 dark:hover:bg-primary/10">
                 <!-- <td class="px-6 py-4 text-gray-600 font-medium text-background-dark dark:text-background-light whitespace-nowrap">
                   {{ quiz.start_date|date:"F j, Y" }}
@@ -89,6 +94,50 @@
           </table>
         </div>
       </div>
+      <script>
+        // Quiz filter script
+        (function(){
+          const buttons = document.querySelectorAll('.js-filter-btn');
+          const rows = document.querySelectorAll('table tbody tr[data-status]');
+
+          function applyFilter(filter) {
+            rows.forEach(r => {
+              if (!filter || filter === 'all') {
+                r.style.display = '';
+                return;
+              }
+              const status = r.getAttribute('data-status');
+              r.style.display = (status === filter) ? '' : 'none';
+            });
+          }
+
+          buttons.forEach(b => {
+            b.addEventListener('click', function(){
+              // toggle active visual state
+              buttons.forEach(btn => {
+                btn.classList.remove('bg-primary','text-white');
+                btn.classList.add('bg-background-light');
+                btn.setAttribute('aria-pressed','false');
+              });
+              this.classList.add('bg-primary','text-white');
+              this.classList.remove('bg-background-light');
+              this.setAttribute('aria-pressed','true');
+
+              const filter = this.getAttribute('data-filter');
+              applyFilter(filter);
+              // persist last filter
+              try { localStorage.setItem('quizzesFilter', filter); } catch(e){}
+            });
+          });
+
+          // apply persisted filter on load
+          try{
+            const saved = localStorage.getItem('quizzesFilter') || 'all';
+            const btn = Array.from(buttons).find(b => b.getAttribute('data-filter') === saved);
+            if (btn) btn.click(); else buttons[0].click();
+          } catch(e){ buttons[0].click(); }
+        })();
+      </script>
         {% if message %}
           <span class="text-sm text-center text-gray-500 mt-8">{{ message }}</span>
         {% endif %}

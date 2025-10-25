@@ -38,7 +38,7 @@
         </div>
         <div class="mt-8">
           <h3 class="text-xl font-bold text-gray-900 dark:text-white px-1 pb-4">
-            Enrolled Subjects
+            Enrolled Subjects ({{ user.student.get_enrolled_subjects_with_teacher|length }})
           </h3>
           <div
             class="overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700/50 bg-white dark:bg-background-dark/50">
@@ -59,14 +59,18 @@
                   </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200 dark:divide-gray-700/50">
-                  {% comment %} Display all enrolled subjects for the student {% endcomment %}
-                    {% for subject in user.student.get_enrolled_subjects %}
+                    {% comment %} Display all enrolled subjects for the student along with assigned teacher {% endcomment %}
+                    {% for item in user.student.get_enrolled_subjects_with_teacher %}
                   <tr>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
-                      {{ subject.name }}
+                      {{ item.subject.name }}
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
-                      {{ subject.teacher.fullname }}
+                      {% if item.teacher %}
+                        {{ item.teacher.fullname }}
+                      {% else %}
+                        <td>N/A</td>
+                      {% endif %}
                     </td>
                   </tr>
                     {% endfor %}

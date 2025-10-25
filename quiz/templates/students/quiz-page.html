@@ -38,26 +38,29 @@
               <!-- Question Text -->
                <!-- Load one question at a time -->
               <div class="space-y-8">
-                {% for question in questions %}
+                {% comment %} questions is a list of dicts: { 'question': Question, 'choices': QuerySet of MultipleChoice } {% endcomment %}
+                {% for q in questions %}
                 <div class="question-block {% if forloop.first %}block{% else %}hidden{% endif %}" data-question-index="{{ forloop.counter0 }}">
                   <span class="font-bold text-gray-900 dark:text-white mt-4">Question {{ forloop.counter }}</span>
                   <p class="text-gray-900 dark:text-white mb-6">
-                    {{ question.question }}
+                    {{ q.question.question_text }}
                   </p>
                   <!-- Answers -->
                   <div class="space-y-4">
-                    {% for choice in question.choices %}
+                    {% for choice in q.choices %}
                     <label
                       class="flex items-center gap-4 rounded-lg border border-gray-200 dark:border-gray-700 p-2 cursor-pointer hover:border-primary dark:hover:border-primary has-[:checked]:border-primary has-[:checked]:bg-primary/10 dark:has-[:checked]:bg-primary/20 transition-all">
                       <input
-                        class="h-5 w-5 appearance-none rounded-full border-2 border-gray-300 dark:border-gray-600 checked:bg-primary checked:border-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800 focus:ring-primary" type="radio" name="question_{{ question.id }}" value="{{ choice }}"/>
-                      <p class="text-base text-gray-800 dark:text-gray-200">{{ choice }}</p>
+                        class="h-5 w-5 appearance-none rounded-full border-2 border-gray-300 dark:border-gray-600 checked:bg-primary checked:border-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800 focus:ring-primary" type="radio" name="question_{{ q.question.id }}" value="{{ choice.id }}"/>
+                      <p class="text-base text-gray-800 dark:text-gray-200">{{ choice.choice_text }}</p>
                     </label>
                     {% endfor %}
                   </div>
                 </div>
               {% endfor %}
               <!-- questions container ends -->
+              <!-- hidden field to capture remaining time (in seconds) -->
+              <input type="hidden" name="time_remaining" class="js-time-remaining" value="" />
               <div class="flex justify-between pt-4">
                 <button type="button" id="prevBtn"
                   class="flex items-center justify-center gap-2 rounded-full bg-gray-300 dark:bg-gray-700 h-10 px-6 text-base font-bold text-gray-800 dark:text-gray-200 shadow-sm hover:bg-gray-400 dark:hover:bg-gray-600 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 dark:focus:ring-gray-600"
@@ -71,11 +74,9 @@
                   <span>Next</span>
                   <i class="fa-solid fa-arrow-right"></i>
                 </button>
-                <button type="button" id="submitBtn" class="flex items-center justify-center gap-2 rounded-full bg-primary h-10 px-6 text-base font-bold text-white shadow-sm hover:bg-primary/90 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
-                  <a href="#">
-                      <span>Submit</span>
-                      <i class="fa-solid fa-arrow-right"></i>
-                  </a>
+                <button type="submit" id="submitBtn" class="flex items-center justify-center gap-2 rounded-full bg-primary h-10 px-6 text-base font-bold text-white shadow-sm hover:bg-primary/90 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                    <span>Submit</span>
+                    <i class="fa-solid fa-arrow-right"></i>
                 </button>
               </div>
             </form>
@@ -181,8 +182,13 @@
       // Initialize the first question
       showQuestion(0);
 
-      // Clear localStorage on form submission
+      // Clear localStorage on form submission and attach remaining time to hidden field
       document.querySelector('form').addEventListener('submit', function() {
+        const timeField = document.querySelector('.js-time-remaining');
+        const saved = localStorage.getItem('quizTimeRemaining');
+        if (timeField) {
+          timeField.value = saved ? saved : '';
+        }
         localStorage.removeItem('quizTimeRemaining');
         localStorage.removeItem('quizAnswers');
       });

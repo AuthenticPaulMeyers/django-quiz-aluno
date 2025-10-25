@@ -162,14 +162,38 @@ class Student(models.Model):
 
         return results
     
-    # get enrolled subjects for this student
+    # get enrolled subjects for this student with teachers name
     def get_enrolled_subjects(self):
         from django.db.models import Q
         return Subject.objects.filter(
             Q(subjectclass__classname=self.class_enrolled) &
             Q(subjectclass__studentsubject__student=self)
         ).distinct()
-    
+
+    def get_enrolled_subjects_with_teacher(self):
+        """
+        Return a list of dicts for the subjects the student is enrolled in along with the assigned teacher
+        for this student's class (if any):
+        [{ 'subject': Subject instance, 'teacher': Teacher instance or None }, ...]
+        """
+        from django.db.models import Q
+        subjects = Subject.objects.filter(
+            Q(subjectclass__classname=self.class_enrolled) &
+            Q(subjectclass__studentsubject__student=self)
+        ).distinct()
+
+        results = []
+        for subj in subjects:
+            # find a TeacherSubjectClass linking this subject to this student's class
+            tsc = TeacherSubjectClass.objects.filter(classname=self.class_enrolled,
+                                                    subject_teacher__subject=subj).select_related('subject_teacher__teacher').first()
+            teacher = None
+            if tsc and getattr(tsc, 'subject_teacher', None):
+                teacher = tsc.subject_teacher.teacher
+            results.append({'subject': subj, 'teacher': teacher})
+
+        return results
+
     # get full name of the student
     def get_full_name(self):
         return f'{self.user.first_name} {self.user.last_name}'
