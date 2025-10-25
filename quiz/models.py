@@ -279,6 +279,7 @@ class Quiz(models.Model):
     teacher_subject_class = models.ForeignKey(TeacherSubjectClass, on_delete=models.CASCADE)
     total_marks = models.IntegerField()
     duration = models.PositiveIntegerField(help_text='Duration in minutes')
+    start_date = models.DateTimeField(help_text='Start date and time for the quiz')
     due_date = models.DateTimeField(help_text='Due date for the quiz')
     date_created = models.DateField()
 
@@ -300,6 +301,20 @@ class Quiz(models.Model):
     def teacher(self):
         return self.teacher_subject_class.subject_teacher.teacher
     
+    # calculate quiz results
+    def calculate_results(self):
+        attempts = self.get_attempts().filter(is_completed=True)
+        if not attempts.exists():
+            return None
+        total_score = sum(a.score for a in attempts)
+        average_score = round(total_score / attempts.count())
+        return {
+            'total_score': total_score,
+            'total_questions': self.questions_count(),
+            'total_attempts': attempts.count(),
+            'average_score': average_score, 
+        }
+
     # get attempts for this quiz
     def get_attempts(self):
         return Attempt.objects.filter(quiz=self)
@@ -339,6 +354,16 @@ class Quiz(models.Model):
                 'choices': choices
             })
         return result
+    
+    # increment_correct_answers
+    def increment_correct_answers(self):
+        self.correct_answers += 1
+        self.save()
+
+    # increment_total_answered
+    def increment_total_answered(self):
+        self.total_answered += 1
+        self.save()
 
 class Question(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
@@ -400,3 +425,15 @@ class AttemptAnswer(models.Model):
 
     def __str__(self):
         return f'Question: {self.question.question_text}. Answer: {self.multiple_choice.choice_text}. Correct: {self.is_correct}.'
+    
+    # get attempt for this answer
+    @property
+    def get_attempt(self):
+        return self.attempt
+    
+    # get question for this answer
+    @property
+    def get_question(self):
+        return self.question
+    
+

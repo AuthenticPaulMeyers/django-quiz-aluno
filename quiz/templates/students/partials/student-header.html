@@ -18,13 +18,17 @@
 
             <!-- User Menu -->
             <div class="relative">
-              <div class="absolute right-4 mt-5 w-40 bg-white dark:bg-gray-800 rounded-md shadow-lg z-100 user-menu hide">
+              <div class="absolute right-4 mt-5 w-32 bg-white dark:bg-gray-800 rounded-md shadow-lg z-100 user-menu hide">
                 <ul class="py-1">
                   <li>
-                    <a href="{% url 'quiz:student-profile' %}" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Profile</a>
+                    <a href="{% url 'quiz:student-profile' %}" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
+                      <i class="fa-regular fa-user"></i>
+                      Profile</a>
                   </li>
                   <li>
-                    <a href="{% url 'quiz:logout' %}" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Logout</a>
+                    <a href="{% url 'quiz:logout' %}" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
+                      <i class="fa-solid fa-right-from-bracket"></i>
+                      Logout</a>
                   </li>
                 </ul>
               </div>

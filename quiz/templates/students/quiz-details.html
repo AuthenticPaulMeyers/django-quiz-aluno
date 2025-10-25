@@ -33,7 +33,7 @@
                 Total Questions
               </p>
               <p class="md:col-span-2 text-sm text-foreground-light dark:text-foreground-dark font-semibold">
-                {{ total }}
+                {{ quiz.questions_count }}
               </p>
             </div>
             <div
@@ -48,7 +48,16 @@
             <div
               class="grid grid-cols-1 md:grid-cols-3 gap-y-4 gap-x-8 pb-6 border-b border-border-light dark:border-border-dark">
               <p class="text-sm font-medium text-muted-light dark:text-muted-dark">
-                Date
+                Start Date
+              </p>
+              <p class="md:col-span-2 text-gray-600 text-sm text-foreground-light dark:text-foreground-dark font-semibold">
+                {{ quiz.start_date|date:"F j, Y" }}
+              </p>
+            </div>
+            <div
+              class="grid grid-cols-1 md:grid-cols-3 gap-y-4 gap-x-8 pb-6 border-b border-border-light dark:border-border-dark">
+              <p class="text-sm font-medium text-muted-light dark:text-muted-dark">
+                End Date
               </p>
               <p class="md:col-span-2 text-gray-600 text-sm text-foreground-light dark:text-foreground-dark font-semibold">
                 {{ quiz.due_date|date:"F j, Y" }}
@@ -57,7 +66,16 @@
             <div
               class="grid grid-cols-1 md:grid-cols-3 gap-y-4 gap-x-8 pb-6 border-b border-border-light dark:border-border-dark">
               <p class="text-sm font-medium text-muted-light dark:text-muted-dark">
-                Time
+                Start Time
+              </p>
+              <p class="md:col-span-2 text-gray-600 text-sm text-foreground-light dark:text-foreground-dark font-semibold">
+                {{ quiz.start_date|date:"g:i a" }}
+              </p>
+            </div>
+            <div
+              class="grid grid-cols-1 md:grid-cols-3 gap-y-4 gap-x-8 pb-6 border-b border-border-light dark:border-border-dark">
+              <p class="text-sm font-medium text-muted-light dark:text-muted-dark">
+                End Time
               </p>
               <p class="md:col-span-2 text-gray-600 text-sm text-foreground-light dark:text-foreground-dark font-semibold">
                 {{ quiz.due_date|date:"g:i a" }}
@@ -99,20 +117,36 @@
           class="px-6 md:px-8 py-4 bg-background-light dark:bg-background-dark/50 border-t border-border-light dark:border-border-dark flex justify-end">
           {% if quiz.due_date < current_time %}
             <button disabled
-              class="inline-flex items-center justify-center rounded-lg h-12 px-8 bg-gray-400 text-white text-base font-bold tracking-wide shadow-lg cursor-not-allowed">
+              class="inline-flex items-center justify-center rounded-full h-10 px-4 bg-gray-400 text-white text-base font-bold tracking-wide shadow-lg cursor-not-allowed">
               <span class="mr-2"> <i class="fa-solid fa-lock"></i></span>
               <span>Quiz Expired</span>
             </button>
-          {% elif quiz.due_date|timeuntil:current_time %}
+          {% elif quiz.start_date <= current_time and current_time <= quiz.due_date %}
             <a href="{% url 'quiz:attempt-quiz' quiz.id %}"
-            class="inline-flex items-center justify-center rounded-lg h-12 px-8 bg-primary text-white text-base font-bold tracking-wide shadow-lg hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary/50 dark:focus:ring-offset-background-dark transition-all">
+            class="inline-flex items-center justify-center rounded-full h-10 px-4 bg-primary text-white text-base font-bold tracking-wide shadow-lg hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary/50 dark:focus:ring-offset-background-dark transition-all js-attempt-quiz-button">
             <span class="mr-2"> <i class="fa-solid fa-play"></i></span>
             <span>Start Quiz</span>
           </a>
+          {% elif quiz.start_date > current_time %}
+          <button disabled
+              class="inline-flex items-center justify-center rounded-full h-10 px-4 bg-gray-400 text-white text-base font-bold tracking-wide shadow-lg cursor-not-allowed">
+              <span class="mr-2"> <i class="fa-solid fa-lock"></i></span>
+              <span>Upcoming Quiz</span>
+            </button>
           {% endif %}
        
         </div>
       </div>
     </main>
   </div>
+
+  <script>
+   window.addEventListener('DOMContentLoaded', (event) => {
+      // You can add any JavaScript needed for this page here
+      // clear localStorage on page load
+      localStorage.removeItem('quizTimeRemaining');
+      localStorage.removeItem('quizAnswers');
+
+   });
+  </script>
 {% endblock %}

@@ -1,86 +1,216 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'students/base.html' %}
 
-<head>
-  <meta charset="utf-8" />
-  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <title>Aluno</title>
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <link href="https://fonts.googleapis.com" rel="preconnect" />
-  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-  <script src="/static/js/index.js" type="text/javaScript"></script>
-</head>
+{% load static %}
 
-<body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200">
+{% block content %}
   <div class="flex min-h-screen flex-col">
     {% include 'students/partials/student-header.html' %}
     <main class="flex-1">
-      <div class="mx-auto max-w-3xl px-4 py-8 sm:px-6 lg:px-8">
+      <!-- Display progress bar -->
+       
+      <div class="mx-auto max-w-2xl px-4 py-8 sm:px-6 lg:px-8">
         <div class="space-y-8">
-          <div>
             <div class="mb-4">
               <div class="flex items-center justify-between mb-1">
-                <p class="font-medium text-gray-700 dark:text-gray-300">
-                  Progress
-                </p>
-                <p class="text-sm font-medium text-primary">25%</p>
+                <p class="font-medium text-gray-700 dark:text-gray-300">Progress</p>
+                <p class="text-sm font-medium text-primary js-progress">0%</p>
               </div>
               <div class="h-2 w-full rounded-full bg-gray-200 dark:bg-gray-700">
-                <div class="h-2 rounded-full bg-primary" style="width: 25%"></div>
+                <div class="h-2 rounded-full bg-primary js-progress-bar-fill" style="width: 0%"></div>
               </div>
-              <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                Question 1 of 4
-              </p>
+
+              <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Total Questions: {{ questions|length }}</p>
             </div>
+          <div>
+            <!-- Time container -->
+            <div class="mb-4">
+              <div class="flex items-center justify-between mb-1 bg-background-light dark:bg-background-dark/80 backdrop-blur-sm fixed right-20 z-20 border-b border-background-dark/10 dark:border-background-light/10 p-2 rounded-lg shadow-md">
+                <p class="font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <i class="fa-solid fa-clock text-primary font-medium"></i> Time remaining: <span class="js-duration">{{ quiz.duration }}</span> Minutes
+                </p>
+              </div>
+            </div>
+
+            <!-- questions container starts -->
             <div class="bg-white dark:bg-gray-800/50 p-6 rounded-lg shadow-sm">
-              <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-                What is the capital of France?
-              </h2>
-              <div class="space-y-4">
-                <label
-                  class="flex items-center gap-4 rounded-lg border border-gray-200 dark:border-gray-700 p-4 cursor-pointer hover:border-primary dark:hover:border-primary has-[:checked]:border-primary has-[:checked]:bg-primary/10 dark:has-[:checked]:bg-primary/20 transition-all">
-                  <input
-                    class="h-5 w-5 appearance-none rounded-full border-2 border-gray-300 dark:border-gray-600 checked:bg-primary checked:border-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800 focus:ring-primary"
-                    name="capital" type="radio" />
-                  <span class="text-base font-medium text-gray-800 dark:text-gray-200">London</span>
-                </label>
-                <label
-                  class="flex items-center gap-4 rounded-lg border border-gray-200 dark:border-gray-700 p-4 cursor-pointer hover:border-primary dark:hover:border-primary has-[:checked]:border-primary has-[:checked]:bg-primary/10 dark:has-[:checked]:bg-primary/20 transition-all">
-                  <input checked=""
-                    class="h-5 w-5 appearance-none rounded-full border-2 border-gray-300 dark:border-gray-600 checked:bg-primary checked:border-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800 focus:ring-primary"
-                    name="capital" type="radio" />
-                  <span class="text-base font-medium text-gray-800 dark:text-gray-200">Paris</span>
-                </label>
-                <label
-                  class="flex items-center gap-4 rounded-lg border border-gray-200 dark:border-gray-700 p-4 cursor-pointer hover:border-primary dark:hover:border-primary has-[:checked]:border-primary has-[:checked]:bg-primary/10 dark:has-[:checked]:bg-primary/20 transition-all">
-                  <input
-                    class="h-5 w-5 appearance-none rounded-full border-2 border-gray-300 dark:border-gray-600 checked:bg-primary checked:border-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800 focus:ring-primary"
-                    name="capital" type="radio" />
-                  <span class="text-base font-medium text-gray-800 dark:text-gray-200">Berlin</span>
-                </label>
-                <label
-                  class="flex items-center gap-4 rounded-lg border border-gray-200 dark:border-gray-700 p-4 cursor-pointer hover:border-primary dark:hover:border-primary has-[:checked]:border-primary has-[:checked]:bg-primary/10 dark:has-[:checked]:bg-primary/20 transition-all">
-                  <input
-                    class="h-5 w-5 appearance-none rounded-full border-2 border-gray-300 dark:border-gray-600 checked:bg-primary checked:border-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800 focus:ring-primary"
-                    name="capital" type="radio" />
-                  <span class="text-base font-medium text-gray-800 dark:text-gray-200">Rome</span>
-                </label>
+            <form action="{% url 'quiz:quiz-results' quiz.id %}" method="post" class="space-y-8">
+              {% csrf_token %}
+              <!-- Question Text -->
+               <!-- Load one question at a time -->
+              <div class="space-y-8">
+                {% for question in questions %}
+                <div class="question-block {% if forloop.first %}block{% else %}hidden{% endif %}" data-question-index="{{ forloop.counter0 }}">
+                  <span class="font-bold text-gray-900 dark:text-white mt-4">Question {{ forloop.counter }}</span>
+                  <p class="text-gray-900 dark:text-white mb-6">
+                    {{ question.question }}
+                  </p>
+                  <!-- Answers -->
+                  <div class="space-y-4">
+                    {% for choice in question.choices %}
+                    <label
+                      class="flex items-center gap-4 rounded-lg border border-gray-200 dark:border-gray-700 p-2 cursor-pointer hover:border-primary dark:hover:border-primary has-[:checked]:border-primary has-[:checked]:bg-primary/10 dark:has-[:checked]:bg-primary/20 transition-all">
+                      <input
+                        class="h-5 w-5 appearance-none rounded-full border-2 border-gray-300 dark:border-gray-600 checked:bg-primary checked:border-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800 focus:ring-primary" type="radio" name="question_{{ question.id }}" value="{{ choice }}"/>
+                      <p class="text-base text-gray-800 dark:text-gray-200">{{ choice }}</p>
+                    </label>
+                    {% endfor %}
+                  </div>
+                </div>
+              {% endfor %}
+              <!-- questions container ends -->
+              <div class="flex justify-between pt-4">
+                <button type="button" id="prevBtn"
+                  class="flex items-center justify-center gap-2 rounded-full bg-gray-300 dark:bg-gray-700 h-10 px-6 text-base font-bold text-gray-800 dark:text-gray-200 shadow-sm hover:bg-gray-400 dark:hover:bg-gray-600 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 dark:focus:ring-gray-600"
+                  onclick="showPreviousQuestion()">
+                  <i class="fa-solid fa-arrow-left"></i>
+                  <span>Previous</span>
+                </button>
+                <button type="button" id="nextBtn" disabled
+                  class="flex items-center justify-center gap-2 rounded-full bg-primary h-10 px-6 text-base font-bold text-white shadow-sm hover:bg-primary/90 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                  onclick="showNextQuestion()">
+                  <span>Next</span>
+                  <i class="fa-solid fa-arrow-right"></i>
+                </button>
+                <button type="button" id="submitBtn" class="flex items-center justify-center gap-2 rounded-full bg-primary h-10 px-6 text-base font-bold text-white shadow-sm hover:bg-primary/90 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                  <a href="#">
+                      <span>Submit</span>
+                      <i class="fa-solid fa-arrow-right"></i>
+                  </a>
+                </button>
               </div>
-            </div>
+            </form>
           </div>
-          <div class="flex justify-end pt-4">
-            <button
-              class="flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 text-base font-bold text-white shadow-sm hover:bg-primary/90 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
-              <a href="/students/quiz-results.html"><span>Next Question</span></a>
-              <span class="material-symbols-outlined"> arrow_forward </span>
-            </button>
-          </div>
+          <!-- questions container ends -->
         </div>
-      </div>
     </main>
   </div>
-</body>
+  <script>
+    // Timer Script
+    document.addEventListener('DOMContentLoaded', function() {
+      const durationElement = document.querySelector('.js-duration');
+      let duration = parseInt(durationElement.textContent) * 60; // Convert minutes to seconds
 
-</html>
+      // Check if there's saved time in localStorage
+      const savedTime = localStorage.getItem('quizTimeRemaining');
+      if (savedTime) {
+        duration = parseInt(savedTime);
+      }
+
+      function updateTimer() {
+        const minutes = Math.floor(duration / 60);
+        const seconds = duration % 60;
+
+        durationElement.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
+        if (duration <= 0) {
+          clearInterval(timerInterval);
+          alert('Time is up! The quiz will be submitted automatically.');
+          document.querySelector('form').submit();
+        }
+
+        // save time to localstorage to avoid refresh reset
+        localStorage.setItem('quizTimeRemaining', duration);
+        
+        duration--;
+      }
+
+      updateTimer(); // Initial call to display the timer immediately
+      const timerInterval = setInterval(updateTimer, 1000);
+
+
+
+      // Prevent Back Navigation
+      history.pushState(null, null, location.href);
+      window.onpopstate = function () {
+        history.go(1);
+      };
+
+      // Auto-submit on Tab Close or Refresh
+      window.addEventListener('unload', function() {
+        navigator.sendBeacon(document.querySelector('form').action, new FormData(document.querySelector('form')));
+
+      });
+    });
+
+      // Question Navigation Script
+      let currentQuestionIndex = 0;
+      const questionBlocks = document.querySelectorAll('.question-block');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const submitBtn = document.getElementById('submitBtn');
+
+      function showQuestion(index) {
+        questionBlocks.forEach((block, i) => {
+          block.classList.toggle('hidden', i !== index);
+        });
+        currentQuestionIndex = index;
+        updateNavigationButtons();
+      }
+
+      function showNextQuestion() {
+        if (currentQuestionIndex < questionBlocks.length - 1) {
+          showQuestion(currentQuestionIndex + 1);
+        }
+      }
+
+      function showPreviousQuestion() {
+        if (currentQuestionIndex > 0) {
+          showQuestion(currentQuestionIndex - 1);
+        }
+      }
+
+      // Disable next button until an answer is selected
+      questionBlocks.forEach((block) => {
+        const inputs = block.querySelectorAll('input[type="radio"]');
+        inputs.forEach((input) => {
+          input.addEventListener('change', () => {
+            nextBtn.disabled = false;
+          });
+        });
+      });
+
+      // // Disable previous button if on first question
+      // prevBtn.disabled = currentQuestionIndex === 0;
+
+      function updateNavigationButtons() {
+        prevBtn.classList.toggle('hidden', currentQuestionIndex === 0);
+        nextBtn.classList.toggle('hidden', currentQuestionIndex === questionBlocks.length - 1);
+        submitBtn.classList.toggle('hidden', currentQuestionIndex !== questionBlocks.length - 1);
+      }
+
+      // Initialize the first question
+      showQuestion(0);
+
+      // Clear localStorage on form submission
+      document.querySelector('form').addEventListener('submit', function() {
+        localStorage.removeItem('quizTimeRemaining');
+        localStorage.removeItem('quizAnswers');
+      });
+
+      // Fill progress bar and percentage
+      function updateProgress() {
+        const totalQuestions = questionBlocks.length;
+        const answeredQuestions = Array.from(questionBlocks).filter(block => {
+          const inputs = block.querySelectorAll('input[type="radio"]');
+          return Array.from(inputs).some(input => input.checked);
+        }).length;
+
+        const progressBar = document.querySelector('.js-progress-bar-fill');
+        const progressPercentage = document.querySelector('.js-progress');
+
+        if (totalQuestions > 0) {
+          const percentage = (answeredQuestions / totalQuestions) * 100;
+          progressBar.style.width = `${percentage}%`;
+          progressPercentage.textContent = `${Math.round(percentage)}%`;
+        }
+      }
+      // Update progress when next button is clicked
+      nextBtn.addEventListener('click', updateProgress);
+      // Update progress when previous button is clicked
+      prevBtn.addEventListener('click', updateProgress);
+      // Update progress when an answer is selected
+      document.querySelectorAll('input[type="radio"]').forEach(input => {
+        input.addEventListener('change', updateProgress);
+      });
+  </script>
+{% endblock %}
