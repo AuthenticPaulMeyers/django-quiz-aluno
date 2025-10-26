@@ -11,7 +11,7 @@
       <div class="p-8">
 
         <header class="mb-8">
-          <h1 class="text-3xl font-bold text-gray-900 dark:text-white">
+          <h1 class="text-3xl font-bold text-gray-700 dark:text-white">
             Dashboard
           </h1>
           {% if user %}
@@ -23,54 +23,59 @@
 
         <section class="mb-8 space-y-12">
           <div>
-            <h3 class="text-xl font-semibold text-zinc-900 dark:text-white">
+            <h3 class="text-xl font-semibold text-gray-700 dark:text-white">
               Overall Performance
             </h3>
             <div class="mt-4 grid grid-cols-1 gap-5 sm:grid-cols-1 lg:grid-cols-3">
               <div
-                class="overflow-hidden rounded-lg bg-white p-5 shadow-sm ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-800">
-                <p class="truncate text-sm font-medium text-zinc-500 dark:text-zinc-400">
+                class="overflow-hidden rounded-lg bg-white p-5 shadow-sm ring-1 ring-green-300/90">
+                <p class="truncate text-sm font-medium text-green-500">
                   Average Score
                 </p>
-                <p class="mt-1 text-3xl font-semibold text-zinc-900 dark:text-white">
+                <p class="mt-1 text-3xl font-semibold text-green-500 flex flex-row justify-between align-center">
                   {% if average_score is None %}
                     0
                   {% else %}
                     {{ average_score }}
                   {% endif %}
+                  <span class="flex-shrink-0 size-12 rounded-lg flex items-center justify-center bg-green-500 text-white text-md"><i class="fa-solid fa-chart-simple"></i></span>
+                  
                 </p>
               </div>
               <div
-                class="overflow-hidden rounded-lg bg-white p-5 shadow-sm ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-800">
-                <p class="truncate text-sm font-medium text-zinc-500 dark:text-zinc-400">
+                class="overflow-hidden rounded-lg bg-white p-5 shadow-sm ring-1 ring-purple-300/90">
+                <p class="truncate text-sm font-medium text-purple-500">
                   Quizzes Taken
                 </p>
-                <p class="mt-1 text-3xl font-semibold text-zinc-900 dark:text-white">
+                <p class="mt-1 text-3xl font-semibold text-purple-500 flex flex-row justify-between align-center">
                   {% if quizzes_taken is None %}
                     0
                   {% else %}
                     {{ quizzes_taken }}
                   {% endif %}
+                  <span class="flex-shrink-0 size-12 rounded-lg flex items-center justify-center bg-purple-500 text-white text-md"><i class="fa-solid fa-graduation-cap"></i></span>
                 </p>
               </div>
               <div
-                class="overflow-hidden rounded-lg bg-white p-5 shadow-sm ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-800">
-                <p class="truncate text-sm font-medium text-zinc-500 dark:text-zinc-400">
+                class="overflow-hidden rounded-lg bg-white p-5 shadow-sm ring-1 ring-primary/90">
+                <p class="truncate text-sm font-medium text-primary dark:text-primary/70">
                   Subjects Covered
                 </p>
-                <p class="mt-1 text-3xl font-semibold text-zinc-900 dark:text-white">
+                <p class="mt-1 text-3xl font-semibold text-primary flex flex-row justify-between align-center">
                   {% if subjects_covered is None %}
                     0
                   {% else %}
                     {{ subjects_covered }}
                   {% endif %}
+                  <span class="flex-shrink-0 size-12 rounded-lg flex items-center justify-center bg-primary text-white text-md"><i class="fa-solid fa-book-open"></i></span>
                 </p>
+                
               </div>
             </div>
           </div>
           <div>
             <div class="flex justify-between items-center mb-4">
-            <h2 class="text-xl font-semibold text-zinc-900 dark:text-white">
+            <h2 class="text-xl font-semibold text-gray-700 dark:text-white">
               Active Quizzes
             </h2>
           </div>

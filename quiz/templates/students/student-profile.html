@@ -7,20 +7,26 @@
       <div class="max-w-2xl mx-auto">
         <div class="bg-white dark:bg-background-dark/50 rounded-lg shadow-sm p-6 @container">
           <div class="flex flex-col items-center justify-center gap-6 @[520px]:flex-row @[520px]:justify-between @[520px]:items-center">
-            <div class="flex flex-col justify-center items-center gap-5">
+            <div class="self-center mx-auto">
 
-              <div class="flex flex-col gap-6 items-center justify-center">
-              <div class="h-24 w-24 sm:h-32 sm:w-32 flex-shrink-0 rounded-full bg-cover bg-center bg-no-repeat" >
+              <div class="flex flex-col gap-3 align-center items-center justify-center">
+              <div class="h-24 w-24 sm:h-32 sm:w-32 flex-shrink-0 rounded-full bg-cover bg-center bg-no-repeat ring-1 ring-primary" >
                 <img src="{% static 'images/user.png' %}" alt="User placeholder" class="rounded-full">
               </div>
-                <h2 class="text-xl sm:text-xl font-bold text-gray-900 dark:text-white">
+                <h2 class="text-xl sm:text-xl font-bold text-gray-700 dark:text-white">
                   {{ user.student.get_full_name }}
                 </h2>
-                <p class="text-base text-gray-500 dark:text-gray-400">
-                  <b>Class : </b> {{ user.student.class_enrolled.name }} <br>
-                  <b>Username : </b> {{ user.username }}
-                </p>
-                <div class="flex gap-4">
+                <div class="text-base text-gray-500 dark:text-gray-400 flex flex-row gap-8">
+                  <div class="flex align-center justify-between flex-row gap-3">
+                    <span class="flex-shrink-0 size-10 rounded-lg flex items-center justify-center bg-primary text-white text-md"><i class="fa-solid fa-graduation-cap"></i></span> 
+                    <span class="mt-2">{{ user.student.class_enrolled.name }}</span>
+                  </div>
+                  <div class="flex align-center justify-between flex-row gap-3">
+                    <span class="flex-shrink-0 size-10 rounded-lg flex items-center justify-center bg-primary text-white text-md"><i class="fa-solid fa-user"></i></span> 
+                    <span class="mt-2">{{ user.username }}</span>
+                  </div>
+                </div>
+                <div class="flex gap-4 mt-6">
                   <button
                     class="flex min-w-[84px] items-center justify-center rounded-full h-8 px-4 bg-primary text-white text-sm tracking-wide hover:bg-primary/90">
                     <span class="truncate">Change password</span>
@@ -37,7 +43,7 @@
           </div>
         </div>
         <div class="mt-8">
-          <h3 class="text-xl font-bold text-gray-900 dark:text-white px-1 pb-4">
+          <h3 class="text-xl font-bold text-gray-700 dark:text-white px-1 pb-4">
             Enrolled Subjects ({{ user.student.get_enrolled_subjects_with_teacher|length }})
           </h3>
           <div

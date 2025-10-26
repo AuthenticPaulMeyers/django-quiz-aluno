@@ -8,7 +8,7 @@
     <main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
       <div class="max-w-4xl mx-auto">
         <div class="mb-8">
-          <h2 class="text-3xl font-bold tracking-tight text-foreground-light dark:text-foreground-dark">
+          <h2 class="text-3xl font-bold tracking-tight text-gray-700 dark:text-foreground-dark">
             Quiz Results
           </h2>
           <p class="mt-2 text-lg text-subtle-light dark:text-subtle-dark">
@@ -35,7 +35,7 @@
             <p class="text-sm font-medium text-subtle-light dark:text-subtle-dark">
               Correct Answers
             </p>
-            <p class="text-4xl font-bold text-foreground-light dark:text-foreground-dark mt-2">
+            <p class="text-4xl font-bold text-gray-700 dark:text-foreground-dark mt-2">
               {{ correct_count }}/{{ total }}
             </p>
           </div>
@@ -44,13 +44,13 @@
             <p class="text-sm font-medium text-subtle-light dark:text-subtle-dark">
               Time Taken
             </p>
-            <p class="text-4xl font-bold text-foreground-light dark:text-foreground-dark mt-2">
+            <p class="text-4xl font-bold text-gray-700 dark:text-foreground-dark mt-2">
               {{ time_taken|default:'N/A' }}
             </p>
           </div>
         </div>
         <div>
-          <h3 class="text-2xl font-bold text-foreground-light dark:text-foreground-dark mb-6">
+          <h3 class="text-2xl font-bold text-gray-700 dark:text-foreground-dark mb-6">
             Answer Review
           </h3>
           <div class="space-y-4">
@@ -67,7 +67,7 @@
               </div>
               {% endif %}
               <div class="flex-grow">
-                <p class="font-medium text-foreground-light dark:text-foreground-dark">
+                <p class="font-medium text-gray-700 dark:text-foreground-dark">
                   {{ forloop.counter }}. {{ a.question }}
                 </p>
                 <p class="text-sm text-subtle-light dark:text-subtle-dark">

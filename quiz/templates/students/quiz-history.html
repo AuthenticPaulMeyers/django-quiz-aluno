@@ -8,10 +8,10 @@
     <main class="flex-1">
       <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         <div class="mb-8">
-          <h2 class="text-3xl font-bold tracking-tight text-zinc-900 dark:text-white">
+          <h2 class="text-3xl font-bold tracking-tight text-gray-700 dark:text-white">
             My Results
           </h2>
-          <p class="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+          <p class="mt-1 text-sm text-zinc-600 dark:text-zinc-700">
             Review your quiz history and performance metrics.
           </p>
         </div>
@@ -23,7 +23,7 @@
         </div>
         <div class="space-y-12">
           <div>
-            <h3 class="text-xl font-semibold text-zinc-900 dark:text-white">
+            <h3 class="text-xl font-semibold text-gray-700 dark:text-white">
               Overall Performance
             </h3>
             {% if messages %}
@@ -33,11 +33,11 @@
             {% endif %}
             <div class="mt-4 grid grid-cols-1 gap-5 sm:grid-cols-1 lg:grid-cols-3">
               <div
-                class="overflow-hidden rounded-lg bg-white p-5 shadow-sm ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-800">
-                <p class="truncate text-sm font-medium text-zinc-500 dark:text-zinc-400">
+                class="overflow-hidden rounded-lg bg-white p-5 shadow-sm ring-1 ring-zinc-200 dark:bg-zinc-700 dark:ring-zinc-800">
+                <p class="truncate text-sm font-medium text-zinc-700 dark:text-zinc-700">
                   Average Score
                 </p>
-                <p class="mt-1 text-3xl font-semibold text-zinc-900 dark:text-white">
+                <p class="mt-1 text-3xl font-semibold text-zinc-700 dark:text-white">
                   {% if average_score is None %}
                     0
                   {% else %}
@@ -46,11 +46,11 @@
                 </p>
               </div>
               <div
-                class="overflow-hidden rounded-lg bg-white p-5 shadow-sm ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-800">
-                <p class="truncate text-sm font-medium text-zinc-500 dark:text-zinc-400">
+                class="overflow-hidden rounded-lg bg-white p-5 shadow-sm ring-1 ring-zinc-200 dark:bg-zinc-700 dark:ring-zinc-800">
+                <p class="truncate text-sm font-medium text-zinc-700 dark:text-zinc-700">
                   Quizzes Taken
                 </p>
-                <p class="mt-1 text-3xl font-semibold text-zinc-900 dark:text-white">
+                <p class="mt-1 text-3xl font-semibold text-zinc-700 dark:text-white">
                   {% if quizzes_taken is None %}
                     0
                   {% else %}
@@ -59,11 +59,11 @@
                 </p>
               </div>
               <div
-                class="overflow-hidden rounded-lg bg-white p-5 shadow-sm ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-800">
-                <p class="truncate text-sm font-medium text-zinc-500 dark:text-zinc-400">
+                class="overflow-hidden rounded-lg bg-white p-5 shadow-sm ring-1 ring-zinc-200 dark:bg-zinc-700 dark:ring-zinc-800">
+                <p class="truncate text-sm font-medium text-zinc-700 dark:text-zinc-700">
                   Subjects Covered
                 </p>
-                <p class="mt-1 text-3xl font-semibold text-zinc-900 dark:text-white">
+                <p class="mt-1 text-3xl font-semibold text-zinc-700 dark:text-white">
                   {% if subjects_covered is None %}
                     0
                   {% else %}
@@ -74,7 +74,7 @@
             </div>
           </div>
           <div>
-            <h3 class="text-xl font-semibold text-zinc-900 dark:text-white">
+            <h3 class="text-xl font-semibold text-gray-700 dark:text-white">
               Subject Performance
             </h3>
             <div class="mt-4 flow-root">
@@ -82,51 +82,51 @@
                 <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
                   <div class="overflow-hidden rounded-lg shadow-sm ring-1 ring-zinc-200 dark:ring-zinc-800">
                     <table class="min-w-full divide-y divide-zinc-200 dark:divide-zinc-800">
-                      <thead class="bg-zinc-50 dark:bg-zinc-900/50">
+                      <thead class="bg-zinc-50 dark:bg-zinc-700/50">
                         <tr>
                           <th
-                            class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-zinc-500 dark:text-zinc-400"
+                            class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-zinc-700 dark:text-zinc-700"
                             scope="col">
                             Subject
                           </th>
                           <th
-                            class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-zinc-500 dark:text-zinc-400"
+                            class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-zinc-700 dark:text-zinc-700"
                             scope="col">
                             Average Score
                           </th>
                           <th
-                            class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-zinc-500 dark:text-zinc-400"
+                            class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-zinc-700 dark:text-zinc-700"
                             scope="col">
                             Quizzes Taken
                           </th>
                           <th
-                            class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-zinc-500 dark:text-zinc-400"
+                            class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-zinc-700 dark:text-zinc-700"
                             scope="col">
                             Last Attempt
                           </th>
                         </tr>
                       </thead>
-                      <tbody class="divide-y divide-zinc-200 bg-white dark:divide-zinc-800 dark:bg-zinc-900">
+                      <tbody class="divide-y divide-zinc-200 bg-white dark:divide-zinc-800 dark:bg-zinc-700">
                         {% if subject_performance %}
                           {% for s in subject_performance %}
                             <tr>
-                              <td class="whitespace-nowrap px-6 py-4 text-sm font-medium text-zinc-900 dark:text-white">
+                              <td class="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-700 dark:text-white">
                                 {{ s.subject.name }}
                               </td>
-                              <td class="whitespace-nowrap px-6 py-4 text-sm text-zinc-500 dark:text-zinc-400">
+                              <td class="whitespace-nowrap px-6 py-4 text-sm text-zinc-700 dark:text-zinc-700">
                                 {{ s.average_score }}%
                               </td>
-                              <td class="whitespace-nowrap px-6 py-4 text-sm text-zinc-500 dark:text-zinc-400">
+                              <td class="whitespace-nowrap px-6 py-4 text-sm text-zinc-700 dark:text-zinc-700">
                                 {{ s.quizzes_taken }}
                               </td>
-                              <td class="whitespace-nowrap px-6 py-4 text-sm text-zinc-500 dark:text-zinc-400">
+                              <td class="whitespace-nowrap px-6 py-4 text-sm text-zinc-700 dark:text-zinc-700">
                                 {{ s.last_attempt|date:"Y-m-d" }}
                               </td>
                             </tr>
                           {% endfor %}
                         {% else %}
                           <tr>
-                            <td colspan="4" class="px-6 py-4 text-sm text-zinc-500 dark:text-zinc-400">No performance data available.</td>
+                            <td colspan="4" class="px-6 py-4 text-sm text-zinc-700 dark:text-zinc-700">No performance data available.</td>
                           </tr>
                         {% endif %}
                       </tbody>
@@ -137,7 +137,7 @@
             </div>
           </div>
           <div>
-            <h3 class="text-xl font-semibold text-zinc-900 dark:text-white">
+            <h3 class="text-xl font-semibold text-gray-700 dark:text-white">
               Quiz Attempts
             </h3>
             <div class="mt-4 flow-root">
@@ -145,25 +145,25 @@
                 <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
                   <div class="overflow-hidden rounded-lg shadow-sm ring-1 ring-zinc-200 dark:ring-zinc-800">
                     <table class="min-w-full divide-y divide-zinc-200 dark:divide-zinc-800">
-                      <thead class="bg-zinc-50 dark:bg-zinc-900/50">
+                      <thead class="bg-zinc-50 dark:bg-zinc-700/50">
                         <tr>
-                          <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-zinc-500 dark:text-zinc-400">Quiz</th>
-                          <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-zinc-500 dark:text-zinc-400">Date</th>
-                          <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-zinc-500 dark:text-zinc-400">Score</th>
-                          <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-zinc-500 dark:text-zinc-400">Status</th>
-                          <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-zinc-500 dark:text-zinc-400">Review</th>
+                          <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-zinc-700 dark:text-zinc-700">Quiz</th>
+                          <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-zinc-700 dark:text-zinc-700">Date</th>
+                          <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-zinc-700 dark:text-zinc-700">Score</th>
+                          <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-zinc-700 dark:text-zinc-700">Status</th>
+                          <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-zinc-700 dark:text-zinc-700">Review</th>
                         </tr>
                       </thead>
-                      <tbody class="divide-y divide-zinc-200 bg-white dark:divide-zinc-800 dark:bg-zinc-900">
+                      <tbody class="divide-y divide-zinc-200 bg-white dark:divide-zinc-800 dark:bg-zinc-700">
                         {% if attempts %}
                           {% for attempt in attempts %}
                             {% if attempt.is_completed %}
                               <tr>
-                                <td class="whitespace-nowrap px-6 py-4 text-sm font-medium text-zinc-900 dark:text-white">{{ attempt.quiz.title }}</td>
-                                <td class="whitespace-nowrap px-6 py-4 text-sm text-zinc-500 dark:text-zinc-400">{{ attempt.quiz.date_created|date:"Y-m-d" }}</td>
-                                <td class="whitespace-nowrap px-6 py-4 text-sm text-zinc-500 dark:text-zinc-400">{{ attempt.score }}%</td>
-                                <td class="whitespace-nowrap px-6 py-4 text-sm text-zinc-500 dark:text-zinc-400">Completed</td>
-                                <td class="whitespace-nowrap px-6 py-4 text-sm text-zinc-500 dark:text-zinc-400">
+                                <td class="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-700 dark:text-white">{{ attempt.quiz.title }}</td>
+                                <td class="whitespace-nowrap px-6 py-4 text-sm text-zinc-700 dark:text-zinc-700">{{ attempt.quiz.date_created|date:"Y-m-d" }}</td>
+                                <td class="whitespace-nowrap px-6 py-4 text-sm text-zinc-700 dark:text-zinc-700">{{ attempt.score }}%</td>
+                                <td class="whitespace-nowrap px-6 py-4 text-sm text-zinc-700 dark:text-zinc-700">Completed</td>
+                                <td class="whitespace-nowrap px-6 py-4 text-sm text-zinc-700 dark:text-zinc-700">
                                   <a class="text-primary hover:underline" href="{% url 'quiz:quiz-results' attempt.quiz.id %}">View</a>
                                 </td>
                               </tr>
@@ -171,7 +171,7 @@
                           {% endfor %}
                         {% else %}
                           <tr>
-                            <td colspan="5" class="px-6 py-4 text-sm text-zinc-500 dark:text-zinc-400">You have not taken any quizzes yet.</td>
+                            <td colspan="5" class="px-6 py-4 text-sm text-zinc-700 dark:text-zinc-700">You have not taken any quizzes yet.</td>
                           </tr>
                         {% endif %}
                       </tbody>
