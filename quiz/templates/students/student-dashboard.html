@@ -77,6 +77,12 @@
           {% if not active_quizzes %}
             <span class="text-sm text-center text-gray-600 dark:text-gray-400">You do not have active quizzes.</span>
           {% endif %}
+          <!-- Display error messages if any -->
+          {% if messages %}
+            {% for message in messages %}
+                <p class="text-center text-sm text-red-600 mb-4 mt-4">{{ message }}</p>
+            {% endfor %}
+          {% endif %}
           <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-6">
 
             {% for quiz in active_quizzes %}

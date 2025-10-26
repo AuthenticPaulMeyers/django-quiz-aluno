@@ -69,7 +69,8 @@ def all_quizzes_view(request):
         class_quizzes = student_obj.get_quizzes()
          # if no quizzes found, return with message
         if not class_quizzes:
-            return render(request, 'students/view-all-quizzes.html', {'message': 'You do not have quiz history.'})
+            messages.info(request, 'You do not have quiz history.')
+            return redirect('quiz:all-quizzes')
 
         context = {
             'user': user,
@@ -87,7 +88,6 @@ def all_quizzes_view(request):
 @login_required(login_url='quiz:login')
 def quiz_history_view(request, student_id=None):
     # Show the quiz history for the logged-in student
-
     user = request.user
     try:
         # prefer the logged-in user's student object
@@ -99,7 +99,7 @@ def quiz_history_view(request, student_id=None):
 
         if student_obj is None:
             messages.error(request, 'Student record not found.')
-            return redirect('student-dashboard')
+            return redirect('quiz:student-dashboard')
 
         # overall metrics
         avg_score = student_obj.average_score()
@@ -125,7 +125,7 @@ def quiz_history_view(request, student_id=None):
         # for debugging purposes
         print('Error in quiz_history_view:', e)
         messages.error(request, 'Unable to load quiz history.')
-        return redirect('student-dashboard')
+        return redirect('quiz:student-dashboard')
 
 @login_required(login_url='quiz:login')
 def quiz_details_view(request, quiz_id):
@@ -134,7 +134,7 @@ def quiz_details_view(request, quiz_id):
         quiz = Quiz.objects.filter(pk=quiz_id).first()
         if quiz is None:
             messages.error(request, 'Quiz not found.')
-            return redirect('student-dashboard')
+            return redirect('quiz:student-dashboard')
         total = Question.objects.filter(quiz=quiz.id).count()
 
         from django.utils import timezone
@@ -150,7 +150,7 @@ def quiz_details_view(request, quiz_id):
     except Exception as e:
         print('Error in quiz_details_view:', e)
         messages.error(request, 'Unable to load quiz details.')
-        return redirect('student-dashboard')
+        return redirect('quiz:student-dashboard')
 
 @login_required(login_url='quiz:login')
 def attempt_quiz_view(request, quiz_id):

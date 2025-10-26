@@ -17,6 +17,11 @@
               Learn more about the quiz before you start.
             </p>
           </div>
+            {% if messages %}
+                {% for message in messages %}
+                    <p class="text-center text-sm text-red-600 mb-4">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
           <div class="space-y-6">
             <div
               class="grid grid-cols-1 md:grid-cols-3 gap-y-4 gap-x-8 pb-6 border-b border-border-light dark:border-border-dark">
@@ -142,7 +147,6 @@
 
   <script>
    window.addEventListener('DOMContentLoaded', (event) => {
-      // You can add any JavaScript needed for this page here
       // clear localStorage on page load
       localStorage.removeItem('quizTimeRemaining');
       localStorage.removeItem('quizAnswers');

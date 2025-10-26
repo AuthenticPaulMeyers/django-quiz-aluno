@@ -14,8 +14,7 @@
           All Quizzes
         </h2>
       </div>
-      <div class="flex flex-wrap gap-2 mb-8 text-center">
-        <span class="text-sm">Filter by Status:</span>
+      <div class="flex flex-row flex-wrap gap-2 mb-8 text-center align-center justify-center">
         <button data-filter="all"
           class="js-filter-btn flex items-center gap-1 px-4 py-2 rounded-lg bg-primary text-white text-sm font-medium transition-colors" aria-pressed="true">
           <span>All</span>
@@ -42,9 +41,6 @@
             <thead
               class="text-xs uppercase bg-background-light dark:bg-background-dark border-b border-background-dark/10 dark:border-background-light/10">
               <tr>
-                <!-- <th class="px-6 py-3 font-medium" scope="col">Date</th>
-                <th class="px-6 py-3 font-medium" scope="col">Start Time</th>
-                <th class="px-6 py-3 font-medium" scope="col">End Time</th> -->
                 <th class="px-6 py-3 font-medium" scope="col">Quiz Title</th>
                 <th class="px-6 py-3 font-medium" scope="col">Subject</th>
                 <th class="px-6 py-3 font-medium" scope="col">Time allowed</th>
@@ -62,15 +58,6 @@
               <tr
                 data-status="{% if quiz.due_date < current_time %}expired{% elif quiz.start_date > current_time %}upcoming{% else %}active{% endif %}"
                 class="border-b border-background-dark/10 dark:border-background-light/10 hover:bg-primary/5 dark:hover:bg-primary/10">
-                <!-- <td class="px-6 py-4 text-gray-600 font-medium text-background-dark dark:text-background-light whitespace-nowrap">
-                  {{ quiz.start_date|date:"F j, Y" }}
-                </td>
-                <td class="px-6 py-4 text-gray-600 font-medium text-background-dark dark:text-background-light whitespace-nowrap">
-                  {{ quiz.start_date|date:"g:i a" }}
-                </td>
-                <td class="px-6 py-4 text-gray-600 font-medium text-background-dark dark:text-background-light whitespace-nowrap">
-                  {{ quiz.due_date|date:"g:i a" }}
-                </td> -->
                 <td class="px-6 py-4">{{ quiz.title }}</td>
                 <td class="px-6 py-4">{{ quiz.subject.name }}</td>
                 <td class="px-6 py-4">{{ quiz.duration }} mins</td>
@@ -138,9 +125,11 @@
           } catch(e){ buttons[0].click(); }
         })();
       </script>
-        {% if message %}
-          <span class="text-sm text-center text-gray-500 mt-8">{{ message }}</span>
-        {% endif %}
+          {% if messages %}
+            {% for message in messages %}
+                <p class="text-center text-sm text-gray-500 mb-4">{{ message }}</p>
+            {% endfor %}
+          {% endif %}
     </main>
   </div>
 {% endblock %}

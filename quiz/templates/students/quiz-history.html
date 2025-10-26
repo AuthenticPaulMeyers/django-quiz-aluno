@@ -18,7 +18,7 @@
         <div class="mb-8 border-b border-zinc-200 dark:border-zinc-800">
           <nav aria-label="Tabs" class="-mb-px flex space-x-8">
             <a class="border-primary text-primary whitespace-nowrap border-b-2 px-1 py-4 text-sm font-medium"
-              href="#">Subject</a>
+              >Subject</a>
           </nav>
         </div>
         <div class="space-y-12">
@@ -26,6 +26,11 @@
             <h3 class="text-xl font-semibold text-zinc-900 dark:text-white">
               Overall Performance
             </h3>
+            {% if messages %}
+                {% for message in messages %}
+                    <p class="text-center text-sm text-red-600 mb-4">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
             <div class="mt-4 grid grid-cols-1 gap-5 sm:grid-cols-1 lg:grid-cols-3">
               <div
                 class="overflow-hidden rounded-lg bg-white p-5 shadow-sm ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-800">
