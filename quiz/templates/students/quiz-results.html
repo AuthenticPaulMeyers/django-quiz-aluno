@@ -28,7 +28,8 @@
               Score
             </p>
             <p class="text-4xl font-bold text-primary mt-2">{{ score }}</p>
-            <span class="text-sm font-medium text-subtle-light dark:text-subtle-dark">{{ score|floatformat:0|add:'0' }}%</span>
+            {}
+            <span class="text-sm font-medium text-subtle-light dark:text-subtle-dark"></span>
           </div>
           <div
             class="bg-white dark:bg-background-dark/70 p-6 rounded-xl border border-border-light dark:border-border-dark">
@@ -71,7 +72,7 @@
                   {{ forloop.counter }}. {{ a.question }}
                 </p>
                 <p class="text-sm text-subtle-light dark:text-subtle-dark">
-                  <b>Your answer:</b> {{ a.your_answer|default:'No answer' }}
+                  <b>Your answer:</b> <span class="line-through">{{ a.your_answer|default:'No answer' }}</span>
                 </p>
                 {% if not a.is_correct %}
                 <p class="text-sm text-subtle-light dark:text-subtle-dark">
@@ -84,7 +85,8 @@
 
           <div class="mt-12 text-center">
             <button
-              class="bg-primary text-white font-medium px-4 py-3 rounded-full hover:bg-primary/90 transition-all duration-300">
+              class="bg-primary text-white font-sm px-4 py-2 rounded-full hover:bg-primary/90 transition-all duration-300">
+              <i class="fa-solid fa-arrow-left"></i>
               <a href="{% url 'quiz:student-dashboard' %}">Back to Dashboard</a>
             </button>
           </div>
