@@ -26,7 +26,7 @@
                     <span class="mt-2">{{ user.username }}</span>
                   </div>
                 </div>
-                <div class="flex gap-4 mt-6">
+                <div class="flex gap-4 mt-10">
                   <button
                     class="flex min-w-[84px] items-center justify-center rounded-full h-8 px-4 bg-primary text-white text-sm tracking-wide hover:bg-primary/90">
                       <a href="{% url 'quiz:change-password' %}">
@@ -34,9 +34,9 @@
                     </a>
                   </button>
                   <button
-                    class="flex min-w-[84px] items-center justify-center rounded-full h-8 px-4 bg-primary/10 dark:bg-primary/20 text-primary text-sm tracking-wide hover:bg-primary/20 dark:hover:bg-primary/30">
+                    class="flex min-w-[84px] items-center justify-center rounded-full h-8 px-4 bg-green-500 dark:bg-green-500 text-white text-sm tracking-wide hover:bg-green-600 dark:hover:bg-green-500/30">
                     <span class="truncate">
-                      <a href="{% url 'quiz:quiz-history' user.student.id %}">Grade history</a>
+                      <a href="{% url 'quiz:quiz-history' user.student.id %}">Performance</a>
                     </span>
                   </button>
                 </div>
