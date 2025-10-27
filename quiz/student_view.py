@@ -86,17 +86,13 @@ def all_quizzes_view(request):
     return render(request, 'students/view-all-quizzes.html', context)
 
 @login_required(login_url='quiz:login')
-def quiz_history_view(request, student_id=None):
+def quiz_history_view(request):
     # Show the quiz history for the logged-in student
     user = request.user
     try:
         # prefer the logged-in user's student object
         student_obj = getattr(user, 'student', None)
-        if student_obj is None and student_id:
-            # fallback: try to get by id
-            from .models import Student
-            student_obj = Student.objects.filter(pk=student_id).first()
-
+        
         if student_obj is None:
             messages.error(request, 'Student record not found.')
             return redirect('quiz:student-dashboard')
