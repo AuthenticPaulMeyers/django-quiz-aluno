@@ -31,8 +31,6 @@ function updateTimer() {
 updateTimer(); // Initial call to display the timer immediately
 const timerInterval = setInterval(updateTimer, 1000);
 
-
-
 // Prevent Back Navigation
 history.pushState(null, null, location.href);
 window.onpopstate = function () {
