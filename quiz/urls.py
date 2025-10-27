@@ -8,6 +8,7 @@ urlpatterns = [
     # Auth view
     path('login/', auth_view.login_view, name='login'),
     path('logout/', auth_view.logout_view, name='logout'),
+    path('students/profile/change-password/', auth_view.change_password, name='change-password'),
     # Student view
     path('student/dashboard/', student_view.student_dashboard_view, name='student-dashboard'),
     path('student/all-quizzes/', student_view.all_quizzes_view, name='all-quizzes'),

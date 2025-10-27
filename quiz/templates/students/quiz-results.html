@@ -21,15 +21,18 @@
             {% endfor %}
           {% endif %}
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
           <div
             class="bg-white dark:bg-background-dark/70 p-6 rounded-xl border border-border-light dark:border-border-dark">
             <p class="text-sm font-medium text-subtle-light dark:text-subtle-dark">
               Score
             </p>
-            <p class="text-4xl font-bold text-primary mt-2">{{ score }}</p>
-            {}
-            <span class="text-sm font-medium text-subtle-light dark:text-subtle-dark"></span>
+            <p class="text-4xl font-bold text-gray-700 mt-2">{{ score }}%</p>
+            {% if score|floatformat:0|add:'0' < 40 %}
+            <span class="text-sm font-medium text-red-600 dark:text-red-600">FAILED</span>
+            {% else %}
+            <span class="text-sm font-medium text-green-600 dark:text-green-600">PASSED</span>
+            {% endif %}
           </div>
           <div
             class="bg-white dark:bg-background-dark/70 p-6 rounded-xl border border-border-light dark:border-border-dark">
@@ -40,7 +43,7 @@
               {{ correct_count }}/{{ total }}
             </p>
           </div>
-          <div
+          <!-- <div
             class="bg-white dark:bg-background-dark/70 p-6 rounded-xl border border-border-light dark:border-border-dark">
             <p class="text-sm font-medium text-subtle-light dark:text-subtle-dark">
               Time Taken
@@ -48,7 +51,7 @@
             <p class="text-4xl font-bold text-gray-700 dark:text-foreground-dark mt-2">
               {{ time_taken|default:'N/A' }}
             </p>
-          </div>
+          </div> -->
         </div>
         <div>
           <h3 class="text-2xl font-bold text-gray-700 dark:text-foreground-dark mb-6">

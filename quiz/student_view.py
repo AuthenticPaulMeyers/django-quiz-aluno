@@ -223,11 +223,10 @@ def quiz_results_view(request, quiz_id):
                 })
 
             context = {
-                'score': f"{existing_attempt.score}%",
+                'score': float(round(existing_attempt.score)),
                 'correct_count': correct_count,
                 'total': answers.count(),
                 'answers_review': answers_review,
-                'time_taken': None,
             }
             return render(request, 'students/quiz-results.html', context)
         else:
