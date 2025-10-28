@@ -47,6 +47,7 @@ def student_dashboard_view(request):
             'average_score': f"{avg_score}%" if avg_score is not None else '0',
             'quizzes_taken': quizzes_taken,
             'subjects_covered': subjects_count,
+            'title': 'Dashboard',
         }
         return render(request, 'students/student-dashboard.html', context)
 
@@ -76,6 +77,7 @@ def all_quizzes_view(request):
             'user': user,
             'all_quizzes': class_quizzes,
             'current_time': current_time,
+            'title': 'Quizzes',
         }
 
     except Student.DoesNotExist:
@@ -113,6 +115,7 @@ def quiz_history_view(request):
             'subjects_covered': subjects_count,
             'subject_performance': subject_perf,
             'attempts': attempts,
+            'title': 'Quiz History',
         }
 
         return render(request, 'students/quiz-history.html', context)
@@ -139,7 +142,8 @@ def quiz_details_view(request, quiz_id):
         context = {
             'quiz': quiz,
             'total': total,
-            'current_time': current_time
+            'current_time': current_time,
+            'title': 'Quiz Details',
         }
         return render(request, 'students/quiz-details.html', context=context)
 
@@ -178,6 +182,7 @@ def attempt_quiz_view(request, quiz_id):
         'quiz': quiz,
         'questions': questions,
         'questions_count': questions_count,
+        'title': 'Attempt Quiz',
     }
 
     return render(request, 'students/quiz-page.html', context=context)
@@ -223,6 +228,7 @@ def quiz_results_view(request, quiz_id):
                 'correct_count': correct_count,
                 'total': answers.count(),
                 'answers_review': answers_review,
+                'title': 'Quiz Results',
             }
             return render(request, 'students/quiz-results.html', context)
         else:
@@ -252,6 +258,7 @@ def quiz_results_view(request, quiz_id):
             'total': answers.count(),
             'answers_review': answers_review,
             'time_taken': None,
+            'title': 'Quiz Results',
         }
         return render(request, 'students/quiz-results.html', context)
 
@@ -329,6 +336,7 @@ def quiz_results_view(request, quiz_id):
         'total': total_questions,
         'answers_review': answers_review,
         'time_taken': time_taken,
+        'title': 'Quiz Results',
     }
 
     return render(request, 'students/quiz-results.html', context)
@@ -339,5 +347,6 @@ def student_profile_view(request):
     user = request.user
     context = {
         'user': user,
+        'title': 'Student Profile',
     }
     return render(request, 'students/student-profile.html', context)
