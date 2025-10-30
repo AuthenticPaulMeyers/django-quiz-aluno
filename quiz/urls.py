@@ -1,5 +1,5 @@
 from django.urls import path
-from . import auth_view, views, student_view, teacher_view
+from . import auth_view, views, student_view
 
 app_name = 'quiz'
 
@@ -17,5 +17,5 @@ urlpatterns = [
     path('student/quiz-details/<int:quiz_id>', student_view.quiz_details_view, name='quiz-details'),
     path('student/attempt-quiz/<int:quiz_id>', student_view.attempt_quiz_view, name='attempt-quiz'),
     path('student/quiz-results/<int:quiz_id>', student_view.quiz_results_view, name='quiz-results'),
-    # Teacher view
+
 ]

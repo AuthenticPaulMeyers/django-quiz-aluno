@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Stitch Design</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#1173d4",
+              "background-light": "#f6f7f8",
+              "background-dark": "#101922",
+              "content-light": "#ffffff",
+              "content-dark": "#1f2937",
+              "text-light": "#1f2937",
+              "text-dark": "#f9fafb",
+              "border-light": "#e5e7eb",
+              "border-dark": "#374151",
+              "placeholder-light": "#9ca3af",
+              "placeholder-dark": "#6b7280",
+            },
+            fontFamily: {
+              display: ["Inter"],
+            },
+            borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" },
+          },
+        },
+      };
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+      }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-text-light dark:text-text-dark">
+<div class="relative flex min-h-screen w-full flex-col">
+<header class="flex h-16 items-center justify-between border-b border-border-light dark:border-border-dark bg-content-light dark:bg-content-dark px-4 sm:px-6 lg:px-8 sticky top-0 z-10">
+<div class="flex items-center gap-4">
+<div class="text-primary">
+<svg class="h-8 w-8" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_6_330)">
+<path clip-rule="evenodd" d="M24 0.757355L47.2426 24L24 47.2426L0.757355 24L24 0.757355ZM21 35.7574V12.2426L9.24264 24L21 35.7574Z" fill="currentColor" fill-rule="evenodd"></path>
+</g>
+<defs>
+<clipPath id="clip0_6_330">
+<rect fill="white" height="48" width="48"></rect>
+</clipPath>
+</defs>
+</svg>
+</div>
+<h1 class="text-xl font-bold">Quiz App</h1>
+</div>
+<nav class="hidden items-center gap-6 md:flex">
+<a class="text-sm font-medium hover:text-primary" href="#">Dashboard</a>
+<a class="text-sm font-medium text-primary" href="#">Quizzes</a>
+<a class="text-sm font-medium hover:text-primary" href="#">Students</a>
+</nav>
+<div class="flex items-center gap-4">
+<div class="relative">
+<button class="flex items-center justify-center rounded-full size-10 bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC2YQEpeZCGhqdfgB-LEgXuc5qOz36YenGe2kmrPD0zOU2qq_fBB8eGi2XVtsFZo9j-WVwxTaKFf25R9NeWJ3jKlsBomqjDqLMw0UN5tshjLsje0TfS1eDVhB24LvAhkcOqSmr0DDMZUAR5qJjt0mw69gsHz3Y4faidcBH0TU8tDYGSwtOFbP2KttEnRPyAKFFG4vkkLx1thdeEbd7NuSqcHS1nn_TSsaVSMGOzxXE7dvQF1G1lrC6HvHidp0gQbrNqHErmIHN96f09");'></button>
+</div>
+<button class="md:hidden">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</header>
+<main class="flex-1 px-4 py-8 sm:px-6 lg:px-8">
+<div class="mx-auto max-w-3xl">
+<div class="mb-8">
+<h2 class="text-3xl font-bold tracking-tight">Create a New Quiz</h2>
+<p class="text-placeholder-light dark:text-placeholder-dark mt-1">Fill in the details to create a new quiz for your students.</p>
+</div>
+<div class="space-y-6">
+<div class="rounded-lg border border-border-light dark:border-border-dark bg-content-light dark:bg-content-dark p-6">
+<h3 class="text-lg font-semibold mb-4">Quiz Details</h3>
+<div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+<div class="sm:col-span-2">
+<label class="block text-sm font-medium" for="quiz-title">Quiz Title</label>
+<input class="mt-1 block w-full rounded border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark placeholder:text-placeholder-light dark:placeholder:text-placeholder-dark focus:border-primary focus:ring-primary" id="quiz-title" placeholder="e.g., Introduction to Algebra" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-medium" for="subject">Subject</label>
+<select class="mt-1 block w-full rounded border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark focus:border-primary focus:ring-primary" id="subject">
+<option>Mathematics</option>
+<option>Science</option>
+<option>History</option>
+<option>English</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-medium" for="time-limit">Time Limit (minutes)</label>
+<input class="mt-1 block w-full rounded border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark placeholder:text-placeholder-light dark:placeholder:text-placeholder-dark focus:border-primary focus:ring-primary" id="time-limit" placeholder="e.g., 60" type="number"/>
+</div>
+</div>
+</div>
+<div class="rounded-lg border border-border-light dark:border-border-dark bg-content-light dark:bg-content-dark p-6">
+<div class="flex justify-between items-center mb-4">
+<h3 class="text-lg font-semibold">Questions</h3>
+<span class="text-sm font-medium text-placeholder-light dark:text-placeholder-dark">Question 1 of 10</span>
+</div>
+<div class="space-y-6">
+<div>
+<label class="block text-sm font-medium" for="question-1">Question 1</label>
+<textarea class="mt-1 block w-full rounded border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark placeholder:text-placeholder-light dark:placeholder:text-placeholder-dark focus:border-primary focus:ring-primary" id="question-1" placeholder="Enter the question text..." rows="3"></textarea>
+</div>
+<div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+<div>
+<label class="block text-sm font-medium" for="option-a">Option A</label>
+<input class="mt-1 block w-full rounded border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark placeholder:text-placeholder-light dark:placeholder:text-placeholder-dark focus:border-primary focus:ring-primary" id="option-a" placeholder="Enter option A" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-medium" for="option-b">Option B</label>
+<input class="mt-1 block w-full rounded border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark placeholder:text-placeholder-light dark:placeholder:text-placeholder-dark focus:border-primary focus:ring-primary" id="option-b" placeholder="Enter option B" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-medium" for="option-c">Option C</label>
+<input class="mt-1 block w-full rounded border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark placeholder:text-placeholder-light dark:placeholder:text-placeholder-dark focus:border-primary focus:ring-primary" id="option-c" placeholder="Enter option C" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-medium" for="option-d">Option D</label>
+<input class="mt-1 block w-full rounded border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark placeholder:text-placeholder-light dark:placeholder:text-placeholder-dark focus:border-primary focus:ring-primary" id="option-d" placeholder="Enter option D" type="text"/>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium" for="correct-answer">Correct Answer</label>
+<select class="mt-1 block w-full rounded border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark focus:border-primary focus:ring-primary" id="correct-answer">
+<option>Option A</option>
+<option>Option B</option>
+<option>Option C</option>
+<option>Option D</option>
+</select>
+</div>
+</div>
+</div>
+<div class="flex justify-between">
+<button class="flex items-center justify-center rounded-lg h-10 px-4 bg-primary/20 text-primary hover:bg-primary/30 dark:bg-primary/20 dark:hover:bg-primary/30 text-sm font-bold">
+<span class="material-symbols-outlined mr-2">add</span>
+<span>Add Question</span>
+</button>
+<div class="flex gap-4">
+<button class="flex items-center justify-center rounded-lg h-10 px-4 bg-background-light dark:bg-content-dark border border-border-light dark:border-border-dark hover:bg-border-light dark:hover:bg-border-dark/50 text-text-light dark:text-text-dark text-sm font-bold">
+<span>Save Draft</span>
+</button>
+<button class="flex items-center justify-center rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold hover:bg-primary/90">
+<span>Create Quiz</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>

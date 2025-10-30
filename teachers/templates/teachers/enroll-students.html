@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Add Students</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1173d4",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                        "foreground-light": "#111827",
+                        "foreground-dark": "#f9fafb",
+                        "subtle-light": "#6b7280",
+                        "subtle-dark": "#9ca3af",
+                        "border-light": "#e5e7eb",
+                        "border-dark": "#374151"
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .form-select {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            padding-right: 2.5rem;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-foreground-light dark:text-foreground-dark">
+<div class="flex flex-col min-h-screen">
+<header class="bg-background-light dark:bg-background-dark/80 backdrop-blur-sm sticky top-0 z-20 border-b border-border-light dark:border-border-dark">
+<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+<div class="flex h-16 items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="flex-shrink-0">
+<svg class="h-8 w-8 text-primary" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_6_330)">
+<path clip-rule="evenodd" d="M24 0.757355L47.2426 24L24 47.2426L0.757355 24L24 0.757355ZM21 35.7574V12.2426L9.24264 24L21 35.7574Z" fill="currentColor" fill-rule="evenodd"></path>
+</g>
+<defs>
+<clipPath id="clip0_6_330"><rect fill="white" height="48" width="48"></rect></clipPath>
+</defs>
+</svg>
+</div>
+<h1 class="text-xl font-bold text-foreground-light dark:text-foreground-dark">Quiz App</h1>
+</div>
+<nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+<a class="text-subtle-light dark:text-subtle-dark hover:text-primary dark:hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-subtle-light dark:text-subtle-dark hover:text-primary dark:hover:text-primary transition-colors" href="#">Quizzes</a>
+<a class="text-primary font-semibold" href="#">Students</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="relative rounded-full p-2 text-subtle-light dark:text-subtle-dark hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button>
+<img alt="User profile picture" class="h-10 w-10 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAt-znMFEvh3NshoWNDL85kaPSuJ7Vn-kOqwfDmMJoCuzacCmGucy4J3t4A7z4zW2OlfqD2tJ0o-5TWFFnVl6UBbT2j-evOhsyMN3CcTXZ03JQPxru5YMVFizWps6QAxciEQOO2ttOvcXUa-3OtoKu8-LTpIUYqUcccUdIrnFwWFQTSZ1F4ujmci-9PkUAbnV_5YCcKILZHQ2saQBCE5KC0rHK8WZPxYiv0Axyiwo5oAsRvvjxTE-lAr-DbrCQUIabdtjKwOrue7iRz"/>
+</button>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-grow">
+<div class="mx-auto max-w-3xl py-12 px-4 sm:px-6 lg:px-8">
+<div class="space-y-10">
+<div>
+<h2 class="text-3xl font-bold tracking-tight text-foreground-light dark:text-foreground-dark">Add Students</h2>
+<p class="mt-2 text-sm text-subtle-light dark:text-subtle-dark">Add students individually or upload a CSV file for bulk addition.</p>
+</div>
+<div class="bg-background-light dark:bg-background-dark/50 p-6 sm:p-8 rounded-xl border border-border-light dark:border-border-dark">
+<form class="space-y-6">
+<div>
+<label class="block text-sm font-medium text-foreground-light dark:text-foreground-dark" for="student-name">Student Name</label>
+<div class="mt-1">
+<input class="block w-full rounded-lg border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark/30 focus:border-primary focus:ring-primary text-sm" id="student-name" name="student-name" placeholder="Enter student's full name" type="text"/>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-foreground-light dark:text-foreground-dark" for="student-id">Student ID</label>
+<div class="mt-1">
+<input class="block w-full rounded-lg border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark/30 focus:border-primary focus:ring-primary text-sm" id="student-id" name="student-id" placeholder="Enter student's unique ID" type="text"/>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-foreground-light dark:text-foreground-dark" for="class">Class</label>
+<div class="mt-1">
+<select class="form-select block w-full rounded-lg border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark/30 focus:border-primary focus:ring-primary text-sm text-subtle-light dark:text-subtle-dark" id="class" name="class">
+<option>Select a class</option>
+<option value="9A">Grade 9 - Section A</option>
+<option value="9B">Grade 9 - Section B</option>
+<option value="10A">Grade 10 - Section A</option>
+<option value="10B">Grade 10 - Section B</option>
+</select>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-foreground-light dark:text-foreground-dark" for="password">Initial Password</label>
+<div class="mt-1">
+<input class="block w-full rounded-lg border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark/30 focus:border-primary focus:ring-primary text-sm" id="password" name="password" placeholder="Set initial password" type="password"/>
+</div>
+</div>
+<div class="pt-2 flex justify-end">
+<button class="inline-flex justify-center rounded-lg border border-transparent bg-primary px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background-light dark:focus:ring-offset-background-dark transition-colors" type="submit">Add Student</button>
+</div>
+</form>
+</div>
+<div>
+<h3 class="text-xl font-bold text-foreground-light dark:text-foreground-dark">Bulk Upload</h3>
+<div class="mt-4">
+<div class="flex justify-center rounded-xl border-2 border-dashed border-border-light dark:border-border-dark px-6 pt-10 pb-12">
+<div class="space-y-3 text-center">
+<span class="material-symbols-outlined text-5xl text-subtle-light dark:text-subtle-dark">cloud_upload</span>
+<div class="flex text-sm text-subtle-light dark:text-subtle-dark">
+<label class="relative cursor-pointer rounded-md font-medium text-primary hover:text-primary/90 focus-within:outline-none focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 focus-within:ring-offset-background-light dark:focus-within:ring-offset-background-dark" for="file-upload">
+<span>Upload a file</span>
+<input class="sr-only" id="file-upload" name="file-upload" type="file"/>
+</label>
+<p class="pl-1">or drag and drop</p>
+</div>
+<p class="text-xs text-subtle-light dark:text-subtle-dark">CSV up to 10MB</p>
+</div>
+</div>
+<p class="mt-2 text-xs text-subtle-light dark:text-subtle-dark">Note: The CSV file should have columns for 'Name', 'ID', 'Class', and 'Password'.</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>

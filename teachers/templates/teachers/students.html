@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Students - Quiz App</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1173d4",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="flex flex-col min-h-screen">
+<header class="bg-background-light dark:bg-background-dark/50 border-b border-primary/20 backdrop-blur-sm sticky top-0 z-10">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-16">
+<div class="flex items-center gap-4">
+<div class="text-primary size-8">
+<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_6_330)">
+<path clip-rule="evenodd" d="M24 0.757355L47.2426 24L24 47.2426L0.757355 24L24 0.757355ZM21 35.7574V12.2426L9.24264 24L21 35.7574Z" fill="currentColor" fill-rule="evenodd"></path>
+</g>
+<defs>
+<clipPath id="clip0_6_330">
+<rect fill="white" height="48" width="48"></rect>
+</clipPath>
+</defs>
+</svg>
+</div>
+<h1 class="text-lg font-bold text-gray-900 dark:text-white">Quiz App</h1>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary" href="#">Dashboard</a>
+<a class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary" href="#">Quizzes</a>
+<a class="text-sm font-bold text-primary dark:text-primary" href="#">Students</a>
+<a class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary" href="#">Settings</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+<span class="material-symbols-outlined">
+                                notifications
+                            </span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBShbffPYh08diecuKaT57zi_lHA1te0xnUgLwM7iVY2zOMmSR0JQtF2rrAuPlTqcFf_BhA3uK231G3eBQozARh3sZAnpCmtk4YL8rznVkI64yKf0sQJWNd11FFXMIuHRGpcQrRmgC0koTalqeEEQCHyIKqfcELdUp2zfgj4U3pGcByaQZ2j3hzodzDZMq-77pAge6zjswqfs53JqKYcbn7UOxUsUQBe2-Pscw_4AAMLiSboKRLm-SXZAm4ejd4lItfMR9u62No5jfF");'></div>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+<h2 class="text-3xl font-bold text-gray-900 dark:text-white">Students</h2>
+<div class="relative">
+<button class="flex items-center justify-center gap-x-2 rounded-lg bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background-light dark:focus:ring-offset-background-dark focus:ring-primary">
+<span>Filter by Class</span>
+<span class="material-symbols-outlined text-base">
+                                expand_more
+                            </span>
+</button>
+</div>
+</div>
+<div class="bg-white dark:bg-background-dark/50 rounded-lg shadow-sm overflow-hidden border border-gray-200 dark:border-gray-800">
+<div class="overflow-x-auto">
+<table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+<thead class="text-xs text-gray-700 dark:text-gray-400 uppercase bg-gray-50 dark:bg-gray-700/50">
+<tr>
+<th class="px-6 py-3" scope="col">Name</th>
+<th class="px-6 py-3" scope="col">Email</th>
+<th class="px-6 py-3" scope="col">Class</th>
+<th class="px-6 py-3 text-center" scope="col">Status</th>
+</tr>
+</thead>
+<tbody>
+<tr class="bg-white dark:bg-background-dark/50 border-b dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600/20">
+<th class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" scope="row">Ethan Harper</th>
+<td class="px-6 py-4">ethan.harper@email.com</td>
+<td class="px-6 py-4">Class 10A</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-300">Active</span>
+</td>
+</tr>
+<tr class="bg-white dark:bg-background-dark/50 border-b dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600/20">
+<th class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" scope="row">Olivia Bennett</th>
+<td class="px-6 py-4">olivia.bennett@email.com</td>
+<td class="px-6 py-4">Class 10A</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-300">Active</span>
+</td>
+</tr>
+<tr class="bg-white dark:bg-background-dark/50 border-b dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600/20">
+<th class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" scope="row">Noah Carter</th>
+<td class="px-6 py-4">noah.carter@email.com</td>
+<td class="px-6 py-4">Class 10B</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-300">Active</span>
+</td>
+</tr>
+<tr class="bg-white dark:bg-background-dark/50 border-b dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600/20">
+<th class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" scope="row">Ava Davis</th>
+<td class="px-6 py-4">ava.davis@email.com</td>
+<td class="px-6 py-4">Class 10B</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900/50 dark:text-red-300">Inactive</span>
+</td>
+</tr>
+<tr class="bg-white dark:bg-background-dark/50 border-b dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600/20">
+<th class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" scope="row">Liam Evans</th>
+<td class="px-6 py-4">liam.evans@email.com</td>
+<td class="px-6 py-4">Class 10C</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-300">Active</span>
+</td>
+</tr>
+<tr class="bg-white dark:bg-background-dark/50 border-b dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600/20">
+<th class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" scope="row">Sophia Foster</th>
+<td class="px-6 py-4">sophia.foster@email.com</td>
+<td class="px-6 py-4">Class 10C</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-300">Active</span>
+</td>
+</tr>
+<tr class="bg-white dark:bg-background-dark/50 border-b dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600/20">
+<th class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" scope="row">Jackson Gray</th>
+<td class="px-6 py-4">jackson.gray@email.com</td>
+<td class="px-6 py-4">Class 11A</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-300">Active</span>
+</td>
+</tr>
+<tr class="bg-white dark:bg-background-dark/50 hover:bg-gray-50 dark:hover:bg-gray-600/20">
+<th class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" scope="row">Isabella Hayes</th>
+<td class="px-6 py-4">isabella.hayes@email.com</td>
+<td class="px-6 py-4">Class 11A</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900/50 dark:text-red-300">Inactive</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>

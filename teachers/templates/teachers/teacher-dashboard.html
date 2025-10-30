@@ -1,0 +1,82 @@
+{% extends 'teachers/partials/base.html' %}
+
+{% load widget_tweaks %}
+
+{% load static %}
+
+{% block content %}
+<div class="flex min-h-screen">
+  {% include 'teachers/partials/aside.html' %}
+  <main class="flex-1 p-8">
+    <div class="max-w-7xl mx-auto">
+      <div class="mb-8">
+        <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Dashboard</h1>
+        <p class="text-gray-600 dark:text-gray-400 mt-1">Manage your quizzes, students, and performance metrics.</p>
+      </div>
+      <!-- <div class="mb-8">
+        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Quick Actions</h2>
+        <div class="flex gap-4">
+          <button
+            class="flex items-center justify-center gap-2 px-4 py-2 bg-primary text-white rounded-lg shadow-sm hover:bg-primary/90 transition-colors">
+            <span class="material-symbols-outlined">add_circle</span>
+            <span>Create Quiz</span>
+          </button>
+          <button
+            class="flex items-center justify-center gap-2 px-4 py-2 bg-white dark:bg-background-dark border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white rounded-lg shadow-sm hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+            <span class="material-symbols-outlined">person_add</span>
+            <span>Add Student</span>
+          </button>
+        </div>
+      </div> -->
+      <div class="mb-8">
+        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Upcoming Quizzes</h2>
+        <div class="bg-white dark:bg-background-dark rounded-xl shadow-sm overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+              <thead class="text-xs text-gray-700 dark:text-gray-300 uppercase bg-gray-50 dark:bg-gray-800">
+                <tr>
+                  <th class="px-6 py-3" scope="col">Quiz Title</th>
+                  <th class="px-6 py-3" scope="col">Subject</th>
+                  <th class="px-6 py-3" scope="col">Class</th>
+                  <th class="px-6 py-3" scope="col">Date</th>
+                  <th class="px-6 py-3" scope="col">Time</th>
+                  <th class="px-6 py-3 text-right" scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="bg-white dark:bg-background-dark border-b dark:border-gray-800">
+                  <th class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap" scope="row">Math
+                    Quiz 1</th>
+                  <td class="px-6 py-4">Mathematics</td>
+                  <td class="px-6 py-4">Class 10A</td>
+                  <td class="px-6 py-4">2024-05-15</td>
+                  <td class="px-6 py-4">10:00 AM</td>
+                  <td class="px-6 py-4 text-right">
+                    <div class="flex gap-4 justify-end">
+                      <button class="font-medium text-primary hover:underline">
+                        <span><i class="fa-solid fa-pen"></i></span>
+                      </button>
+                      <button class="font-medium text-red-600 dark:text-red-500 hover:underline">
+                        <span><i class="fa-solid fa-trash"></i></span>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Students performance section starts -->
+      <!-- <div>
+        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Student Performance</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          
+        </div>
+      </div> -->
+      <!-- Students performance section ends -->
+    </div>
+  </main>
+</div>
+{% endblock %}

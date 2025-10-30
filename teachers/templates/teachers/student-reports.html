@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Student Report</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#1173d4",
+              "background-light": "#f6f7f8",
+              "background-dark": "#101922",
+              "foreground-light": "#111827",
+              "foreground-dark": "#f9fafb",
+              "border-light": "#e5e7eb",
+              "border-dark": "#374151",
+              "muted-light": "#6b7280",
+              "muted-dark": "#9ca3af",
+            },
+            fontFamily: {
+              display: ["Inter", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+      }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-foreground-light dark:text-foreground-dark">
+<div class="flex flex-col min-h-screen">
+<header class="sticky top-0 z-10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm border-b border-border-light dark:border-border-dark">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-16">
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-3xl">school</span>
+<h1 class="text-xl font-bold">Quiz App</h1>
+</div>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-sm font-medium text-muted-light dark:text-muted-dark hover:text-primary dark:hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-sm font-medium text-muted-light dark:text-muted-dark hover:text-primary dark:hover:text-primary transition-colors" href="#">Quizzes</a>
+<a class="text-sm font-medium text-primary dark:text-primary" href="#">Reports</a>
+<a class="text-sm font-medium text-muted-light dark:text-muted-dark hover:text-primary dark:hover:text-primary transition-colors" href="#">Settings</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="md:hidden p-2 rounded-full text-muted-light dark:text-muted-dark hover:bg-primary/10 dark:hover:bg-primary/20">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<img alt="User avatar" class="size-10 rounded-full object-cover border-2 border-primary/50" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcMD-nSreiIn0E79xmMIfqDgfqFBvRGJQHfU1s7G7FykAuj9uBsmI2lOWCOJSHFS_T4djk6fLDPDeiCyzZGuZv37712tsE4DtxJIQqDnk0Z5y89pPlEyypJTjJvWsEOfBkPenOmJQ6jbVBy4s6W7Mh6RiBv47FsVA9Mgq4LRrjMZa4qytS1BA6t-vGPleeFOWenUke-1q3bayPMt-i2X2WBGODxt_B8O9jARr_KaDMf38zcoHgxL3Bld7rsu8X3eTuP_dBwaXkQ3mL"/>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<div class="flex flex-col gap-8">
+<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+<div>
+<h2 class="text-3xl font-bold tracking-tight">Student Reports</h2>
+<p class="text-muted-light dark:text-muted-dark mt-1">View and download quiz reports for specific subjects and classes.</p>
+</div>
+<div class="flex gap-2">
+<button class="inline-flex items-center justify-center whitespace-nowrap rounded-lg text-sm font-medium ring-offset-background-light dark:ring-offset-background-dark transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-white hover:bg-primary/90 h-10 px-4 py-2 gap-2">
+<span class="material-symbols-outlined">download</span>
+                Download All
+              </button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="relative">
+<label class="block text-sm font-medium text-muted-light dark:text-muted-dark mb-1" for="subject">Subject</label>
+<select class="w-full h-10 pl-3 pr-8 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-primary/50" id="subject">
+<option selected="">All Subjects</option>
+<option>Mathematics</option>
+<option>Science</option>
+<option>History</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-0 top-6 flex items-center px-2 text-muted-light dark:text-muted-dark">
+<span class="material-symbols-outlined">expand_more</span>
+</div>
+</div>
+<div class="relative">
+<label class="block text-sm font-medium text-muted-light dark:text-muted-dark mb-1" for="class">Class</label>
+<select class="w-full h-10 pl-3 pr-8 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-primary/50" id="class">
+<option selected="">All Classes</option>
+<option>Class 10A</option>
+<option>Class 10B</option>
+<option>Class 11A</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-0 top-6 flex items-center px-2 text-muted-light dark:text-muted-dark">
+<span class="material-symbols-outlined">expand_more</span>
+</div>
+</div>
+</div>
+<div class="overflow-x-auto bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-xl">
+<table class="min-w-full divide-y divide-border-light dark:divide-border-dark">
+<thead class="bg-background-light dark:bg-background-dark/50">
+<tr>
+<th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-foreground-light dark:text-foreground-dark sm:pl-6" scope="col">Student Name</th>
+<th class="px-3 py-3.5 text-left text-sm font-semibold text-foreground-light dark:text-foreground-dark" scope="col">Quiz Title</th>
+<th class="px-3 py-3.5 text-left text-sm font-semibold text-foreground-light dark:text-foreground-dark" scope="col">Score</th>
+<th class="px-3 py-3.5 text-left text-sm font-semibold text-foreground-light dark:text-foreground-dark" scope="col">Date</th>
+<th class="relative py-3.5 pl-3 pr-4 sm:pr-6 text-right" scope="col">
+<span class="sr-only">Download</span>
+</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-light dark:divide-border-dark">
+<tr>
+<td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-foreground-light dark:text-foreground-dark sm:pl-6">Ethan Harper</td>
+<td class="whitespace-nowrap px-3 py-4 text-sm text-muted-light dark:text-muted-dark">Math Quiz 1</td>
+<td class="whitespace-nowrap px-3 py-4 text-sm text-muted-light dark:text-muted-dark">85/100</td>
+<td class="whitespace-nowrap px-3 py-4 text-sm text-muted-light dark:text-muted-dark">2024-07-26</td>
+<td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+<a class="text-primary hover:text-primary/80" href="#">Download<span class="sr-only">, Ethan Harper</span></a>
+</td>
+</tr>
+<tr>
+<td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-foreground-light dark:text-foreground-dark sm:pl-6">Olivia Bennett</td>
+<td class="whitespace-nowrap px-3 py-4 text-sm text-muted-light dark:text-muted-dark">Math Quiz 1</td>
+<td class="whitespace-nowrap px-3 py-4 text-sm text-muted-light dark:text-muted-dark">92/100</td>
+<td class="whitespace-nowrap px-3 py-4 text-sm text-muted-light dark:text-muted-dark">2024-07-26</td>
+<td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+<a class="text-primary hover:text-primary/80" href="#">Download<span class="sr-only">, Olivia Bennett</span></a>
+</td>
+</tr>
+<tr>
+<td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-foreground-light dark:text-foreground-dark sm:pl-6">Noah Carter</td>
+<td class="whitespace-nowrap px-3 py-4 text-sm text-muted-light dark:text-muted-dark">Math Quiz 1</td>
+<td class="whitespace-nowrap px-3 py-4 text-sm text-muted-light dark:text-muted-dark">78/100</td>
+<td class="whitespace-nowrap px-3 py-4 text-sm text-muted-light dark:text-muted-dark">2024-07-26</td>
+<td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+<a class="text-primary hover:text-primary/80" href="#">Download<span class="sr-only">, Noah Carter</span></a>
+</td>
+</tr>
+<tr>
+<td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-foreground-light dark:text-foreground-dark sm:pl-6">Sophia Evans</td>
+<td class="whitespace-nowrap px-3 py-4 text-sm text-muted-light dark:text-muted-dark">Math Quiz 1</td>
+<td class="whitespace-nowrap px-3 py-4 text-sm text-muted-light dark:text-muted-dark">95/100</td>
+<td class="whitespace-nowrap px-3 py-4 text-sm text-muted-light dark:text-muted-dark">2024-07-26</td>
+<td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+<a class="text-primary hover:text-primary/80" href="#">Download<span class="sr-only">, Sophia Evans</span></a>
+</td>
+</tr>
+<tr>
+<td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-foreground-light dark:text-foreground-dark sm:pl-6">Liam Foster</td>
+<td class="whitespace-nowrap px-3 py-4 text-sm text-muted-light dark:text-muted-dark">Math Quiz 1</td>
+<td class="whitespace-nowrap px-3 py-4 text-sm text-muted-light dark:text-muted-dark">88/100</td>
+<td class="whitespace-nowrap px-3 py-4 text-sm text-muted-light dark:text-muted-dark">2024-07-26</td>
+<td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+<a class="text-primary hover:text-primary/80" href="#">Download<span class="sr-only">, Liam Foster</span></a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>

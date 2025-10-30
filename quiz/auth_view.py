@@ -18,27 +18,28 @@ def login_view(request):
             
             if not username or not password:
                 messages.error(request, 'Wrong username or password.')
-                return HttpResponseRedirect(reverse('quiz:login'))
+                return redirect('quiz:login')
             
             # Check if the user exists
             if not User.objects.filter(username=username).exists():
                 messages.error(request, 'Wrong username or password.')
-                return HttpResponseRedirect(reverse('quiz:login'))
+                return redirect('quiz:login')
 
             user = authenticate(request, username=username, password=password)
 
             if user is None:
                 messages.error(request, 'Wrong username or password.')
-                return HttpResponseRedirect(reverse('quiz:login'))
+                return redirect('quiz:login')
 
             login(request, user)
             
             if user.role == 'student':
-                return HttpResponseRedirect(reverse('quiz:student-dashboard'))
+                # Redirect the student to the student dashboard
+                return redirect('quiz:student-dashboard')
             
             elif user.role == 'teacher':
                 # Redirect the teacher to the teacher-dashboard
-                return HttpResponseRedirect(reverse('quiz:student-dashboard'))
+                return redirect('teachers:dashboard')
     else:
         form = LoginForm()
     return render(request, 'students/login.html', {'form': form, 'title': 'Login'})
@@ -46,7 +47,7 @@ def login_view(request):
 @login_required(login_url='quiz:login')
 def logout_view(request):
     logout(request)
-    return HttpResponseRedirect(reverse('quiz:index'))
+    return redirect('quiz:index')
 
 @login_required(login_url='quiz:login')
 def change_password(request):
