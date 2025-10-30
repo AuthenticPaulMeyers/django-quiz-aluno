@@ -13,6 +13,58 @@
         <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Dashboard</h1>
         <p class="text-gray-600 dark:text-gray-400 mt-1">Manage your quizzes, students, and performance metrics.</p>
       </div>
+      <div class="mt-4 grid grid-cols-1 gap-5 sm:grid-cols-1 lg:grid-cols-3">
+              <div
+                class="overflow-hidden rounded-lg bg-white p-5 shadow-sm ring-1 ring-green-300/90">
+                <p class="truncate text-sm font-medium text-green-500">
+                  Total Quizzes
+                </p>
+                <p class="mt-1 text-3xl font-semibold text-green-500 flex flex-row justify-between align-center">
+                  {% if quizzes_count is None %}
+                    0
+                  {% else %}
+                    {{ quizzes_count }}
+                  {% endif %}
+                  <span class="flex-shrink-0 size-12 rounded-lg flex items-center justify-center bg-green-500 text-white text-md"><i class="fa-solid fa-chart-simple"></i></span>
+                </p>
+              </div>
+              <div
+                class="overflow-hidden rounded-lg bg-white p-5 shadow-sm ring-1 ring-purple-300/90">
+                <p class="truncate text-sm font-medium text-purple-500">
+                  Total Classes
+                </p>
+                <p class="mt-1 text-3xl font-semibold text-purple-500 flex flex-row justify-between align-center">
+                  {% if classes_count is None %}
+                    0
+                  {% else %}
+                    {{ classes_count }}
+                  {% endif %}
+                  <span class="flex-shrink-0 size-12 rounded-lg flex items-center justify-center bg-purple-500 text-white text-md"><i class="fa-solid fa-graduation-cap"></i></span>
+                </p>
+              </div>
+              <div
+                class="overflow-hidden rounded-lg bg-white p-5 shadow-sm ring-1 ring-primary/90">
+                <p class="truncate text-sm font-medium text-primary dark:text-primary/70">
+                 Total Subjects
+                </p>
+                <p class="mt-1 text-3xl font-semibold text-primary flex flex-row justify-between align-center">
+                  {% if subjects_count is None %}
+                    0
+                  {% else %}
+                    {{ subjects_count }}
+                  {% endif %}
+                  <span class="flex-shrink-0 size-12 rounded-lg flex items-center justify-center bg-primary text-white text-md"><i class="fa-solid fa-book-open"></i></span>
+                </p>
+              </div>
+            </div>
+      <!-- Display messages container -->
+      <div class="text-center align-center">
+      {% if messages %}
+        {% for message in messages %}
+            <p class="text-center text-sm text-red-600 mb-4">{{ message }}</p>
+        {% endfor %}
+      {% endif %}
+      </div>
       <!-- <div class="mb-8">
         <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Quick Actions</h2>
         <div class="flex gap-4">
@@ -28,8 +80,9 @@
           </button>
         </div>
       </div> -->
-      <div class="mb-8">
-        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Upcoming Quizzes</h2>
+      <div class="mb-8 mt-10">
+        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Active Quizzes</h2>
+        {% if active_quizzes %}
         <div class="bg-white dark:bg-background-dark rounded-xl shadow-sm overflow-hidden">
           <div class="overflow-x-auto">
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -40,32 +93,42 @@
                   <th class="px-6 py-3" scope="col">Class</th>
                   <th class="px-6 py-3" scope="col">Date</th>
                   <th class="px-6 py-3" scope="col">Time</th>
-                  <th class="px-6 py-3 text-right" scope="col">Actions</th>
+                  <th class="px-6 py-3" scope="col">Time allowed</th>
+                  <th class="px-6 py-3 text-right" scope="col">Action</th>
                 </tr>
               </thead>
               <tbody>
-                <tr class="bg-white dark:bg-background-dark border-b dark:border-gray-800">
-                  <th class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap" scope="row">Math
-                    Quiz 1</th>
-                  <td class="px-6 py-4">Mathematics</td>
-                  <td class="px-6 py-4">Class 10A</td>
-                  <td class="px-6 py-4">2024-05-15</td>
-                  <td class="px-6 py-4">10:00 AM</td>
-                  <td class="px-6 py-4 text-right">
-                    <div class="flex gap-4 justify-end">
-                      <button class="font-medium text-primary hover:underline">
-                        <span><i class="fa-solid fa-pen"></i></span>
-                      </button>
-                      <button class="font-medium text-red-600 dark:text-red-500 hover:underline">
-                        <span><i class="fa-solid fa-trash"></i></span>
-                      </button>
-                    </div>
-                  </td>
-                </tr>
+                  {% for quiz in active_quizzes %}
+                  <tr class="bg-white dark:bg-background-dark border-b dark:border-gray-800">
+                    <th class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap" scope="row">{{ quiz.title }}</th>
+                    <td class="px-6 py-4">{{ quiz.subject.name }}</td>
+                    <td class="px-6 py-4">{{ quiz.quizclass }}</td>
+                    <td class="px-6 py-4">{{ quiz.start_date|date:"F j, Y" }}</td>
+                    <td class="px-6 py-4">{{ quiz.start_date|date:"g:i a" }}</td>
+                    <td class="px-6 py-4">{{ quiz.duration }} Mins</td>
+                    <td class="px-6 py-4 text-right">
+                      <div class="flex gap-4 justify-end">
+                        <!-- <button class="font-medium text-primary hover:underline">
+                          <span><i class="fa-solid fa-pen"></i></span>
+                        </button>
+                        <button class="font-medium text-red-600 dark:text-red-500 hover:underline">
+                          <span><i class="fa-solid fa-trash"></i></span> 
+                        </button> -->
+                        <button class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                          <a href="{% url 'teachers:quiz-details' quiz.id %}">View</a> 
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  {% endfor %}
               </tbody>
             </table>
+
           </div>
         </div>
+          {% else %}
+            <span class="text-center text-gray-600 text-sm p-2">You do not have active quizzes.</span>
+          {% endif %}
       </div>
 
       <!-- Students performance section starts -->

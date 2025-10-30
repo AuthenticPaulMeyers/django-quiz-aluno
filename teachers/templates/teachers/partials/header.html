@@ -1,0 +1,64 @@
+{% load static %}
+
+<header
+      class="bg-background-light dark:bg-background-dark/80 backdrop-blur-sm sticky top-0 z-20 border-b border-background-dark/10 dark:border-background-light/10">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+          <div class="flex items-center gap-4">
+            <a href="{% url 'teachers:dashboard' %}">
+              <h1 class="text-3xl font-black">Aluno<span class="text-primary text-5xl">.</span></h1>
+            </a>
+          </div>
+          <div class="flex items-center gap-4">
+          {% if user %}
+          <div class="flex flex-col">
+            <span class="font-bold text-gray-700 dark:text-white">
+            {{ user }}
+            </span>
+            <span class="text-sm text-gray-500 -mt-1">{{ user.role.capitalize }}</span>
+          </div>
+          {% endif %}
+            <button class="h-10 w-10 rounded-full ring-1 ring-gray-400 bg-cover bg-center user-menu-button" aria-label="User menu">
+              <div class="h-10 w-10 overflow-hidden">
+                <img src="{% static 'images/user.png' %}" alt="User placeholder" class="rounded-full">
+              </div>
+            </button>
+
+            <!-- User Menu -->
+            <div class="relative">
+              <div class="absolute right-4 mt-5 w-32 bg-white dark:bg-gray-800 rounded-md shadow-lg z-100 user-menu hide">
+                <ul class="py-1">
+                  <li>
+                    <a href="{% url 'teachers:profile' %}" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
+                      <i class="fa-regular fa-user"></i>
+                      Profile</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'quiz:logout' %}" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
+                      <i class="fa-solid fa-right-from-bracket"></i>
+                      Logout</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <style>
+        .hide {
+          display: none;
+        }
+        .show {
+          display: inline-block;
+        }
+      </style>
+      <script>
+        // JavaScript to toggle user menu visibility can be added here
+        const userMenuButton = document.querySelector('.user-menu-button');
+        const userMenu = document.querySelector('.user-menu');
+
+        userMenuButton.addEventListener('click', () => {
+          userMenu.classList.toggle('hide');
+        });
+      </script>
+</header>

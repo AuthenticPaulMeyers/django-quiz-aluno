@@ -17,6 +17,7 @@
               Learn more about the quiz before you start.
             </p>
           </div>
+          
             {% if messages %}
                 {% for message in messages %}
                     <p class="text-center text-sm text-red-600 mb-4">{{ message }}</p>
@@ -133,13 +134,12 @@
             <span>Start Quiz</span>
           </a>
           {% elif quiz.start_date > current_time %}
-          <button disabled
+            <button disabled
               class="inline-flex items-center justify-center rounded-full h-10 px-4 bg-gray-400 text-white text-base font-bold tracking-wide shadow-lg cursor-not-allowed">
               <span class="mr-2"> <i class="fa-solid fa-lock"></i></span>
               <span>Upcoming Quiz</span>
             </button>
           {% endif %}
-       
         </div>
       </div>
     </main>

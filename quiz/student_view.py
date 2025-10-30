@@ -6,7 +6,11 @@ from django.contrib.auth.decorators import login_required
 @login_required(login_url='quiz:login')
 def student_dashboard_view(request):
     user = request.user
-
+    # First check if user has student role
+    if user.role != 'student':
+        messages.error(request, 'Access denied. You are not registered as a student.')
+        return redirect('quiz:login')
+    
     try:
         student_obj = user.student
         if student_obj is None:
@@ -145,7 +149,7 @@ def quiz_details_view(request, quiz_id):
             'current_time': current_time,
             'title': 'Quiz Details',
         }
-        return render(request, 'students/quiz-details.html', context=context)
+        return render(request, 'students/quiz-details.html', context)
 
     except Exception as e:
         print('Error in quiz_details_view:', e)
