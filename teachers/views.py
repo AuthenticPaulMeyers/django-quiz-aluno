@@ -97,20 +97,45 @@ def all_quizzes_view(request):
 
 #view classes
 @login_required(login_url='quiz:login')
-def classes_view(request):
+def students_view(request):
       user = request.user
+      
+      # First check if user has teacher role
+      if user.role != 'teacher':
+            messages.error(request, 'Access denied. You are not registered as a teacher.')
+            return redirect('quiz:login')
+      
+      try:
+            teacher_obj = user.teacher
 
-      context={
-            'user': user,
-            'title': 'Classes'
-      }
-      return render(request, 'teachers/classes.html', context)
+            if teacher_obj is None:
+                  messages.error(request, 'Teacher records not found.')
+                  return redirect('quiz:login')
+
+            # get all students taught by this teacher
+
+            students = teacher_obj.get_students()
+
+            students_count = teacher_obj.students_count()
+
+            context={
+                  'user': user,
+                  'title': 'Students',
+                  'students_count': students_count,
+                  'students': students,
+            }
+            return render(request, 'teachers/students.html', context)
+      
+      except Exception as e:
+            print("Error fetching teacher data.")
+            messages.error(request, "Error fetching teacher data")
+            return redirect("teachers:dashboard")
 
 #view reports
 @login_required(login_url='quiz:login')
 def reports_view(request):
       user = request.user
-
+      
       context={
             'user': user,
             'title': 'Reports'
@@ -166,3 +191,10 @@ def teacher_profile_view(request):
         'title': 'Teacher Profile',
     }
     return render(request, 'teachers/teacher-profile.html', context)
+
+# Create quiz
+# Delete quiz
+# Enroll student to class subject
+# Remove student from class subject enrolled (Drop subject)
+# Download reports
+

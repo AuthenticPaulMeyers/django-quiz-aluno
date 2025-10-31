@@ -1,0 +1,66 @@
+{% extends 'teachers/partials/base.html' %}
+
+{% load widget_tweaks %}
+
+{% load static %}
+
+{% block content %}
+<div class="flex flex-col min-h-screen">
+    {% include 'teachers/partials/header.html' %}
+    <main class="flex-1">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Students</h2>
+                <div class="relative">
+                    <button
+                        class="flex items-center justify-center gap-x-2 rounded-lg bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background-light dark:focus:ring-offset-background-dark focus:ring-primary">
+                        <span>Filter by Class</span>
+                        <span class="material-symbols-outlined text-base">
+                            expand_more
+                        </span>
+                    </button>
+                </div>
+            </div>
+            {% if students %}
+            <div
+                class="bg-white dark:bg-background-dark/50 rounded-lg shadow-sm overflow-hidden border border-gray-200 dark:border-gray-800">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                        <thead
+                            class="text-xs text-gray-700 dark:text-gray-400 uppercase bg-gray-50 dark:bg-gray-700/50">
+                            <tr>
+                                <th class="px-2 py-3" scope="col">No.</th>
+                                <th class="px-2 py-3" scope="col">Lastname</th>
+                                <th class="px-2 py-3" scope="col">Firstname</th>
+                                <th class="px-2 py-3" scope="col">Class</th>
+                                <th class="px-6 py-3 text-center" scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for student in students %}
+                            <tr class="bg-white dark:bg-background-dark/50 border-b dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600/20">
+                                <th class="px-2 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                    scope="row">{{ forloop.counter }}</th>
+                                <th class="px-2 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                    scope="row">{{ student.user.last_name }}</th>
+                                <th class="px-2 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                    scope="row">{{ student.user.first_name }}</th>
+                                <td class="px-2 py-4">{{ student.class_enrolled }}</td>
+                                <td class="px-6 py-4 text-center">
+                                    <span class="text-primary"><a href="#">Edit</a></span>
+                                    <span class="text-red-600"><a href="#">Delete</a></span>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {% else %}
+            <span class="text-gray-500 text-sm p-2">You do not have any student.</span>
+            {% endif %}
+        </div>
+    </main>
+</div>
+
+{% endblock %}
