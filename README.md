@@ -181,5 +181,62 @@ Fullstack Quiz app - ALUNO - with Django
 - **student to attempt**: one_to_many
 - **quiz to attempt**: one_to_many
 
-## Database Diagram
-> Todo: add diagram here
+## Tools user
+- Python 3.14
+- Django 5.2.7
+- SQLite3 (Migrating to PostGreSQL using Supabase)
+- HTML, Tailwind CSS, & JavaScript
+
+## Security
+1. Role based access
+- Teachers, Students, and admin have different views to access the system according to their role.
+
+2. Password Hashing
+- All stored passwords are hashed using Django Authentication system.
+
+3. Quiz expiration time and permission to take quiz
+- Active quizzes have expiration time set by the teacher and students can not take expired quizzes if their due dates have passed. A timer is set on the duration of the quiz when the student is taking the active quiz, once the allowed time has elapsed, the platform warns the student that time has expired and submits the answers and grades the student. Students are allowed to take quiz only once.
+
+# Students View
+1. Landing Page
+![Screenshot of the landing page](./screenshots/Screenshot%202025-11-02%20154607.png)
+
+2. Login Page
+![Screenshot of the login page](./screenshots/Screenshot%202025-11-02%20154622.png)
+
+3. Student Dashboard Page
+![Screenshot of the student dashboard page](./screenshots/Screenshot%202025-11-02%20145615.png)
+
+4. All quizzes Page
+![Screenshot of the all quizzes page](./screenshots/Screenshot%202025-11-02%20145634.png)
+
+5. Student reports Page
+![Screenshot of the reports page](./screenshots/Screenshot%202025-11-02%20145738.png)
+
+6. Quiz details Page
+![Screenshot of the quiz details page](./screenshots/Screenshot%202025-11-02%20145721.png)
+
+7. Student profile Page
+![Screenshot of the student profile page](./screenshots/Screenshot%202025-11-02%20145756.png)
+
+7. Student change password Page
+![Screenshot of the student profile page](./screenshots/Screenshot%202025-11-02%20145825.png)
+
+# Teacher's view
+1. Teacher dashboard Page
+![Screenshot of the teacher dashboard page](./screenshots/Screenshot%202025-11-02%20145909.png)
+
+2. Student reports Page
+![Screenshot of the student reports page](./screenshots/Screenshot%202025-11-02%20145929.png)
+
+3. Create quiz page
+![Screenshot of the create quiz page](./screenshots/Screenshot%202025-11-02%20145950.png)
+![Screenshot of the create quiz page](./screenshots/Screenshot%202025-11-02%20150003.png)
+
+4. View Students Page
+![Screenshot of the student page](./screenshots/Screenshot%202025-11-02%20150602.png)
+
+5. Edit quiz Page
+![Screenshot of the edit quiz page](./screenshots/Screenshot%202025-11-02%20150037.png)
+![Screenshot of the edit quiz page](./screenshots/Screenshot%202025-11-02%20150049.png)
+
