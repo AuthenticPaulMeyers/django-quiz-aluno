@@ -22,6 +22,10 @@ Fullstack Quiz app - ALUNO - with Django
 ## Database type
 
 - **Database system:** PostgreSQL
+
+## ERD Diagram Sketch
+![](/screenshots/IMG_20251021_182005_266.jpg)
+
 ## Table structure
 
 ### user
@@ -181,7 +185,7 @@ Fullstack Quiz app - ALUNO - with Django
 - **student to attempt**: one_to_many
 - **quiz to attempt**: one_to_many
 
-## Tools user
+## Tools used
 - Python 3.14
 - Django 5.2.7
 - SQLite3 (Migrating to PostGreSQL using Supabase)
