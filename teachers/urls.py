@@ -7,8 +7,11 @@ urlpatterns=[
       path('dashboard/', views.teacher_dashboard_view, name='dashboard'),
       path('quizzes/', views.all_quizzes_view, name='all-quizzes'),
       path('students/', views.students_view, name='students'),
+      path('student/<int:student_id>/edit/', views.edit_student, name='edit-student'),
+      path('student/<int:student_id>/delete/', views.delete_student, name='delete-student'),
       path('reports/', views.reports_view, name='reports'),
       path('subjects/', views.subjects_view, name='subjects'),
       path('quiz/<int:quiz_id>', views.view_quiz_details, name='quiz-details'),
       path('profile', views.teacher_profile_view, name='profile'),
+      path('create-quiz', views.create_quiz_view, name='create-quiz'),
 ]

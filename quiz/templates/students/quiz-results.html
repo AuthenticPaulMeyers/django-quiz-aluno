@@ -74,12 +74,17 @@
                 <p class="font-medium text-gray-700 dark:text-foreground-dark">
                   {{ forloop.counter }}. {{ a.question }}
                 </p>
+
+                {% if not a.is_correct %}
                 <p class="text-sm text-subtle-light dark:text-subtle-dark">
                   <b>Your answer:</b> <span class="line-through">{{ a.your_answer|default:'No answer' }}</span>
                 </p>
-                {% if not a.is_correct %}
                 <p class="text-sm text-subtle-light dark:text-subtle-dark">
                   <b>Correct answer:</b> {{ a.correct_answer|default:'-' }}
+                </p>
+                {% else %}
+                <p class="text-sm text-subtle-light dark:text-subtle-dark">
+                  <b>Your answer:</b> <span>{{ a.your_answer|default:'No answer' }}</span>
                 </p>
                 {% endif %}
               </div>

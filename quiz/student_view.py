@@ -22,7 +22,7 @@ def student_dashboard_view(request):
             return redirect('quiz:login')
 
         from django.utils import timezone
-        current_time = timezone.now()
+        current_time = timezone.localtime(timezone.now())
         
         # get all quizzes for the current user class with due status
         all_quizzes = student_obj.get_quizzes()
@@ -63,17 +63,22 @@ def student_dashboard_view(request):
 def all_quizzes_view(request):
     user = request.user
 
+    # First check if user has student role
+    if user.role != 'student':
+        messages.error(request, 'Access denied. You are not registered as a student.')
+        return redirect('quiz:login')
+
     try:
         student_obj = user.student
 
         from django.utils import timezone
-        current_time = timezone.now()
+        current_time = timezone.localtime(timezone.now())
 
         # get all quizzes for the current user class for the subject the current user is enrolled
 
         class_quizzes = student_obj.get_quizzes()
          # if no quizzes found, return with message
-        if not class_quizzes:
+        if class_quizzes is None:
             messages.info(request, 'You do not have quiz history.')
             return redirect('quiz:all-quizzes')
 
@@ -87,7 +92,7 @@ def all_quizzes_view(request):
     except Student.DoesNotExist:
         print("Student record not found.")
         messages.error(request, 'Student record not found.')
-        return redirect('student-dashboard')
+        return redirect('quiz:student-dashboard')
 
     return render(request, 'students/view-all-quizzes.html', context)
 
@@ -141,7 +146,7 @@ def quiz_details_view(request, quiz_id):
         total = Question.objects.filter(quiz=quiz.id).count()
 
         from django.utils import timezone
-        current_time = timezone.now()
+        current_time = timezone.localtime(timezone.now())
 
         context = {
             'quiz': quiz,

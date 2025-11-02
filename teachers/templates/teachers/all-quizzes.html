@@ -8,6 +8,12 @@
   <div class="flex flex-col min-h-screen">
     {% include 'teachers/partials/header.html' %}
     <main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Display error messages here -->
+    {% if messages %}
+      {% for message in messages %}
+          <p class="text-center text-sm text-gray-500 mb-4">{{ message }}</p>
+      {% endfor %}
+    {% endif %}
       <div class="flex flex-row justify-between">
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
         <h2 class="text-3xl font-bold dark:text-background-light text-gray-700">
@@ -15,7 +21,7 @@
         </h2>
         <div class="text-center">
 
-        <a href="#">
+        <a href="{% url 'teachers:create-quiz' %}">
             <button
             class="flex items-center justify-center gap-2 px-4 py-2 bg-primary text-white rounded-lg shadow-sm hover:bg-primary/90 transition-colors">
                 <span class="material-symbols-outlined">add_circle</span>
@@ -84,12 +90,11 @@
                 {% endif %}
                 </td>
                 <td class="px-6 py-4 text-right">
-                  <a class="font-medium text-primary hover:underline" href="{% url 'quiz:quiz-details' quiz.id %}">View</a>
+                  <a class="font-medium text-primary hover:underline" href="{% url 'teachers:quiz-details' quiz.id %}">View</a>
                 </td>
               </tr>
               {% endfor %}
             </tbody>
-            
           </table>
           
         </div>
@@ -97,12 +102,6 @@
         {% else %}
           <span class="text-center px-2 py-4 text-sm font-gray-400">You do not have any quiz.</span>
         {% endif %}
-        <!-- Display error messages here -->
-          {% if messages %}
-            {% for message in messages %}
-                <p class="text-center text-sm text-gray-500 mb-4">{{ message }}</p>
-            {% endfor %}
-          {% endif %}
           <script src="{% static 'js/all-quizzes.js' %}" defer></script>
     </main>
   </div>

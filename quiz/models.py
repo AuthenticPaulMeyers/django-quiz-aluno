@@ -35,15 +35,15 @@ class Teacher(models.Model):
         return f'{self.user.first_name} {self.user.last_name}'
     
     # get subjects taught by this teacher
-    def get_subjects(self):
+    def get_subjects_class(self):
         from django.db.models import Q
-        return Subject.objects.filter(
-            Q(subjectteacher__teacher=self)
+        return TeacherSubjectClass.objects.filter(
+            Q(subject_teacher__teacher=self)
         ).distinct()
     
     # get number of subjects taught by this teacher
     def subjects_count(self):
-        return self.get_subjects().count()
+        return self.get_subjects_class().count()
     
     # get classes taught by this teacher
     def get_classes(self):
@@ -275,7 +275,7 @@ class TeacherSubjectClass(models.Model):
     classname = models.ForeignKey(Class, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.subject_teacher.teacher.fullname()} teaches {self.subject_teacher.subject.name} for {self.classname.name}'
+        return f'{self.subject_teacher.subject.name} - {self.classname.name}'
     
     # get quizzes for this teacher subject class
     def get_quizzes(self):
@@ -301,11 +301,10 @@ class Quiz(models.Model):
     title = models.CharField(max_length=255, null=False)
     description = models.CharField(max_length=255)
     teacher_subject_class = models.ForeignKey(TeacherSubjectClass, on_delete=models.CASCADE)
-    total_marks = models.IntegerField()
     duration = models.PositiveIntegerField(help_text='Duration in minutes')
     start_date = models.DateTimeField(help_text='Start date and time for the quiz')
     due_date = models.DateTimeField(help_text='Due date for the quiz')
-    date_created = models.DateField()
+    date_created = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return self.title

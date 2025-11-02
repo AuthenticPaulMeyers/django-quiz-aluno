@@ -12,13 +12,16 @@
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
                 <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Students</h2>
                 <div class="relative">
-                    <button
-                        class="flex items-center justify-center gap-x-2 rounded-lg bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background-light dark:focus:ring-offset-background-dark focus:ring-primary">
-                        <span>Filter by Class</span>
-                        <span class="material-symbols-outlined text-base">
-                            expand_more
-                        </span>
-                    </button>
+                    <form method="get" class="flex items-center gap-2">
+                        <label for="class" class="sr-only">Filter by class</label>
+                        <select id="class" name="class" class="rounded-lg border px-3 py-2 text-sm" onchange="this.form.submit()">
+                            <option value="">All classes</option>
+                            {% for cls in classes %}
+                                <option value="{{ cls.id }}" {% if selected_class == cls.id %}selected{% endif %}>{{ cls.name }}</option>
+                            {% endfor %}
+                        </select>
+                        <noscript><button type="submit" class="px-3 py-2 bg-primary text-white rounded">Filter</button></noscript>
+                    </form>
                 </div>
             </div>
             {% if students %}
@@ -45,10 +48,13 @@
                                     scope="row">{{ student.user.last_name }}</th>
                                 <th class="px-2 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                                     scope="row">{{ student.user.first_name }}</th>
-                                <td class="px-2 py-4">{{ student.class_enrolled }}</td>
+                                <td class="px-2 py-4">{{ student.class_enrolled.name }}</td>
                                 <td class="px-6 py-4 text-center">
-                                    <span class="text-primary"><a href="#">Edit</a></span>
-                                    <span class="text-red-600"><a href="#">Delete</a></span>
+                                    <a href="{% url 'teachers:edit-student' student.id %}" class="text-primary mr-4">Edit</a>
+                                    <form action="{% url 'teachers:delete-student' student.id %}" method="post" class="inline">
+                                        {% csrf_token %}
+                                        <button type="submit" onclick="return confirm('Delete this student?')" class="text-red-600">Delete</button>
+                                    </form>
                                 </td>
                             </tr>
                             {% endfor %}
