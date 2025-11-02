@@ -190,6 +190,7 @@ Fullstack Quiz app - ALUNO - with Django
 - Django 5.2.7
 - SQLite3 (Migrating to PostGreSQL using Supabase)
 - HTML, Tailwind CSS, & JavaScript
+- DrawDB.app (https://www.drawdb.app/) for ERD Design
 
 ## Security
 1. Role based access
