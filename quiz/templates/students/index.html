@@ -14,7 +14,7 @@
           </div>
           <div class="flex items-center gap-4">
             <button
-              class="hidden md:flex items-center justify-center rounded-full h-10 px-4 text-sm font-bold bg-primary text-white hover:bg-primary/80 hover:text-white transition-colors dark:bg-primary dark:hover:bg-primary/10">
+              class="hidden md:flex items-center justify-center rounded-lg h-10 px-4 text-sm font-bold bg-primary text-white hover:bg-primary/80 hover:text-white transition-colors dark:bg-primary dark:hover:bg-primary/10">
               <a href="{% url 'quiz:login' %}">Log In</a>
             </button>
           </div>
@@ -24,8 +24,7 @@
     <main class="flex-grow">
       <section class="relative min-h-screen">
         <div class="absolute inset-0 bg-cover bg-center" style="
-              background-image: url('{% static "images/home.jpg" %}');
-            "></div>
+              background-image: url('{% static "images/home.jpg" %}');"></div>
         <div class="absolute inset-0 bg-background-dark/90"></div>
         <div class="relative container mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 lg:py-40 text-center text-white">
           <h1 class="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter mb-4">
@@ -117,7 +116,7 @@
             </p>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
-            <div class="flex flex-col gap-4">
+            <div class="flex flex-col gap-4 border border-border-light dark:border-border-dark p-2 rounded-lg">
               <img alt="Students using Aluno" class="w-full aspect-video object-cover rounded-lg"
                 src="{% static 'images/student-vector.png' %}" />
               <h3 class="text-xl font-bold">For Students</h3>
@@ -127,8 +126,14 @@
                 improvement and access a wide range of quizzes covering
                 various subjects.
               </p>
+              <div class="flex items-center gap-4">
+                <button
+                  class="md:flex items-center justify-center rounded-lg h-10 px-4 text-sm font-bold bg-primary text-white hover:bg-primary/80 hover:text-white transition-colors dark:bg-primary dark:hover:bg-primary/10">
+                  <a href="{% url 'quiz:login' %}">Log in as a student</a>
+                </button>
+              </div>
             </div>
-            <div class="flex flex-col gap-4">
+            <div class="flex flex-col gap-4 border border-border-light dark:border-border-dark p-2 rounded-lg">
               <img alt="Teacher creating a quiz on Aluno" class="w-full aspect-video object-cover rounded-lg"
                 src="{% static 'images/teacher-vector.png' %}" />
               <h3 class="text-xl font-bold">For Teachers</h3>
@@ -138,6 +143,12 @@
                 secure platform with role-based access for students and
                 teachers.
               </p>
+              <div class="flex items-center gap-4">
+                <button
+                  class="hidden md:flex items-center justify-center rounded-lg h-10 px-4 text-sm font-bold bg-primary text-white hover:bg-primary/80 hover:text-white transition-colors dark:bg-primary dark:hover:bg-primary/10">
+                  <a href="{% url 'quiz:login' %}">Log in as a teacher</a>
+                </button>
+              </div>
             </div>
           </div>
         </div>
