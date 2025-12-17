@@ -35,6 +35,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -139,3 +140,38 @@ AUTH_USER_MODEL = 'quiz.CustomUser'
 
 LOGIN_URL = 'login'
 
+# Jazzmin settings
+JAZZMIN_SETTINGS = {
+    # Copyright on the footer
+    "copyright": "Aluno",
+    
+    # Whether to display the side menu
+    "show_sidebar": True,
+
+    # Whether to aut expand the menu
+    "navigation_expanded": True,
+
+    # Hide these apps when generating side menu e.g (auth)
+    "hide_apps": [
+          'auth',
+
+    ],
+    # Hide these models when generating side menu (e.g (auth.user))
+    "hide_models": [
+        'auth.group',
+        'quiz.attemptanswer',
+        'quiz.attempt',
+        'quiz.multiplechoice',
+        'quiz.question',
+        'quiz.AttemptAnswer',
+        'quiz.Attempt',
+        'quiz.MultipleChoice',
+        'quiz.Question',
+    ],
+
+    # List of apps (and/or models) to base side menu ordering off of (does not need to contain all apps/models)
+    "order_with_respect_to": ["class", "quiz", "teachers", "auth"],
+    
+    # Whether to show the UI customizer on the sidebar
+    "show_ui_builder": True,
+}
