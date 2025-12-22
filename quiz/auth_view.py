@@ -1,10 +1,9 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect
 from django.contrib.auth import login, logout, authenticate, get_user_model
 from .forms import LoginForm, ChangePasswordForm
-from django.urls import reverse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django_ratelimit.decorators import ratelimit
 
 # define the custom user model
 User = get_user_model()
@@ -50,6 +49,7 @@ def logout_view(request):
     return redirect('quiz:index')
 
 @login_required(login_url='quiz:login')
+@ratelimit(key='user_or_ip', rate='1/d', block=True)
 def change_password(request):
     user = request.user
 
