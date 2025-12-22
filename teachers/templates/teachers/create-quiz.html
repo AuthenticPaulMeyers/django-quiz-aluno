@@ -24,7 +24,7 @@
           {% endfor %}
         </div>
       {% endif %}
-      <form method="post" class="space-y-6" >
+      <form method="post" class="space-y-6" enctype="multipart/form-data">
         {% csrf_token %}
         <div
           class="rounded-lg border border-border-light dark:border-border-dark bg-gray-200 p-6">
@@ -80,6 +80,13 @@
               <h3 class="text-lg font-semibold">Question 1</h3>
             </div>
             <div class="space-y-6">
+              <div>
+                <label class="block text-sm font-medium">Question Image</label>
+                <input
+                  type="file"
+                  name="question_image_0"
+                  class="question-image-input mt-1 block w-full rounded border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark placeholder:text-placeholder-light dark:placeholder:text-placeholder-dark focus:border-primary focus:ring-primary"/>
+              </div>
               <div>
                 <label class="block text-sm font-medium">Question Text</label>
                 <textarea
@@ -167,6 +174,13 @@
     </div>
     <div class="space-y-6">
       <div>
+        <label class="block text-sm font-medium">Question Image</label>
+        <input
+          type="file"
+          name="question_image_{qindex}"
+          class="question-image-input mt-1 block w-full rounded border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark placeholder:text-placeholder-light dark:placeholder:text-placeholder-dark focus:border-primary focus:ring-primary"/>
+      </div>
+      <div>
         <label class="block text-sm font-medium">Question Text</label>
         <textarea
           name="question_text[]"
@@ -243,19 +257,20 @@
       questionCount++;
       const baseIndex = (questionCount - 1) * 4;
       const newQuestion = template.content.cloneNode(true);
-      
+
       // Update template placeholders
       const html = newQuestion.firstElementChild.innerHTML
         .replace('{number}', questionCount)
         .replace('{optionA}', baseIndex)
         .replace('{optionB}', baseIndex + 1)
         .replace('{optionC}', baseIndex + 2)
-        .replace('{optionD}', baseIndex + 3);
-      
+        .replace('{optionD}', baseIndex + 3)
+        .replace('{qindex}', questionCount - 1);
+
       const div = document.createElement('div');
       div.className = 'question-section rounded-lg border border-border-light dark:border-border-dark bg-gray-200 dark:bg-content-dark p-6 mb-4';
       div.innerHTML = html;
-      
+
       container.appendChild(div);
 
       // Add remove button functionality
@@ -264,10 +279,40 @@
         removeBtn.addEventListener('click', () => {
           div.remove();
           questionCount--;
-          updateQuestionNumbers();
+          reindexQuestions();
         });
       }
+
+      // Ensure all fields (names/values) stay consistent after adding
+      reindexQuestions();
     });
+
+    // Reindex all question fields (names, checkbox values, headings)
+    function reindexQuestions() {
+      const sections = container.querySelectorAll('.question-section');
+      sections.forEach((section, index) => {
+        // update heading
+        const h3 = section.querySelector('h3');
+        if (h3) h3.textContent = `Question ${index + 1}`;
+
+        // update file input name
+        const fileInput = section.querySelector('.question-image-input');
+        if (fileInput) fileInput.name = `question_image_${index}`;
+
+        // update checkbox values
+        const base = index * 4;
+        const checkboxes = section.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach((cb, i) => {
+          cb.value = base + i;
+        });
+      });
+
+      // Keep questionCount consistent with sections
+      questionCount = sections.length || 1;
+    }
+
+    // Initial reindex to ensure names/values are correct
+    reindexQuestions();
 
     // Form validation
     document.querySelector('form').addEventListener('submit', function(e) {

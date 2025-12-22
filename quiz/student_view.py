@@ -262,7 +262,7 @@ def quiz_results_view(request, quiz_id):
             })
 
         context = {
-            'score': f"{existing_attempt.score}%",
+            'score': f"{existing_attempt.score}",
             'correct_count': correct_count,
             'total': answers.count(),
             'answers_review': answers_review,
@@ -340,7 +340,7 @@ def quiz_results_view(request, quiz_id):
         time_taken = None
 
     context = {
-        'score': f"{score_percent}%",
+        'score': f"{score_percent}",
         'correct_count': correct_count,
         'total': total_questions,
         'answers_review': answers_review,

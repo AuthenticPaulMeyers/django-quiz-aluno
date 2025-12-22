@@ -26,9 +26,10 @@ class QuizForm(forms.ModelForm):
 class QuestionForm(forms.ModelForm):
     class Meta:
         model = Question
-        fields = ['question_text']
+        fields = ['question_text', 'image']
         widgets = {
-            'question_text': forms.Textarea(attrs={'rows': 3})
+            'question_text': forms.Textarea(attrs={'rows': 3}),
+            'image': forms.FileInput(),
         }
 
 class MultipleChoiceForm(forms.ModelForm):

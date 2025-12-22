@@ -144,7 +144,7 @@ def students_view(request):
 		messages.error(request, "Error fetching teacher data")
 		return redirect("teachers:dashboard")
 
-
+# Edit Student
 @login_required(login_url='quiz:login')
 def edit_student(request, student_id):
 	user = request.user
@@ -194,7 +194,7 @@ def edit_student(request, student_id):
 		messages.error(request, 'Error editing student')
 		return redirect('teachers:students')
 
-
+# Delete student
 @login_required(login_url='quiz:login')
 def delete_student(request, student_id):
 	user = request.user
@@ -460,8 +460,8 @@ def view_quiz_details(request, quiz_id):
 		messages.error(request, 'Quiz not found.')
 		print(e)
 		return redirect('teachers:dashboard')
-      
 
+# ToDo: Teacher profile
 @login_required(login_url='quiz:login')
 def teacher_profile_view(request):
 
@@ -490,8 +490,6 @@ def create_quiz_view(request):
 
 		# Get teacher's subject classes for the form
 		teacher_subject_classes = teacher_obj.get_subjects_class()
-	  	
-		print(teacher_subject_classes)
         
 		if request.method == 'POST':
 			quiz_form = QuizForm(request.POST, teacher=teacher_obj)
@@ -505,16 +503,24 @@ def create_quiz_view(request):
 				questions_data = request.POST.getlist('question_text[]')
 				choices_text = request.POST.getlist('choice_text[]')
 				correct_answers = request.POST.getlist('is_correct[]')
-				
-				# Process 4 choices at a time (assuming 4 choices per question)
+
+				# Build per-question (text, image) pairs using indexed file inputs (question_image_0, question_image_1, ...)
+				paired_questions = []
 				for i, q_text in enumerate(questions_data):
-					if q_text.strip():  # Only process if question text is not empty
-						# Create question
+					q_image = request.FILES.get(f'question_image_{i}') if request.FILES else None
+					paired_questions.append((q_text, q_image))
+
+				# Process questions
+				created_any = False
+				for i, (q_text, q_image) in enumerate(paired_questions):
+					# Only process if question text is not empty
+					if q_text and str(q_text).strip():
 						question = Question.objects.create(
 							quiz=quiz,
-							question_text=q_text
+							question_text=q_text,
+							image=q_image if q_image else None
 						)
-						
+
 						# Create 4 choices for this question
 						start_idx = i * 4
 						for j in range(4):
@@ -526,31 +532,72 @@ def create_quiz_view(request):
 									choice_text=choices_text[choice_idx],
 									is_correct=is_correct
 								)
+						created_any = True
 
-				messages.success(request, 'Quiz created successfully!')
-				return redirect('teachers:all-quizzes')
-			else:
-				messages.error(request, 'Please correct the errors below.')
+				# After processing all questions
+				if created_any:
+					messages.success(request, 'Quiz created successfully!')
+					return redirect('teachers:all-quizzes')
+				else:
+					messages.error(request, 'Please correct the errors below.')
+
+				context = {
+					'user': user,
+					'title': 'Create Quiz',
+					'form': quiz_form,
+					'teacher_subject_classes': teacher_subject_classes,
+				}
+
+			return render(request, 'teachers/create-quiz.html', context)
 		else:
 			quiz_form = QuizForm(teacher=teacher_obj)
-
-		context = {
-			'user': user,
-			'title': 'Create Quiz',
-			'form': quiz_form,
-			'teacher_subject_classes': teacher_subject_classes,
-		}
-
-		return render(request, 'teachers/create-quiz.html', context)
+			context = {
+				'user': user,
+				'title': 'Create Quiz',
+				'form': quiz_form,
+				'teacher_subject_classes': teacher_subject_classes,
+			}
+			return render(request, 'teachers/create-quiz.html', context)
 
 	except Exception as e:
 		print(f"Failed to create quiz: {str(e)}")
 		messages.error(request, "Failed to create quiz.")
 		return redirect("teachers:all-quizzes")
 
-
-
 # Delete quiz
+@login_required(login_url='quiz:login')
+def delete_quiz_view(request, quiz_id):
+	user = request.user
+
+	# First check if user has teacher role
+	if user.role != 'teacher':
+		messages.error(request, 'Access denied. You are not registered as a teacher.')
+		return redirect('quiz:login')
+	
+	try:
+		teacher_obj = user.teacher
+		if teacher_obj is None:
+			messages.error(request, 'Teacher records not found.')
+			return redirect('quiz:login')
+
+		quiz = Quiz.objects.filter(pk=quiz_id, teacher=teacher_obj).first()
+		if quiz is None:
+			messages.error(request, 'Quiz not found or does not belong to you.')
+			return redirect('teachers:all-quizzes')
+
+		if request.method == 'POST':
+			quiz.delete()
+			messages.success(request, 'Quiz deleted successfully.')
+			return redirect('teachers:all-quizzes')
+
+		# If reached by GET, redirect back (template delete form uses POST)
+		return redirect('teachers:all-quizzes')
+
+	except Exception as e:
+		print("Error deleting quiz:", e)
+		messages.error(request, 'Error deleting quiz.')
+		return redirect('teachers:all-quizzes')
+	
 # Enroll student to class subject
 # Remove student from class subject enrolled (Drop subject)
 # Download reports
