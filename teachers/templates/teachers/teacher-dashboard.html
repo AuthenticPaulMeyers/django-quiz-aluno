@@ -99,7 +99,7 @@
               </thead>
               <tbody>
                   {% for quiz in active_quizzes %}
-                  <tr class="bg-white dark:bg-background-dark border-b dark:border-gray-800">
+                  <tr class="bg-white dark:bg-background-dark">
                     <th class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap" scope="row">{{ quiz.title }}</th>
                     <td class="px-6 py-4">{{ quiz.subject.name }}</td>
                     <td class="px-6 py-4">{{ quiz.quizclass }}</td>
@@ -108,9 +108,7 @@
                     <td class="px-6 py-4">{{ quiz.duration }} Mins</td>
                     <td class="px-6 py-4 text-right">
                       <div class="flex gap-4 justify-end">
-                        <!-- <button class="font-medium text-primary hover:underline">
-                          <span><i class="fa-solid fa-pen"></i></span>
-                        </button>
+                        <!-- 
                         <button class="font-medium text-red-600 dark:text-red-500 hover:underline">
                           <span><i class="fa-solid fa-trash"></i></span> 
                         </button> -->

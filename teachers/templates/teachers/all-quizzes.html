@@ -89,8 +89,9 @@
                   <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-200 text-green-500">Active</span>
                 {% endif %}
                 </td>
-                <td class="px-6 py-4 text-right">
+                <td class="px-6 py-4 text-right space-x-2">
                   <a class="font-medium text-primary hover:underline" href="{% url 'teachers:quiz-details' quiz.id %}">View</a>
+                  <a class="font-medium text-red-600 hover:underline" href="{% url 'teachers:delete-quiz' quiz.id %}">Delete</a>
                 </td>
               </tr>
               {% endfor %}

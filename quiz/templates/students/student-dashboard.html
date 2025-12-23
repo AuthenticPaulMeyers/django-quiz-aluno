@@ -22,6 +22,12 @@
         </header>
 
         <section class="mb-8 space-y-12">
+          <!-- Display error messages if any -->
+          {% if messages %}
+            {% for message in messages %}
+                <p class="text-center text-sm text-red-600 mb-4 mt-4">{{ message }}</p>
+            {% endfor %}
+          {% endif %}
           <div>
             <h3 class="text-xl font-semibold text-gray-700 dark:text-white">
               Overall Performance
@@ -73,22 +79,20 @@
             </div>
           </div>
           <div>
-            <div class="flex justify-between items-center mb-4">
+            <div class="flex justify-between items-center mb-2">
             <h2 class="text-xl font-semibold text-gray-700 dark:text-white">
-              Active Quizzes
+              Active & Upcoming Quizzes
             </h2>
           </div>
-          {% if not active_quizzes %}
-            <span class="text-sm text-center text-gray-600 dark:text-gray-400">You do not have active quizzes.</span>
-          {% endif %}
-          <!-- Display error messages if any -->
-          {% if messages %}
-            {% for message in messages %}
-                <p class="text-center text-sm text-red-600 mb-4 mt-4">{{ message }}</p>
-            {% endfor %}
-          {% endif %}
+          <div class="mb-4">
+              {% if not active_quizzes %}
+                <span class="text-sm text-center text-gray-600 dark:text-gray-400">You do not have active quizzes.</span>
+              {% endif %}
+              {% if not upcoming_quizzes %}
+                <span class="text-sm text-center text-gray-600 dark:text-gray-400">You do not have upcoming quizzes.</span>
+              {% endif %}
+          </div>
           <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-6">
-
             {% for quiz in active_quizzes %}
               <div
                 class="bg-white dark:bg-gray-900/50 ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-800 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 ">
@@ -124,7 +128,6 @@
                 </div>
               </div>
             {% endfor %}
-          </div>
           </div>
         </section>
         <!-- <section class="mb-8">

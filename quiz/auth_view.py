@@ -49,7 +49,7 @@ def logout_view(request):
     return redirect('quiz:index')
 
 @login_required(login_url='quiz:login')
-@ratelimit(key='user_or_ip', rate='1/d', block=True)
+@ratelimit(key='user_or_ip', rate='2/d', block=True)
 def change_password(request):
     user = request.user
 

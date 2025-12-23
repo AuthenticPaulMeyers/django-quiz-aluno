@@ -29,16 +29,14 @@
                         Log in as a student or teacher.
                     </p>
                 </div>
-                <form action="{% url 'quiz:login' %}" class="mt-8 space-y-6" method="POST">
+                <form action="{% url 'quiz:login' %}" class="mt-8 space-y-6" method="POST" autocomplete="off">
                     {% csrf_token %}
                     <input name="remember" type="hidden" value="true" />
                     <div class="rounded-lg space-y-4">
                         <div>
-                            <label class="sr-only" for="username">Username</label>
                             {% render_field form.username class="form-input appearance-none relative block w-full px-3 py-3 border border-gray-300 dark:border-gray-700 bg-background-light dark:bg-background-dark text-gray-900 dark:text-white rounded-lg focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm" %}
                         </div>
                         <div>
-                            <label class="sr-only" for="password">Password</label>
                             {% render_field form.password class="form-input appearance-none relative block w-full px-3 py-3 border border-gray-300 dark:border-gray-700 bg-background-light dark:bg-background-dark text-gray-900 dark:text-white rounded-lg focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm" %}
                         </div>
                     </div>

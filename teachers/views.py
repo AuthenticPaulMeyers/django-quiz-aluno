@@ -8,67 +8,71 @@ from django.utils import timezone
 # Dashboard
 @login_required(login_url='quiz:login')
 def teacher_dashboard_view(request):
-      user = request.user
+	user = request.user
+	print(user)
 
       # First check if user has teacher role
-      if user.role != 'teacher':
-            messages.error(request, 'Access denied. You are not registered as a teacher.')
-            return redirect('quiz:login')
+	if user.role != 'teacher':
+		messages.error(request, 'Access denied. You are not registered as a teacher.')
+		return redirect('quiz:login')
 
-      try:
-            teacher_obj = user.teacher
-            
-            if teacher_obj is None:
-                  messages.error(request, 'Teacher records not found.')
-                  return redirect('quiz:login')
-            
-            # get number of classes taught by this teacher
-            classes_count = teacher_obj.classes_count()
+	try:
+		teacher_obj = user.teacher
+		print(teacher_obj)
 
-            # get number of subjects taught by this teacher
-            subjects_count = teacher_obj.subjects_count()
+		if teacher_obj is None:
+			messages.error(request, 'Teacher records not found.')
+			return redirect('quiz:login')
 
-            # get number of quizzes created by this teacher
-            quizzes_count = teacher_obj.quizzes_count()
+		# get number of classes taught by this teacher
+		classes_count = teacher_obj.classes_count()
 
-            #get all the quizzes for this current teacher
-            quizzes = teacher_obj.get_quizzes()
+		# get number of subjects taught by this teacher
+		subjects_count = teacher_obj.subjects_count()
 
-            from django.utils import timezone
-            current_time = timezone.localtime(timezone.now())
+		# get number of quizzes created by this teacher
+		quizzes_count = teacher_obj.quizzes_count()
 
-            # get active quizzes
-            active_quizzes = [quiz for quiz in quizzes if quiz.start_date <= current_time <= quiz.due_date]
-            
-            context={
-                  'user': user,
-                  'title': 'Dashboard',
-                  'active_quizzes': active_quizzes,
-                  'classes_count': classes_count,
-                  'subjects_count': subjects_count,
-                  'quizzes_count': quizzes_count,
-            }
+		#get all the quizzes for this current teacher
+		quizzes = teacher_obj.get_quizzes()
 
-            return render(request, 'teachers/teacher-dashboard.html', context)
-      
-      except Exception as e:
-            print("User does not exist.", e)
-            messages.error(request, 'An error occurred while accessing teacher profile.')
-            return redirect('quiz:login')
+		from django.utils import timezone
+		current_time = timezone.localtime(timezone.now())
+
+		# get active quizzes
+		active_quizzes = [quiz for quiz in quizzes if quiz.start_date <= current_time <= quiz.due_date]
+
+		context={
+			'user': user,
+			'title': 'Dashboard',
+			'active_quizzes': active_quizzes,
+			'classes_count': classes_count,
+			'subjects_count': subjects_count,
+			'quizzes_count': quizzes_count,
+		}
+
+		return render(request, 'teachers/teacher-dashboard.html', context)
+
+	except Exception as e:
+		print(f"Error: {e}")
+		messages.error(request, 'An error occurred while accessing teacher profile.')
+		return redirect('quiz:login')
 
 # All quizzes
 @login_required(login_url='quiz:login')
 def all_quizzes_view(request):
 	user = request.user
+	print(user)
 
 	# First check if user has teacher role
 	if user.role != 'teacher':
 		messages.error(request, 'Access denied. You are not registered as a teacher.')
 		return redirect('quiz:login')
-	
+
 	try:
 		teacher_obj = user.teacher
-		
+		print(teacher_obj)
+
 		if teacher_obj is None:
 				messages.error(request, 'Teacher records not found.')
 				return redirect('quiz:login')
@@ -93,7 +97,7 @@ def all_quizzes_view(request):
 		return render(request, 'teachers/all-quizzes.html', context)
 
 	except Exception as e:
-		print("User does not exist.")
+		print(f"Error: {e}")
 		messages.error(request, 'An error occurred while accessing teacher profile.')
 		return redirect('quiz:login')
 
@@ -579,18 +583,17 @@ def delete_quiz_view(request, quiz_id):
 		if teacher_obj is None:
 			messages.error(request, 'Teacher records not found.')
 			return redirect('quiz:login')
-
-		quiz = Quiz.objects.filter(pk=quiz_id, teacher=teacher_obj).first()
+		# get the teacher subject class object fot this teacher
+		teacher_subject_classes = TeacherSubjectClass.objects.filter(subject_teacher__teacher=teacher_obj)
+		# load the quiz only if it belongs to this teacher
+		quiz = Quiz.objects.filter(pk=quiz_id, teacher_subject_class__in=teacher_subject_classes).first()
+		print(quiz)
 		if quiz is None:
 			messages.error(request, 'Quiz not found or does not belong to you.')
 			return redirect('teachers:all-quizzes')
-
-		if request.method == 'POST':
-			quiz.delete()
-			messages.success(request, 'Quiz deleted successfully.')
-			return redirect('teachers:all-quizzes')
-
-		# If reached by GET, redirect back (template delete form uses POST)
+		# delete the quiz
+		quiz.delete()
+		messages.success(request, 'Quiz deleted successfully.')
 		return redirect('teachers:all-quizzes')
 
 	except Exception as e:
