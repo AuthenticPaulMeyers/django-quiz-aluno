@@ -300,7 +300,7 @@ class TeacherSubjectClass(models.Model):
 class Quiz(models.Model):
     title = models.CharField(max_length=255, null=False)
     description = models.CharField(max_length=255)
-    teacher_subject_class = models.ForeignKey(TeacherSubjectClass, on_delete=models.CASCADE)
+    teacher_subject_class = models.ForeignKey(TeacherSubjectClass, on_delete=models.SET_NULL, null=True)
     duration = models.PositiveIntegerField(help_text='Duration in minutes')
     start_date = models.DateTimeField(help_text='Start date and time for the quiz')
     due_date = models.DateTimeField(help_text='Due date for the quiz')
@@ -389,7 +389,7 @@ class Quiz(models.Model):
         self.save()
 
 class Question(models.Model):
-    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    quiz = models.ForeignKey(Quiz, on_delete=models.SET_NULL, null=True)
     question_text = models.CharField(max_length=255, null=False)
     image = models.ImageField(upload_to='images/', null=True, blank=True)
 
@@ -397,7 +397,7 @@ class Question(models.Model):
         return self.question_text
 
 class MultipleChoice(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, on_delete=models.SET_NULL, null=True)
     choice_text = models.CharField(max_length=255, null=False)
     is_correct = models.BooleanField(default=False)
 
@@ -416,7 +416,7 @@ class MultipleChoice(models.Model):
 
 class Attempt(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
-    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    quiz = models.ForeignKey(Quiz, on_delete=models.SET_NULL, null=True)
     score = models.IntegerField()
     is_completed = models.BooleanField(default=False)
 
@@ -442,9 +442,9 @@ class Attempt(models.Model):
         return AttemptAnswer.objects.filter(attempt=self, is_correct=True)
 
 class AttemptAnswer(models.Model):
-    attempt = models.ForeignKey(Attempt, on_delete=models.CASCADE)
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    multiple_choice = models.ForeignKey(MultipleChoice, on_delete=models.CASCADE)
+    attempt = models.ForeignKey(Attempt, on_delete=models.SET_NULL, null=True)
+    question = models.ForeignKey(Question, on_delete=models.SET_NULL, null=True)
+    multiple_choice = models.ForeignKey(MultipleChoice, on_delete=models.SET_NULL, null=True)
     is_correct = models.BooleanField(default=False)
 
     def __str__(self):
