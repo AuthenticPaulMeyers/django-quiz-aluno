@@ -14,7 +14,7 @@
           </div>
           <div class="flex items-center gap-4">
             <button
-              class="hidden md:flex items-center justify-center rounded-lg h-10 px-4 text-sm font-bold bg-primary text-white hover:bg-primary/80 hover:text-white transition-colors dark:bg-primary dark:hover:bg-primary/10">
+              class="md:flex items-center justify-center rounded-lg h-10 px-4 text-sm font-bold bg-primary text-white hover:bg-primary/80 hover:text-white transition-colors dark:bg-primary dark:hover:bg-primary/10">
               <a href="{% url 'quiz:login' %}">Log In</a>
             </button>
           </div>
@@ -27,13 +27,13 @@
               background-image: url('{% static "images/home.jpg" %}');"></div>
         <div class="absolute inset-0 bg-background-dark/90"></div>
         <div class="relative container mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 lg:py-40 text-center text-white">
-          <h1 class="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter mb-4">
+          <h1 class="text-5xl md:text-5xl lg:text-6xl font-black tracking-tighter mb-4">
             Engage Students, Empower Teachers
           </h1>
-          <p class="max-w-3xl mx-auto text-base md:text-lg lg:text-xl text-white/80 mb-8">
+          <p class="max-w-3xl mx-auto text-base text-lg md:text-lg lg:text-xl text-white/80 mb-8">
             Transform your classroom with Aluno, the ultimate platform for
-            creating, managing, and participating in interactive quizzes.
-            Easy to use and fun for students.
+            creating, managing, and participating in interactive multiple choice tests.
+            Easy to use and independent for students.
           </p>
         </div>
       </section>
@@ -47,7 +47,7 @@
               Aluno offers a range of powerful features designed to make
               learning fun and effective for students, while providing
               teachers with the tools they need to create engaging and
-              insightful quizzes.
+              insightful multiple choice tests.
             </p>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -61,10 +61,10 @@
                   </path>
                 </svg>
               </div>
-              <h3 class="text-lg font-bold">Interactive Quizzes</h3>
+              <h3 class="text-lg font-bold">Interactive Tests</h3>
               <p class="text-sm text-subtle-light dark:text-subtle-dark">
-                Create dynamic quizzes with multiple question types, including
-                multiple choice, true/false, and short answer, to keep
+                Create dynamic tests with multiple question types, including
+                multiple choice, and true/false to keep
                 students engaged and motivated.
               </p>
             </div>
@@ -80,7 +80,7 @@
               </div>
               <h3 class="text-lg font-bold">Customizable Content</h3>
               <p class="text-sm text-subtle-light dark:text-subtle-dark">
-                Tailor quizzes to your specific curriculum. Add images,
+                Tailor tests to your specific curriculum. Add images,
                 videos, and audio to enhance the learning experience.
               </p>
             </div>
@@ -97,7 +97,7 @@
               <h3 class="text-lg font-bold">Role-Based Access</h3>
               <p class="text-sm text-subtle-light dark:text-subtle-dark">
                 Students and teachers have distinct access levels, ensuring a
-                secure environment. Teachers manage quizzes, while students
+                secure environment. Teachers manage tests, while students
                 participate and view results.
               </p>
             </div>
@@ -121,9 +121,9 @@
                 src="{% static 'images/student-vector.png' %}" />
               <h3 class="text-xl font-bold">For Students</h3>
               <p class="text-subtle-light dark:text-subtle-dark">
-                Engaging and interactive quizzes that make learning fun. Get
+                Engaging and interactive tests that make learning fun. Get
                 immediate feedback on your performance to identify areas for
-                improvement and access a wide range of quizzes covering
+                improvement and access a wide range of tests covering
                 various subjects.
               </p>
               <div class="flex items-center gap-4">
@@ -138,14 +138,14 @@
                 src="{% static 'images/teacher-vector.png' %}" />
               <h3 class="text-xl font-bold">For Teachers</h3>
               <p class="text-subtle-light dark:text-subtle-dark">
-                An easy-to-use quiz builder to create customized assessments.
+                An easy-to-use exam builder to create customized assessments.
                 Track student progress and performance in real-time on a
                 secure platform with role-based access for students and
                 teachers.
               </p>
               <div class="flex items-center gap-4">
                 <button
-                  class="hidden md:flex items-center justify-center rounded-lg h-10 px-4 text-sm font-bold bg-primary text-white hover:bg-primary/80 hover:text-white transition-colors dark:bg-primary dark:hover:bg-primary/10">
+                  class="md:flex items-center justify-center rounded-lg h-10 px-4 text-sm font-bold bg-primary text-white hover:bg-primary/80 hover:text-white transition-colors dark:bg-primary dark:hover:bg-primary/10">
                   <a href="{% url 'quiz:login' %}">Log in as a teacher</a>
                 </button>
               </div>
@@ -153,37 +153,18 @@
           </div>
         </div>
       </section>
-      <!-- <section
-          class="bg-background-light dark:bg-background-dark py-16 md:py-24"
-        >
-          <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2
-              class="text-3xl md:text-4xl font-black tracking-tight max-w-2xl mx-auto"
-            >
-              Ready to Transform Your Classroom?
-            </h2>
-            <p
-              class="mt-4 text-base md:text-lg text-subtle-light dark:text-subtle-dark max-w-2xl mx-auto"
-            >
-              Join Aluno today and experience the future of interactive
-              learning. 
-            </p>
-            <div class="mt-8 flex justify-center">
-            </div>
-          </div>
-        </section> -->
     </main>
     <footer class="bg-white dark:bg-background-dark/50 border-t border-border-light dark:border-border-dark">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div class="flex flex-col md:flex-row items-center justify-between gap-6">
           <div class="flex flex-wrap justify-center gap-x-6 gap-y-2">
             <a class="text-sm text-subtle-light dark:text-subtle-dark hover:text-primary transition-colors"
-              href="#">Academic Policy</a>
+              href="{% url 'quiz:academic' %}">Academic Policy</a>
             <a class="text-sm text-subtle-light dark:text-subtle-dark hover:text-primary transition-colors"
-              href="#">Privacy Policy</a>
+              href="{% url 'quiz:privacy' %}">Privacy Policy</a>
           </div>
           <p class="text-sm text-subtle-light dark:text-subtle-dark">
-            © 2025 Aluno. All rights reserved.
+            © 2026 Aluno. All rights reserved.
           </p>
         </div>
       </div>
