@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from ..teachers.models import TeacherSubjectClass
+from teachers.models import TeacherSubjectClass
+
 # Create your models here.
 class CustomUser(AbstractUser):
     ROLE_CHOICES = (

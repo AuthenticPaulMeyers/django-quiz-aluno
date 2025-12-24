@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import CustomUser, Teacher, Class, Student, Subject, SubjectClass, StudentSubject, SubjectTeacher, TeacherSubjectClass, Quiz, Question, MultipleChoice, Attempt, AttemptAnswer
+from .models import CustomUser, Class, Student, Subject, SubjectClass, StudentSubject, Quiz, Question, MultipleChoice, Attempt, AttemptAnswer
+
+from teachers.models import Teacher, SubjectTeacher, TeacherSubjectClass
 
 from django.contrib.auth.admin import UserAdmin
 from .forms import CustomUserCreationForm, CustomUserChangeForm

@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
-from quiz.models import Quiz, Student, Question, Attempt, MultipleChoice, AttemptAnswer, Teacher, TeacherSubjectClass, SubjectTeacher, Class, Subject
-from quiz.forms import QuizForm, QuestionForm, MultipleChoiceForm, StudentEditForm
+from quiz.models import Quiz, Student, Question, Attempt, MultipleChoice, Class, Subject
+from quiz.forms import QuizForm, StudentEditForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
+
+from .models import TeacherSubjectClass
 
 # Dashboard
 @login_required(login_url='quiz:login')

@@ -1,8 +1,10 @@
 from django.db import models
-from ..quiz.models import Student, Class, Subject, CustomUser, Quiz
+from django.apps import apps
+from django.conf import settings
+
 # Create your models here.
 class Teacher(models.Model):
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    user = models.OneToOneField('quiz.CustomUser', on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.user.first_name} {self.user.last_name}'
@@ -24,6 +26,7 @@ class Teacher(models.Model):
     # get classes taught by this teacher
     def get_classes(self):
         from django.db.models import Q
+        Class = apps.get_model('quiz', 'Class')
         return Class.objects.filter(
             Q(teachersubjectclass__subject_teacher__teacher=self)
         ).distinct()
@@ -35,6 +38,7 @@ class Teacher(models.Model):
     # get quizzes created by this teacher
     def get_quizzes(self):
         from django.db.models import Q
+        Quiz = apps.get_model('quiz', 'Quiz')
         return Quiz.objects.filter(
             Q(teacher_subject_class__subject_teacher__teacher=self)
         ).distinct()
@@ -46,6 +50,7 @@ class Teacher(models.Model):
     # get students taught by this teacher
     def get_students(self):
         from django.db.models import Q
+        Student = apps.get_model('quiz', 'Student')
         return Student.objects.filter(
             Q(class_enrolled__teachersubjectclass__subject_teacher__teacher=self)
         ).distinct()
@@ -56,20 +61,21 @@ class Teacher(models.Model):
 
 class SubjectTeacher(models.Model):
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
-    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
+    subject = models.ForeignKey('quiz.Subject', on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.teacher.fullname()} teaches {self.subject.name}'
     
 class TeacherSubjectClass(models.Model):
     subject_teacher = models.ForeignKey(SubjectTeacher, on_delete=models.CASCADE)
-    classname = models.ForeignKey(Class, on_delete=models.CASCADE)
+    classname = models.ForeignKey('quiz.Class', on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.subject_teacher.subject.name} - {self.classname.name}'
     
     # get quizzes for this teacher subject class
     def get_quizzes(self):
+        from quiz.models import Quiz
         return Quiz.objects.filter(teacher_subject_class=self)
     
     # get number of quizzes for this teacher subject class
@@ -79,6 +85,7 @@ class TeacherSubjectClass(models.Model):
     # get students for this teacher subject class
     def get_students(self):
         from django.db.models import Q
+        Student = apps.get_model('quiz', 'Student')
         return Student.objects.filter(
             Q(class_enrolled=self.classname) &
             Q(studentsubject__class_subject__subject=self.subject_teacher.subject)
