@@ -8,12 +8,7 @@
   <div class="flex flex-col min-h-screen">
     {% include 'teachers/partials/header.html' %}
     <main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <!-- Display error messages here -->
-    {% if messages %}
-      {% for message in messages %}
-          <p class="text-center text-sm text-gray-500 mb-4">{{ message }}</p>
-      {% endfor %}
-    {% endif %}
+
       <div class="flex flex-row justify-between">
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
         <h2 class="text-3xl font-bold dark:text-background-light text-gray-700">

@@ -13,14 +13,16 @@ from .models import TeacherSubjectClass
 # Dashboard
 @login_required(login_url='quiz:login')
 def teacher_dashboard_view(request):
+	# get the current logged in user
 	user = request.user
 
-      # First check if user has teacher role
+	# First check if user has teacher role
 	if user.role != 'teacher':
 		messages.error(request, 'Access denied. You are not registered as a teacher.')
 		return redirect('quiz:login')
-
+	
 	try:
+		# get the teacher object
 		teacher_obj = user.teacher
 
 		if teacher_obj is None:

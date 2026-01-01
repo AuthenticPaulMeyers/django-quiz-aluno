@@ -19,6 +19,7 @@ def student_dashboard_view(request):
         if student_obj is None:
             messages.error(request, 'Student record not found.')
             return redirect('quiz:login')
+            
         # get the class the current user is enrolled in
         class_enrolled = student_obj.class_enrolled
         if not class_enrolled:

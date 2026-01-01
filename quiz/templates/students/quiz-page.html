@@ -21,13 +21,6 @@
 
               <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Total Questions: {{ questions|length }}</p>
             </div>
-            <!-- Display error messages if any -->
-            {% if messages %}
-                {% for message in messages %}
-                    <p class="text-center text-sm text-red-600 mb-4 mt-4">{{ message }}</p>
-                {% endfor %}
-            {% endif %}
-          <div>
             <!-- Time container -->
             <div class="mb-4">
               <div class="flex items-center justify-between mb-1 bg-background-light dark:bg-background-dark/80 backdrop-blur-sm fixed right-20 z-20 border-b border-background-dark/10 dark:border-background-light/10 p-2 rounded-lg shadow-md">
