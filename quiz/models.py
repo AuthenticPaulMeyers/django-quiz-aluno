@@ -17,10 +17,10 @@ class CustomUser(AbstractUser):
     
     first_name = models.CharField(max_length=30, null=False)
     last_name = models.CharField(max_length=30, null=False)
-    username = models.CharField(max_length=30, null=False, unique=True)
+    username = models.CharField(max_length=30, null=False, unique=True, db_index=True)
     password = models.CharField(max_length=255)
     gender = models.CharField(max_length=10, null=True, blank=True, choices=GENDER_CHOICES)
-    role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='admin')
+    role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='admin', db_index=True)
 
     # return full name of the user
     def __str__(self):
@@ -34,7 +34,7 @@ class Class(models.Model):
     
 class Student(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-    class_enrolled = models.ForeignKey(Class, null=True, on_delete=models.SET_NULL)
+    class_enrolled = models.ForeignKey(Class, null=True, on_delete=models.SET_NULL, db_index=True)
 
     def __str__(self):
         return f'{self.user.first_name} {self.user.last_name}'
@@ -214,10 +214,10 @@ class StudentSubject(models.Model):
 class Quiz(models.Model):
     title = models.CharField(max_length=255, null=False)
     description = models.CharField(max_length=255)
-    teacher_subject_class = models.ForeignKey(TeacherSubjectClass, on_delete=models.SET_NULL, null=True)
+    teacher_subject_class = models.ForeignKey(TeacherSubjectClass, on_delete=models.SET_NULL, null=True, db_index=True)
     duration = models.PositiveIntegerField(help_text='Duration in minutes')
-    start_date = models.DateTimeField(help_text='Start date and time for the quiz')
-    due_date = models.DateTimeField(help_text='Due date for the quiz')
+    start_date = models.DateTimeField(help_text='Start date and time for the quiz', db_index=True)
+    due_date = models.DateTimeField(help_text='Due date for the quiz', db_index=True)
     date_created = models.DateField(auto_now_add=True)
 
     def __str__(self):
@@ -329,10 +329,10 @@ class MultipleChoice(models.Model):
         return self.question.quiz
 
 class Attempt(models.Model):
-    student = models.ForeignKey(Student, on_delete=models.CASCADE)
-    quiz = models.ForeignKey(Quiz, on_delete=models.SET_NULL, null=True)
+    student = models.ForeignKey(Student, on_delete=models.CASCADE, db_index=True)
+    quiz = models.ForeignKey(Quiz, on_delete=models.SET_NULL, null=True, db_index=True)
     score = models.IntegerField()
-    is_completed = models.BooleanField(default=False)
+    is_completed = models.BooleanField(default=False, db_index=True)
 
     def __str__(self):
         return self.quiz.title
