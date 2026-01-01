@@ -1,4 +1,7 @@
+import logging
 from django.shortcuts import render, redirect
+
+logger = logging.getLogger(__name__)
 from quiz.models import Quiz, Student, Question, Attempt, MultipleChoice, Class, Subject
 from quiz.forms import QuizForm, StudentEditForm
 from django.contrib import messages
@@ -11,7 +14,6 @@ from .models import TeacherSubjectClass
 @login_required(login_url='quiz:login')
 def teacher_dashboard_view(request):
 	user = request.user
-	print(user)
 
       # First check if user has teacher role
 	if user.role != 'teacher':
@@ -20,7 +22,6 @@ def teacher_dashboard_view(request):
 
 	try:
 		teacher_obj = user.teacher
-		print(teacher_obj)
 
 		if teacher_obj is None:
 			messages.error(request, 'Teacher records not found.')
@@ -56,7 +57,7 @@ def teacher_dashboard_view(request):
 		return render(request, 'teachers/teacher-dashboard.html', context)
 
 	except Exception as e:
-		print(f"Error: {e}")
+		logger.error(f"Error in teacher_dashboard_view: {e}")
 		messages.error(request, 'An error occurred while accessing teacher profile.')
 		return redirect('quiz:login')
 
@@ -64,7 +65,6 @@ def teacher_dashboard_view(request):
 @login_required(login_url='quiz:login')
 def all_quizzes_view(request):
 	user = request.user
-	print(user)
 
 	# First check if user has teacher role
 	if user.role != 'teacher':
@@ -73,7 +73,6 @@ def all_quizzes_view(request):
 
 	try:
 		teacher_obj = user.teacher
-		print(teacher_obj)
 
 		if teacher_obj is None:
 				messages.error(request, 'Teacher records not found.')
@@ -99,7 +98,7 @@ def all_quizzes_view(request):
 		return render(request, 'teachers/all-quizzes.html', context)
 
 	except Exception as e:
-		print(f"Error: {e}")
+		logger.error(f"Error in all_quizzes_view: {e}")
 		messages.error(request, 'An error occurred while accessing teacher profile.')
 		return redirect('quiz:login')
 
@@ -146,7 +145,7 @@ def students_view(request):
 		return render(request, 'teachers/students.html', context)
 	
 	except Exception as e:
-		print("Error fetching teacher data.")
+		logger.error(f"Error fetching teacher data: {e}")
 		messages.error(request, "Error fetching teacher data")
 		return redirect("teachers:dashboard")
 
@@ -196,7 +195,7 @@ def edit_student(request, student_id):
 		return render(request, 'teachers/edit-student.html', context)
 
 	except Exception as e:
-		print('Error editing student:', e)
+		logger.error(f"Error editing student: {e}")
 		messages.error(request, 'Error editing student')
 		return redirect('teachers:students')
 
@@ -234,7 +233,7 @@ def delete_student(request, student_id):
 		return redirect('teachers:students')
 
 	except Exception as e:
-		print('Error deleting student:', e)
+		logger.error(f"Error deleting student: {e}")
 		messages.error(request, 'Error deleting student')
 		return redirect('teachers:students')
 
@@ -270,7 +269,7 @@ def reports_view(request):
         ).select_related(
             'student__user',
             'student__class_enrolled',
-            'quiz'
+            'quiz__teacher_subject_class__subject_teacher__subject'
         ).order_by('-quiz__date_created')
 
         # Apply filters
@@ -322,7 +321,7 @@ def reports_view(request):
         return render(request, 'teachers/reports.html', context)
     
     except Exception as e:
-        print('Error loading reports:', e)
+        logger.error(f"Error loading reports: {e}")
         messages.error(request, 'Error loading reports')
         return redirect('teachers:dashboard')
 
@@ -341,8 +340,6 @@ def subjects_view(request):
 @login_required(login_url='quiz:login')
 def view_quiz_details(request, quiz_id):
 	user = request.user
-
-	print(quiz_id)
 
 	# First check if user has teacher role
 	if user.role != 'teacher':
@@ -464,7 +461,7 @@ def view_quiz_details(request, quiz_id):
 
 	except Exception as e:
 		messages.error(request, 'Quiz not found.')
-		print(e)
+		logger.error(f"Error in view_quiz_details: {e}")
 		return redirect('teachers:dashboard')
 
 # ToDo: Teacher profile
@@ -566,7 +563,7 @@ def create_quiz_view(request):
 			return render(request, 'teachers/create-quiz.html', context)
 
 	except Exception as e:
-		print(f"Failed to create quiz: {str(e)}")
+		logger.error(f"Failed to create quiz: {str(e)}")
 		messages.error(request, "Failed to create quiz.")
 		return redirect("teachers:all-quizzes")
 
@@ -589,7 +586,6 @@ def delete_quiz_view(request, quiz_id):
 		teacher_subject_classes = TeacherSubjectClass.objects.filter(subject_teacher__teacher=teacher_obj)
 		# load the quiz only if it belongs to this teacher
 		quiz = Quiz.objects.filter(pk=quiz_id, teacher_subject_class__in=teacher_subject_classes).first()
-		print(quiz)
 		if quiz is None:
 			messages.error(request, 'Quiz not found or does not belong to you.')
 			return redirect('teachers:all-quizzes')
@@ -599,11 +595,10 @@ def delete_quiz_view(request, quiz_id):
 		return redirect('teachers:all-quizzes')
 
 	except Exception as e:
-		print("Error deleting quiz:", e)
+		logger.error(f"Error deleting quiz: {e}")
 		messages.error(request, 'Error deleting quiz.')
 		return redirect('teachers:all-quizzes')
 	
 # Enroll student to class subject
 # Remove student from class subject enrolled (Drop subject)
 # Download reports
-

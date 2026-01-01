@@ -1,4 +1,7 @@
+import logging
 from django.shortcuts import render, redirect
+
+logger = logging.getLogger(__name__)
 from .models import Quiz, Student, Question, Attempt, MultipleChoice, AttemptAnswer
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -25,18 +28,32 @@ def student_dashboard_view(request):
         current_time = timezone.localtime(timezone.now())
         
         # get all quizzes for the current user class with due status
-        all_quizzes = student_obj.get_quizzes()
+        all_quizzes = student_obj.get_quizzes().select_related(
+            'teacher_subject_class__subject_teacher__subject',
+            'teacher_subject_class__subject_teacher__teacher__user'
+        )
 
         # exclude quizzes already completed by this student (consider them 'expired' for this student)
-        def not_completed_by_student(q):
-            return not Attempt.objects.filter(student=student_obj, quiz=q, is_completed=True).exists()
 
-        active_quizzes = [quiz for quiz in all_quizzes if quiz.start_date <= current_time <= quiz.due_date and not_completed_by_student(quiz)]
+        completed_quiz_ids = set(
+            Attempt.objects.filter(student=student_obj, is_completed=True).values_list('quiz_id', flat=True)
+        )
 
-        upcoming_quizzes = [quiz for quiz in all_quizzes if quiz.start_date > current_time and not_completed_by_student(quiz)]
+        active_quizzes = [
+            quiz for quiz in all_quizzes 
+            if quiz.start_date <= current_time <= quiz.due_date and quiz.id not in completed_quiz_ids
+        ]
+
+        upcoming_quizzes = [
+            quiz for quiz in all_quizzes 
+            if quiz.start_date > current_time and quiz.id not in completed_quiz_ids
+        ]
 
         # expired_quizzes: those past due OR quizzes already completed by this student
-        expired_quizzes = [quiz for quiz in all_quizzes if quiz.due_date < current_time or Attempt.objects.filter(student=student_obj, quiz=quiz, is_completed=True).exists()]
+        expired_quizzes = [
+            quiz for quiz in all_quizzes 
+            if quiz.due_date < current_time or quiz.id in completed_quiz_ids
+        ]
 
         # overall metrics
         avg_score = student_obj.average_score()
@@ -56,7 +73,7 @@ def student_dashboard_view(request):
         return render(request, 'students/student-dashboard.html', context)
 
     except Student.DoesNotExist:
-        print("Student does not exist.")
+        logger.error("Student does not exist.")
         return redirect('quiz:login')
 
 @login_required(login_url='quiz:login')
@@ -90,7 +107,7 @@ def all_quizzes_view(request):
         }
 
     except Student.DoesNotExist:
-        print("Student record not found.")
+        logger.error("Student record not found.")
         messages.error(request, 'Student record not found.')
         return redirect('quiz:student-dashboard')
 
@@ -131,7 +148,7 @@ def quiz_history_view(request):
 
     except Exception as e:
         # for debugging purposes
-        print('Error in quiz_history_view:', e)
+        logger.error(f"Error in quiz_history_view: {e}")
         messages.error(request, 'Unable to load quiz history.')
         return redirect('quiz:student-dashboard')
 
@@ -157,7 +174,7 @@ def quiz_details_view(request, quiz_id):
         return render(request, 'students/quiz-details.html', context)
 
     except Exception as e:
-        print('Error in quiz_details_view:', e)
+        logger.error(f"Error in quiz_details_view: {e}")
         messages.error(request, 'Unable to load quiz details.')
         return redirect('quiz:student-dashboard')
 
