@@ -48,8 +48,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
 ROOT_URLCONF = 'aluno.urls'
 
 TEMPLATES = [
@@ -120,11 +118,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
+
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'quiz/static')
+    os.path.join(BASE_DIR, 'quiz/static'),
+    os.path.join(BASE_DIR, 'teachers/static'),
 ]
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
