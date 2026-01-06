@@ -15,11 +15,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG')
-# DEBUG = True
+# DEBUG = os.getenv('DEBUG')
+DEBUG = False
 
 # ALLOWED_HOSTS = tuple(os.getenv('ALLOWED_HOSTS').split(','))    
-ALLOWED_HOSTS = ['aluno-indol.vercel.app', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['aluno-indol.vercel.app', 'localhost', '127.0.0.1', '.vercel.app']
 # Application definition
 
 INSTALLED_APPS = [
