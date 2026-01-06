@@ -18,8 +18,8 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = os.getenv('DEBUG')
 # DEBUG = True
 
-ALLOWED_HOSTS = tuple(os.getenv('ALLOWED_HOSTS').split(','))    
-
+# ALLOWED_HOSTS = tuple(os.getenv('ALLOWED_HOSTS').split(','))    
+ALLOWED_HOSTS = ['aluno-indol.vercel.app', 'localhost', '127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
