@@ -15,13 +15,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = os.getenv('DEBUG')
-DEBUG = False
+DEBUG = os.getenv('DEBUG')
 
-# ALLOWED_HOSTS = tuple(os.getenv('ALLOWED_HOSTS').split(','))    
-ALLOWED_HOSTS = ['aluno-indol.vercel.app', 'localhost', '127.0.0.1', '.vercel.app']
+ALLOWED_HOSTS = list(os.getenv('ALLOWED_HOSTS').split(','))    
+
 # Application definition
-
 INSTALLED_APPS = [
     'jazzmin',
     'django.contrib.admin',

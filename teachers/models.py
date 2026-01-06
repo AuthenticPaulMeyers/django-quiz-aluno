@@ -7,10 +7,10 @@ class Teacher(models.Model):
     user = models.OneToOneField('quiz.CustomUser', on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.user.first_name} {self.user.last_name}'
+        return self.fullname()
     
     def fullname(self):
-        return f'{self.user.first_name} {self.user.last_name}'
+        return f'{self.user.first_name[0]}. {self.user.last_name}'
     
     # get subjects taught by this teacher
     def get_subjects_class(self):
