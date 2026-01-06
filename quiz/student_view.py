@@ -5,9 +5,13 @@ logger = logging.getLogger(__name__)
 from .models import Quiz, Student, Question, Attempt, MultipleChoice, AttemptAnswer
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.db import close_old_connections
 
 @login_required(login_url='quiz:login')
 def student_dashboard_view(request):
+    # Close old database connections to prevent connection pool overflow
+    close_old_connections()
+
     user = request.user
     # First check if user has student role
     if user.role != 'student':

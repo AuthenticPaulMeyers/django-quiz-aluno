@@ -78,6 +78,7 @@ DATABASES = {
         'PORT': os.getenv('DB_PORT'),
         'USER': os.getenv('DB_USER'),
         'POOL_MODE': os.getenv('DB_POOL_MODE'),
+        'CONN_MAX_AGE': 0,
     }
 }
 
