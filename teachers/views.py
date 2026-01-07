@@ -600,7 +600,15 @@ def delete_quiz_view(request, quiz_id):
 		logger.error(f"Error deleting quiz: {e}")
 		messages.error(request, 'Error deleting quiz.')
 		return redirect('teachers:all-quizzes')
-	
+
+# Render custom 404 page
+def custom_page_not_found_view(request, exception):
+    return render(request, '404.html', status=404)
+
+# Render custom 500 page
+def custom_server_error_view(request):
+    return render(request, '500.html', status=500)
+
 # Enroll student to class subject
 # Remove student from class subject enrolled (Drop subject)
 # Download reports

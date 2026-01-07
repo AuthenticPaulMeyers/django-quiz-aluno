@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views 
+from django.conf.urls import handler404, handler500
 
 app_name = 'teachers'
 
@@ -16,3 +17,6 @@ urlpatterns=[
       path('quiz/create/', views.create_quiz_view, name='create-quiz'),
       path('quiz/delete/<int:quiz_id>', views.delete_quiz_view, name='delete-quiz'),
 ]
+
+handler404 = 'teachers.views.custom_page_not_found_view'
+handler500 = 'teachers.views.custom_server_error_view'
