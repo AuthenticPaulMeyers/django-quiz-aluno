@@ -6,6 +6,7 @@ from .models import Quiz, Student, Question, Attempt, MultipleChoice, AttemptAns
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db import close_old_connections
+from .utils import check_student_grade
 
 @login_required(login_url='quiz:login')
 def student_dashboard_view(request):
@@ -139,6 +140,10 @@ def quiz_history_view(request):
         # Get all attempts for this student so we can display grade per quiz taken
         attempts = Attempt.objects.filter(student=student_obj).select_related('quiz').order_by('-id')
 
+        # get the grade
+        for attempt in attempts:
+            attempt.grade = check_student_grade(attempt.score)
+
         context = {
             'user': user,
             'average_score': f"{avg_score}%" if avg_score is not None else '0',
@@ -256,6 +261,7 @@ def quiz_results_view(request, quiz_id):
 
             context = {
                 'score': float(round(existing_attempt.score)),
+                'grade': check_student_grade(existing_attempt.score),
                 'correct_count': correct_count,
                 'total': answers.count(),
                 'answers_review': answers_review,
@@ -284,7 +290,8 @@ def quiz_results_view(request, quiz_id):
             })
 
         context = {
-            'score': f"{existing_attempt.score}",
+            'score': existing_attempt.score,
+            'grade': check_student_grade(existing_attempt.score),
             'correct_count': correct_count,
             'total': answers.count(),
             'answers_review': answers_review,
@@ -361,8 +368,11 @@ def quiz_results_view(request, quiz_id):
     except Exception:
         time_taken = None
 
+    print(score_percent)
+
     context = {
-        'score': f"{score_percent}",
+        'score': score_percent,
+        'grade': check_student_grade(score_percent),
         'correct_count': correct_count,
         'total': total_questions,
         'answers_review': answers_review,

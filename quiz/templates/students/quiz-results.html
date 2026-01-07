@@ -15,7 +15,7 @@
             Here's your performance on the recent quiz.
           </p>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12">
           <div
             class="bg-white dark:bg-background-dark/70 p-6 rounded-xl border border-border-light dark:border-border-dark">
             <p class="text-sm font-medium text-subtle-light dark:text-subtle-dark">
@@ -35,6 +35,15 @@
             </p>
             <p class="text-4xl font-bold text-gray-700 dark:text-foreground-dark mt-2">
               {{ correct_count }}/{{ total }}
+            </p>
+          </div>
+          <div
+            class="bg-white dark:bg-background-dark/70 p-6 rounded-xl border border-border-light dark:border-border-dark">
+            <p class="text-sm font-medium text-subtle-light dark:text-subtle-dark">
+              Grade
+            </p>
+            <p class="text-4xl font-bold text-gray-700 dark:text-foreground-dark mt-2">
+              {{ grade }}
             </p>
           </div>
           <!-- <div
