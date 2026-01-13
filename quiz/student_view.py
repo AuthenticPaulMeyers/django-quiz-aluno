@@ -102,7 +102,7 @@ def all_quizzes_view(request):
         class_quizzes = student_obj.get_quizzes()
          # if no quizzes found, return with message
         if class_quizzes is None:
-            messages.info(request, 'You do not have quiz history.')
+            messages.info(request, 'You do not have exam history.')
             return redirect('quiz:all-quizzes')
 
         context = {
@@ -159,7 +159,7 @@ def quiz_history_view(request):
     except Exception as e:
         # for debugging purposes
         logger.error(f"Error in quiz_history_view: {e}")
-        messages.error(request, 'Unable to load quiz history.')
+        messages.error(request, 'Unable to load exam history.')
         return redirect('quiz:student-dashboard')
 
 @login_required(login_url='quiz:login')
@@ -168,7 +168,7 @@ def quiz_details_view(request, quiz_id):
     try:
         quiz = Quiz.objects.filter(pk=quiz_id).first()
         if quiz is None:
-            messages.error(request, 'Quiz not found.')
+            messages.error(request, 'Exam not found.')
             return redirect('quiz:student-dashboard')
         total = Question.objects.filter(quiz=quiz.id).count()
 
@@ -185,7 +185,7 @@ def quiz_details_view(request, quiz_id):
 
     except Exception as e:
         logger.error(f"Error in quiz_details_view: {e}")
-        messages.error(request, 'Unable to load quiz details.')
+        messages.error(request, 'Unable to load exam details.')
         return redirect('quiz:student-dashboard')
 
 @login_required(login_url='quiz:login')
@@ -194,7 +194,7 @@ def attempt_quiz_view(request, quiz_id):
     quiz = Quiz.objects.filter(pk=quiz_id).first()
 
     if quiz is None:
-        messages.error(request, 'Quiz not found.')
+        messages.error(request, 'Exam not found.')
         return redirect('quiz:student-dashboard')
 
     # Prevent re-attempt if student already completed this quiz
@@ -206,7 +206,7 @@ def attempt_quiz_view(request, quiz_id):
 
     existing = Attempt.objects.filter(student=student_obj, quiz=quiz, is_completed=True).first()
     if existing:
-        messages.info(request, 'You have already completed this quiz. Viewing results instead.')
+        messages.info(request, 'You have already completed this exam. Viewing results instead.')
         return redirect('quiz:quiz-results', quiz_id=quiz.id)
 
     # get question and choices for the quiz
@@ -228,7 +228,7 @@ def quiz_results_view(request, quiz_id):
     # Process POSTed answers and compute results
     quiz = Quiz.objects.filter(pk=quiz_id).first()
     if quiz is None:
-        messages.error(request, 'Quiz not found.')
+        messages.error(request, 'Exam not found.')
         return redirect('quiz:student-dashboard')
 
     user = request.user
