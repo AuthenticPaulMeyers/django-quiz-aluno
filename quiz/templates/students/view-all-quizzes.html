@@ -11,7 +11,7 @@
       <div class="flex flex-row justify-between">
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
         <h2 class="text-3xl font-bold dark:text-background-light text-gray-700">
-          All Quizzes
+          All Exams
         </h2>
       </div>
       <div class="flex flex-row flex-wrap gap-2 mb-8 text-center align-center justify-center">
@@ -41,7 +41,7 @@
             <thead
               class="text-xs uppercase bg-background-light dark:bg-background-dark border-b border-background-dark/10 dark:border-background-light/10">
               <tr>
-                <th class="px-6 py-3 font-medium" scope="col">Quiz Title</th>
+                <th class="px-6 py-3 font-medium" scope="col">Exam Title</th>
                 <th class="px-6 py-3 font-medium" scope="col">Subject</th>
                 <th class="px-6 py-3 font-medium" scope="col">Time allowed</th>
                 <th class="px-6 py-3 font-medium text-center" scope="col">
@@ -81,7 +81,7 @@
           </table>
         </div>
         {% else %}
-        <p class="text-center text-sm text-gray-500 mb-4">You do not have quiz history.</p>
+        <p class="text-center text-sm text-gray-500 mb-4">You do not have exam history.</p>
         {% endif %}
       </div>
           <script src="{% static 'js/all-quizzes.js' %}" defer></script>

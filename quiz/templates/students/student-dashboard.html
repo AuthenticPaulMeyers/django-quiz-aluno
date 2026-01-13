@@ -44,7 +44,7 @@
               <div
                 class="overflow-hidden rounded-lg bg-white p-5 shadow-sm ring-1 ring-purple-300/90">
                 <p class="truncate text-sm font-medium text-purple-500">
-                  Quizzes Taken
+                  Exams Taken
                 </p>
                 <p class="mt-1 text-3xl font-semibold text-purple-500 flex flex-row justify-between align-center">
                   {% if quizzes_taken is None %}
@@ -75,12 +75,12 @@
           <div>
             <div class="flex justify-between items-center mb-2">
             <h2 class="text-xl font-semibold text-gray-700 dark:text-white">
-              Active & Upcoming Quizzes
+              Active Exams
             </h2>
           </div>
           <div class="mb-4">
               {% if not active_quizzes %}
-                <span class="text-sm text-center text-gray-600 dark:text-gray-400">You do not have active quizzes.</span>
+                <span class="text-sm text-center text-gray-600 dark:text-gray-400">You do not have active exams.</span>
               {% endif %}
           </div>
           <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-6">
@@ -102,7 +102,7 @@
               </div>
             {% endfor %}
 
-            {% for quiz in upcoming_quizzes %}
+            <!-- {% for quiz in upcoming_quizzes %}
               <div
                 class="bg-white dark:bg-gray-900/50 ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-800 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 ">
                 <div class="p-4">
@@ -118,7 +118,7 @@
                   <button class="rounded-full bg-primary text-white py-1 px-3 text-sm mt-4 font-thin"><a href="{% url 'quiz:quiz-details' quiz.id %}"> <i class="fa-regular fa-eye"></i> see details</a></button>
                 </div>
               </div>
-            {% endfor %}
+            {% endfor %} -->
           </div>
         </section>
       </div>
