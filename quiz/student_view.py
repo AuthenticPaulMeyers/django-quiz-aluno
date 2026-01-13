@@ -109,7 +109,7 @@ def all_quizzes_view(request):
             'user': user,
             'all_quizzes': class_quizzes,
             'current_time': current_time,
-            'title': 'Quizzes',
+            'title': 'All Exams',
         }
 
     except Student.DoesNotExist:
@@ -151,7 +151,7 @@ def quiz_history_view(request):
             'subjects_covered': subjects_count,
             'subject_performance': subject_perf,
             'attempts': attempts,
-            'title': 'Quiz History',
+            'title': 'Exam History',
         }
 
         return render(request, 'students/quiz-history.html', context)
@@ -179,7 +179,7 @@ def quiz_details_view(request, quiz_id):
             'quiz': quiz,
             'total': total,
             'current_time': current_time,
-            'title': 'Quiz Details',
+            'title': 'Exam Details',
         }
         return render(request, 'students/quiz-details.html', context)
 
@@ -218,7 +218,7 @@ def attempt_quiz_view(request, quiz_id):
         'quiz': quiz,
         'questions': questions,
         'questions_count': questions_count,
-        'title': 'Attempt Quiz',
+        'title': 'Attempt Exam',
     }
 
     return render(request, 'students/quiz-page.html', context=context)
@@ -265,7 +265,7 @@ def quiz_results_view(request, quiz_id):
                 'correct_count': correct_count,
                 'total': answers.count(),
                 'answers_review': answers_review,
-                'title': 'Quiz Results',
+                'title': 'Exam Results',
             }
             return render(request, 'students/quiz-results.html', context)
         else:
@@ -296,7 +296,7 @@ def quiz_results_view(request, quiz_id):
             'total': answers.count(),
             'answers_review': answers_review,
             'time_taken': None,
-            'title': 'Quiz Results',
+            'title': 'Exam Results',
         }
         return render(request, 'students/quiz-results.html', context)
 
@@ -377,7 +377,7 @@ def quiz_results_view(request, quiz_id):
         'total': total_questions,
         'answers_review': answers_review,
         'time_taken': time_taken,
-        'title': 'Quiz Results',
+        'title': 'Exam Results',
     }
 
     return render(request, 'students/quiz-results.html', context)

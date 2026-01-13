@@ -91,7 +91,7 @@ def all_quizzes_view(request):
 
 		context={
 				'user': user,
-				'title': 'Dashboard',
+				'title': 'All Exams',
 				'quizzes': quizzes,
 				'current_time': current_time,
 				'quizzes_count': quizzes_count,
