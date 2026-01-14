@@ -25,17 +25,3 @@ tailwind.config = {
         },
     },
 };
-
-
-// Disable buttons when they are clicked to avoid double clicking and overloading the server
-
-const backDashboardBtn = document.querySelector('#back-dashboard-btn')
-
-backDashboardBtn.addEventListener('click', function(e){
-    e.preventDefault();
-
-    backDashboardBtn.classList.remove('bg-primary');
-    backDashboardBtn.classList.add('bg-gray-500');
-    backDashboardBtn.classList.add('cursor-not-allowed');
-
-});

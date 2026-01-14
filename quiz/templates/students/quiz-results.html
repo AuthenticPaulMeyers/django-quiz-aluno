@@ -93,11 +93,11 @@
               </div>
             </div>
             {% endfor %}
-
+`
           <div class="mt-12 text-center">
-            <a href="{% url 'quiz:student-dashboard' %}" >
+            <a href="{% url 'students:dashboard' %}">
               <button
-                class="bg-primary text-white font-sm px-4 py-2 rounded-full hover:bg-primary/90 transition-all duration-300" id="back-dashboard-btn">
+                class="bg-primary text-white font-sm px-4 py-2 rounded-full hover:bg-primary/90 transition-all duration-300 back-dashboard-btn">
                 <i class="fa-solid fa-arrow-left"></i>
                 Back to Dashboard
               </button>
@@ -107,5 +107,5 @@
       </div>
     </main>
   </div>
-  <script src="{% static 'js/index.js' %}" defer></script>
+  <script src="{% static 'js/quiz-results.js' %}" defer></script>
 {% endblock %}
