@@ -60,7 +60,7 @@ class Student(models.Model):
     # number of subjects covered
     def subjects_covered_count(self):
         # subjects from completed attempts
-        attempts = self.quizzes_taken().filter(is_completed=True).select_related('quiz__teacher_subject_class__subject_teacher__subject')
+        attempts = self.quizzes_taken().filter(is_completed=True, quiz__isnull=False).select_related('quiz__teacher_subject_class__subject_teacher__subject')
         subject_ids = set(a.quiz.teacher_subject_class.subject_teacher.subject_id for a in attempts)
         return len(subject_ids)
 
@@ -71,7 +71,7 @@ class Student(models.Model):
         """
         from django.db.models import Avg, Max, Count
 
-        completed_attempts = self.quizzes_taken().filter(is_completed=True).select_related('quiz__teacher_subject_class__subject_teacher__subject')
+        completed_attempts = self.quizzes_taken().filter(is_completed=True, quiz__isnull=False).select_related('quiz__teacher_subject_class__subject_teacher__subject')
         # Aggregate per subject
         perf = {}
         for a in completed_attempts:
@@ -226,17 +226,23 @@ class Quiz(models.Model):
     # get class for this quiz
     @property
     def quizclass(self):
-        return self.teacher_subject_class.classname
+        if self.teacher_subject_class:
+            return self.teacher_subject_class.classname
+        return None
     
     # get subject for this quiz
     @property
     def subject(self):
-        return self.teacher_subject_class.subject_teacher.subject
+        if self.teacher_subject_class and getattr(self.teacher_subject_class, 'subject_teacher', None):
+            return self.teacher_subject_class.subject_teacher.subject
+        return None
     
     # get teacher for this quiz
     @property
     def teacher(self):
-        return self.teacher_subject_class.subject_teacher.teacher
+        if self.teacher_subject_class and getattr(self.teacher_subject_class, 'subject_teacher', None):
+            return self.teacher_subject_class.subject_teacher.teacher
+        return None
     
     # calculate quiz results
     def calculate_results(self):
@@ -326,7 +332,9 @@ class MultipleChoice(models.Model):
     # get quiz for this multiple choice
     @property
     def get_quiz(self):
-        return self.question.quiz
+        if self.question:
+            return self.question.quiz
+        return None
 
 class Attempt(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE, db_index=True)
@@ -335,7 +343,9 @@ class Attempt(models.Model):
     is_completed = models.BooleanField(default=False, db_index=True)
 
     def __str__(self):
-        return self.quiz.title
+        if self.quiz:
+            return self.quiz.title
+        return f"Attempt {self.pk} (Deleted Quiz)"
     
     # get student for this attempt
     @property
@@ -362,7 +372,9 @@ class AttemptAnswer(models.Model):
     is_correct = models.BooleanField(default=False)
 
     def __str__(self):
-        return f'Question: {self.question.question_text}. Answer: {self.multiple_choice.choice_text}. Correct: {self.is_correct}.'
+        q_text = self.question.question_text if self.question else "Deleted Question"
+        c_text = self.multiple_choice.choice_text if self.multiple_choice else "Deleted Choice"
+        return f'Question: {q_text}. Answer: {c_text}. Correct: {self.is_correct}.'
     
     # get attempt for this answer
     @property
