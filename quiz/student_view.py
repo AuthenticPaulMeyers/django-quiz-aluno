@@ -136,9 +136,9 @@ def quiz_history_view(request):
         quizzes_taken = student_obj.total_quizzes_taken()
         subjects_count = student_obj.subjects_covered_count()
         subject_perf = student_obj.subject_performance()
-
-        # Get all attempts for this student so we can display grade per quiz taken
-        attempts = Attempt.objects.filter(student=student_obj).select_related('quiz').order_by('-id')
+        
+        # Filter out attempts where the quiz has been deleted to avoid broken links in the template
+        attempts = Attempt.objects.filter(student=student_obj, quiz__isnull=False).select_related('quiz').order_by('-id')
 
         # get the grade
         for attempt in attempts:
