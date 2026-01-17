@@ -1,6 +1,6 @@
 from django.urls import path
 from . import auth_view, views, student_view
-from django.conf.urls import handler404, handler500
+from django.conf.urls import handler404, handler500, handler403
 
 app_name = 'quiz'
 
@@ -25,3 +25,4 @@ urlpatterns = [
 
 handler404 = 'quiz.views.custom_page_not_found_view'
 handler500 = 'quiz.views.custom_server_error_view'
+handler403 = 'quiz.views.custom_forbidden_error_view'

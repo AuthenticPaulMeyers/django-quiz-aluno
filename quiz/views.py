@@ -17,3 +17,7 @@ def custom_page_not_found_view(request, exception):
 # Render custom 500 page
 def custom_server_error_view(request):
     return render(request, '500.html', status=500)
+
+# Render custom 403 page
+def custom_forbidden_error_view(request):
+    return render(request, '403.html', status=403)
