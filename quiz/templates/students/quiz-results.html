@@ -82,9 +82,9 @@
                 <p class="text-sm text-subtle-light dark:text-subtle-dark">
                   <b>Your answer:</b> <span class="line-through">{{ a.your_answer|default:'No answer' }}</span>
                 </p>
-                <!-- <p class="text-sm text-subtle-light dark:text-subtle-dark">
+                <p class="text-sm text-subtle-light dark:text-subtle-dark">
                   <b>Correct answer:</b> {{ a.correct_answer|default:'-' }}
-                </p> -->
+                </p>
                 {% else %}
                 <p class="text-sm text-subtle-light dark:text-subtle-dark">
                   <b>Your answer:</b> <span>{{ a.your_answer|default:'No answer' }}</span>
@@ -95,13 +95,12 @@
             {% endfor %}
 `
           <div class="mt-12 text-center">
-            <a href="{% url 'quiz:dashboard' %}">
-              <button
-                class="bg-primary text-white font-sm px-4 py-2 rounded-full hover:bg-primary/90 transition-all duration-300 back-dashboard-btn">
-                <i class="fa-solid fa-arrow-left"></i>
-                Back to Dashboard
-              </button>
-            </a>
+            <button
+              class="bg-primary text-white font-sm px-4 py-2 rounded-full hover:bg-primary/90 transition-all duration-300">
+              <i class="fa-solid fa-arrow-left"></i>
+              <a href="{% url 'quiz:student-dashboard' %}">Back to Dashboard</a>
+            </button>
+
           </div>
         </div>
       </div>
