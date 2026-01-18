@@ -365,6 +365,7 @@ def view_quiz_details(request, quiz_id):
 			return redirect('teachers:all-quizzes')
 
 		# POST handlers for edit actions
+		post_quiz_form = None
 		if request.method == 'POST':
 			action = request.POST.get('action')
 
@@ -375,9 +376,10 @@ def view_quiz_details(request, quiz_id):
 					q = form.save(commit=False)
 					q.save()
 					messages.success(request, 'Quiz updated successfully.')
+					return redirect('teachers:quiz-details', quiz_id=quiz.id)
 				else:
 					messages.error(request, 'Please correct the errors in the quiz form.')
-				return redirect('teachers:quiz-details', quiz_id=quiz.id)
+					post_quiz_form = form  # Save for use in GET-like render below
 
 			# Delete entire quiz
 			if action == 'delete_quiz':
@@ -443,7 +445,10 @@ def view_quiz_details(request, quiz_id):
 				return redirect('teachers:quiz-details', quiz_id=quiz.id)
 
 		# GET: prepare forms and question list
-		quiz_form = QuizForm(instance=quiz, teacher=teacher_obj)
+		if post_quiz_form:
+			quiz_form = post_quiz_form
+		else:
+			quiz_form = QuizForm(instance=quiz, teacher=teacher_obj)
 		questions = Question.objects.filter(quiz=quiz).order_by('id')
 		# Prefetch choices per question for template efficiency
 		choices_map = {}
@@ -544,18 +549,12 @@ def create_quiz_view(request):
 					messages.success(request, 'Quiz created successfully!')
 					return redirect('teachers:all-quizzes')
 				else:
-					messages.error(request, 'Please correct the errors below.')
+					# If quiz details were valid but no valid questions were provided
+					messages.error(request, 'Please provide at least one valid question for the quiz.')
+			else:
+				# Form validation failed
+				messages.error(request, 'Please correct the errors in the quiz form.')
 
-				context = {
-					'user': user,
-					'title': 'Create Quiz',
-					'form': quiz_form,
-					'teacher_subject_classes': teacher_subject_classes,
-				}
-
-			return render(request, 'teachers/create-quiz.html', context)
-		else:
-			quiz_form = QuizForm(teacher=teacher_obj)
 			context = {
 				'user': user,
 				'title': 'Create Quiz',
