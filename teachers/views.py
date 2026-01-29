@@ -562,6 +562,15 @@ def create_quiz_view(request):
 				'teacher_subject_classes': teacher_subject_classes,
 			}
 			return render(request, 'teachers/create-quiz.html', context)
+		else:
+			quiz_form = QuizForm(teacher=teacher_obj)
+			context = {
+				'user': user,
+				'title': 'Create Quiz',
+				'form': quiz_form,
+				'teacher_subject_classes': teacher_subject_classes,
+			}
+			return render(request, 'teachers/create-quiz.html', context)
 
 	except Exception as e:
 		logger.error(f"Failed to create quiz: {str(e)}")
