@@ -1,8 +1,8 @@
 {% extends 'students/base.html' %}
 {% load static %}
 {% block content %}
-  <div class="flex min-h-screen w-full flex-col">
-    {% include 'students/partials/student-header.html' %}
+  <div class="flex h-screen relative">
+    {% include 'students/student-sidebar.html' %}
     <main class="flex-1 px-4 sm:px-6 lg:px-8 py-8">
       <div class="max-w-2xl mx-auto">
         <div class="bg-white dark:bg-background-dark/50 rounded-lg shadow-sm p-6 @container">

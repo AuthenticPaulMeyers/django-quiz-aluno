@@ -19,8 +19,8 @@
           {% endif %}
         </div>
         <nav class="flex flex-col gap-2">
-          <a class="flex items-center gap-3 px-4 py-2 rounded-lg bg-primary/10 dark:bg-primary/20 text-primary font-bold"
-            href="{% url 'quiz:student-dashboard' %}">
+          <a class="nav-item flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-100 text-gray-700"
+            href="{% url 'quiz:student-dashboard' %}" id="current-nav">
             <svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M224,115.55V208a16,16,0,0,1-16,16H168a16,16,0,0,1-16-16V168a8,8,0,0,0-8-8H112a8,8,0,0,0-8,8v40a16,16,0,0,1-16,16H48a16,16,0,0,1-16-16V115.55a16,16,0,0,1,5.17-11.78l80-75.48.11-.11a16,16,0,0,1,21.53,0,1.14,1.14,0,0,0,.11.11l80,75.48A16,16,0,0,1,224,115.55Z">
@@ -28,7 +28,7 @@
             </svg>
             <span>Home</span>
           </a>
-          <a class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700"
+          <a class="nav-item flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700"
             href="{% url 'quiz:all-quizzes' %}">
             <svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24" xmlns="http://www.w3.org/2000/svg">
               <path
@@ -37,7 +37,7 @@
             </svg>
             <span>Exams</span>
           </a>
-          <a class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700"
+          <a class="nav-item flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700"
             href="{% url 'quiz:quiz-history' %}">
             <svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24" xmlns="http://www.w3.org/2000/svg">
               <path
@@ -46,7 +46,7 @@
             </svg>
             <span>History</span>
           </a>
-          <a class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700"
+          <a class="nav-item flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700"
             href="{% url 'quiz:student-profile' %}">
             <svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24" xmlns="http://www.w3.org/2000/svg">
               <path
@@ -65,5 +65,7 @@
         </a>
       </div>
     </aside>
+
+    <script src="{% static 'js/sidebar.js' %}" defer></script>
 
 {% endblock %}
