@@ -23,9 +23,9 @@
             </div>
             <!-- Time container -->
             <div class="mb-4">
-              <div class="flex items-center justify-between mb-1 bg-background-light dark:bg-background-dark/80 backdrop-blur-sm fixed right-20 z-20 border-b border-background-dark/10 dark:border-background-light/10 p-2 rounded-lg shadow-md">
-                <p class="font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  <i class="fa-solid fa-clock text-primary font-medium"></i> Time remaining: <span class="js-duration">{{ quiz.duration }}</span> Minutes
+              <div class="flex items-center justify-between mb-1 bg-background-light dark:bg-background-dark/80 backdrop-blur-sm sticky top-0 sm:fixed sm:right-7 z-20 border-b border-background-dark/10 dark:border-background-light/10 p-2 rounded-lg shadow-md">
+                <p class="font-medium text-gray-700 dark:text-gray-300 mb-2 text-sm sm:text-base">
+                  <i class="fa-solid fa-clock text-primary font-medium"></i> Time remaining: <span class="js-duration">{{ quiz.duration }}</span> Mins
                 </p>
               </div>
             </div>
@@ -64,20 +64,20 @@
               <!-- questions container ends -->
               <!-- hidden field to capture remaining time (in seconds) -->
               <input type="hidden" name="time_remaining" class="js-time-remaining" value="" />
-              <div class="flex justify-between pt-4">
+              <div class="flex flex-col sm:flex-row justify-between gap-2 pt-4">
                 <button type="button" id="prevBtn"
-                  class="flex items-center justify-center gap-2 rounded-full bg-gray-300 dark:bg-gray-700 h-10 px-6 text-base font-bold text-gray-800 dark:text-gray-200 shadow-sm hover:bg-gray-400 dark:hover:bg-gray-600 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 dark:focus:ring-gray-600"
+                  class="flex items-center justify-center gap-2 rounded-full bg-gray-300 dark:bg-gray-700 h-10 px-4 sm:px-6 text-sm sm:text-base font-bold text-gray-800 dark:text-gray-200 shadow-sm hover:bg-gray-400 dark:hover:bg-gray-600 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 dark:focus:ring-gray-600 order-2 sm:order-1"
                   onclick="showPreviousQuestion()">
-                  <i class="fa-solid fa-arrow-left"></i>
+                  <i class="fa-solid fa-arrow-left hidden sm:inline"></i>
                   <span>Previous</span>
                 </button>
                 <button type="button" id="nextBtn" disabled
-                  class="flex items-center justify-center gap-2 rounded-full bg-primary h-10 px-6 text-base font-bold text-white shadow-sm hover:bg-primary/90 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                  class="flex items-center justify-center gap-2 rounded-full bg-primary h-10 px-4 sm:px-6 text-sm sm:text-base font-bold text-white shadow-sm hover:bg-primary/90 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary order-1 sm:order-2"
                   onclick="showNextQuestion()">
                   <span>Next</span>
-                  <i class="fa-solid fa-arrow-right"></i>
+                  <i class="fa-solid fa-arrow-right hidden sm:inline"></i>
                 </button>
-                <button type="submit" id="submitBtn" class="flex items-center justify-center align-center text-center items-center gap-2 rounded-full bg-primary h-10 px-6 text-base font-bold text-white shadow-sm hover:bg-primary/90 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                <button type="submit" id="submitBtn" class="flex items-center justify-center align-center text-center items-center gap-2 rounded-full bg-primary h-10 px-4 sm:px-6 text-sm sm:text-base font-bold text-white shadow-sm hover:bg-primary/90 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary order-3">
                   <svg id="loading-spinner" class="hidden animate-spin ml-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
