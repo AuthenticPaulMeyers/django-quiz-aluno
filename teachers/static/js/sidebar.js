@@ -1,7 +1,7 @@
-// Sidebar toggle functionality
+// Teacher Sidebar toggle functionality
 document.addEventListener('DOMContentLoaded', function() {
   const toggleBtn = document.getElementById('toggle-sidebar');
-  const sidebar = document.getElementById('student-sidebar');
+  const sidebar = document.getElementById('teacher-sidebar');
   const overlay = document.getElementById('sidebar-overlay');
   const mainContent = document.querySelector('main');
 
@@ -40,10 +40,10 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     }
 
-    // Close sidebar when clicking outside on mobile
+    // Close sidebar when clicking outside on mobile/tablet
     if (mainContent) {
       mainContent.addEventListener('click', function(e) {
-        if (window.innerWidth < 640 && !sidebar.classList.contains('hidden') && e.target !== toggleBtn && !toggleBtn.contains(e.target)) {
+        if (window.innerWidth < 1024 && !sidebar.classList.contains('hidden') && e.target !== toggleBtn && !toggleBtn.contains(e.target)) {
           sidebar.classList.add('hidden');
           if (overlay) {
             overlay.classList.add('hidden');
@@ -54,18 +54,3 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 });
-
-// get all the nav items 
-const navItems = document.querySelectorAll('.nav-items');
-const currentNavItem = document.querySelector('#current-item');
-
-navItems.forEach(item, function(e){
-      e.preventDefaults()
-      console.log(this)
-      this.classList.add('text-primary')
-      this.classList.add('bg-primary')
-      currentNavItem.classList.remove('text-primary')
-      currentNavItem.classList.remove('bg-primary')
-});
-
-

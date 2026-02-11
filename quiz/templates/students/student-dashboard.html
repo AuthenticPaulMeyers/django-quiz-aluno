@@ -3,13 +3,13 @@
 {% load static %}
 
 {% block content %}
-  <div class="flex h-screen relative">
+<div class="flex h-screen relative">
 
-    {% include 'students/student-sidebar.html' %}
+  {% include 'students/student-sidebar.html' %}
 
-    <main class="flex-1 overflow-y-auto">
-      <div class="p-4 sm:p-8">
-
+  <main class="flex-1 overflow-y-auto w-full">
+    <div class="p-4 sm:p-8">
+      <div class="flex flex-row align-center justify-between">
         <header class="mb-8">
           <h1 class="text-2xl sm:text-3xl font-bold text-gray-700 dark:text-white">
             Dashboard
@@ -20,86 +20,96 @@
           </p>
           {% endif %}
         </header>
+        <button id="toggle-sidebar"
+          class="sm:hidden mb-4 inline-flex items-center justify-center rounded-lg h-10 w-10 bg-gray-200 text-gray-600 hover:bg-gray-300 border border-gray-600 transition-colors">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
 
-        <section class="mb-8 space-y-12">
-          <div>
-            <h3 class="text-xl font-semibold text-gray-700 dark:text-white">
-              Overall Performance
-            </h3>
-            <div class="mt-4 grid grid-cols-1 gap-5 sm:grid-cols-1 lg:grid-cols-3">
-              <div
-                class="overflow-hidden rounded-lg bg-white p-5 shadow-sm ring-1 ring-green-300/90">
-                <p class="truncate text-sm font-medium text-green-500">
-                  Average Score
-                </p>
-                <p class="mt-1 text-3xl font-semibold text-green-500 flex flex-row justify-between align-center">
-                  {% if average_score is None %}
-                    0
-                  {% else %}
-                    {{ average_score }}
-                  {% endif %}
-                  <span class="flex-shrink-0 size-12 rounded-lg flex items-center justify-center bg-green-500 text-white text-md"><i class="fa-solid fa-chart-simple"></i></span>
-                </p>
-              </div>
-              <div
-                class="overflow-hidden rounded-lg bg-white p-5 shadow-sm ring-1 ring-purple-300/90">
-                <p class="truncate text-sm font-medium text-purple-500">
-                  Exams Taken
-                </p>
-                <p class="mt-1 text-3xl font-semibold text-purple-500 flex flex-row justify-between align-center">
-                  {% if quizzes_taken is None %}
-                    0
-                  {% else %}
-                    {{ quizzes_taken }}
-                  {% endif %}
-                  <span class="flex-shrink-0 size-12 rounded-lg flex items-center justify-center bg-purple-500 text-white text-md"><i class="fa-solid fa-graduation-cap"></i></span>
-                </p>
-              </div>
-              <div
-                class="overflow-hidden rounded-lg bg-white p-5 shadow-sm ring-1 ring-primary/90">
-                <p class="truncate text-sm font-medium text-primary dark:text-primary/70">
-                  Subjects Covered
-                </p>
-                <p class="mt-1 text-3xl font-semibold text-primary flex flex-row justify-between align-center">
-                  {% if subjects_covered is None %}
-                    0
-                  {% else %}
-                    {{ subjects_covered }}
-                  {% endif %}
-                  <span class="flex-shrink-0 size-12 rounded-lg flex items-center justify-center bg-primary text-white text-md"><i class="fa-solid fa-book-open"></i></span>
-                </p>
-                
-              </div>
+      <section class="mb-8 space-y-12">
+        <div>
+          <h3 class="text-xl font-semibold text-gray-700 dark:text-white">
+            Overall Performance
+          </h3>
+          <div class="mt-4 grid grid-cols-1 gap-5 sm:grid-cols-1 lg:grid-cols-3">
+            <div class="overflow-hidden rounded-lg bg-white p-5 shadow-sm ring-1 ring-green-300/90">
+              <p class="truncate text-sm font-medium text-green-500">
+                Average Score
+              </p>
+              <p class="mt-1 text-3xl font-semibold text-green-500 flex flex-row justify-between align-center">
+                {% if average_score is None %}
+                0
+                {% else %}
+                {{ average_score }}
+                {% endif %}
+                <span
+                  class="flex-shrink-0 size-12 rounded-lg flex items-center justify-center bg-green-500 text-white text-md"><i
+                    class="fa-solid fa-chart-simple"></i></span>
+              </p>
+            </div>
+            <div class="overflow-hidden rounded-lg bg-white p-5 shadow-sm ring-1 ring-purple-300/90">
+              <p class="truncate text-sm font-medium text-purple-500">
+                Exams Taken
+              </p>
+              <p class="mt-1 text-3xl font-semibold text-purple-500 flex flex-row justify-between align-center">
+                {% if quizzes_taken is None %}
+                0
+                {% else %}
+                {{ quizzes_taken }}
+                {% endif %}
+                <span
+                  class="flex-shrink-0 size-12 rounded-lg flex items-center justify-center bg-purple-500 text-white text-md"><i
+                    class="fa-solid fa-graduation-cap"></i></span>
+              </p>
+            </div>
+            <div class="overflow-hidden rounded-lg bg-white p-5 shadow-sm ring-1 ring-primary/90">
+              <p class="truncate text-sm font-medium text-primary dark:text-primary/70">
+                Subjects Covered
+              </p>
+              <p class="mt-1 text-3xl font-semibold text-primary flex flex-row justify-between align-center">
+                {% if subjects_covered is None %}
+                0
+                {% else %}
+                {{ subjects_covered }}
+                {% endif %}
+                <span
+                  class="flex-shrink-0 size-12 rounded-lg flex items-center justify-center bg-primary text-white text-md"><i
+                    class="fa-solid fa-book-open"></i></span>
+              </p>
+
             </div>
           </div>
-          <div>
-            <div class="flex justify-between items-center mb-2">
+        </div>
+        <div>
+          <div class="flex justify-between items-center mb-2">
             <h2 class="text-xl font-semibold text-gray-700 dark:text-white">
               Active Exams
             </h2>
           </div>
           <div class="mb-4">
-              {% if not active_quizzes %}
-                <span class="text-sm text-center text-gray-600 dark:text-gray-400">You do not have active exams.</span>
-              {% endif %}
+            {% if not active_quizzes %}
+            <span class="text-sm text-center text-gray-600 dark:text-gray-400">You do not have active exams.</span>
+            {% endif %}
           </div>
           <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-6">
             {% for quiz in active_quizzes %}
-              <div
-                class="bg-white dark:bg-gray-900/50 ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-800 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 ">
-                <div class="p-4">
-                  <h3 class="font-bold text-lg text-gray-900 dark:text-white">
-                    <a href="{% url 'quiz:quiz-details' quiz.id %}">{{ quiz.subject.name }}</a>
-                  </h3>
-                  <p class="text-gray-500 dark:text-gray-400 text-sm">
-                    <b><i class="fa-regular fa-clock"></i></b> {{ quiz.duration }} minutes<br>
-                    <b><i class="fa-regular fa-calendar"></i></b> {{ quiz.start_date|date:"F j" }}<br>
-                    <b><i class="fa-solid fa-circle-check text-green-500"></i></b>
-                    <span class="text-green-500">Active</span>
-                  </p>
-                  <button class="rounded-full bg-primary text-white py-1 px-3 text-sm mt-4 font-thin"><a href="{% url 'quiz:quiz-details' quiz.id %}"> <i class="fa-regular fa-eye"></i> see details</a></button>
-                </div>
+            <div
+              class="bg-white dark:bg-gray-900/50 ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-800 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 ">
+              <div class="p-4">
+                <h3 class="font-bold text-lg text-gray-900 dark:text-white">
+                  <a href="{% url 'quiz:quiz-details' quiz.id %}">{{ quiz.subject.name }}</a>
+                </h3>
+                <p class="text-gray-500 dark:text-gray-400 text-sm">
+                  <b><i class="fa-regular fa-clock"></i></b> {{ quiz.duration }} minutes<br>
+                  <b><i class="fa-regular fa-calendar"></i></b> {{ quiz.start_date|date:"F j" }}<br>
+                  <b><i class="fa-solid fa-circle-check text-green-500"></i></b>
+                  <span class="text-green-500">Active</span>
+                </p>
+                <button class="rounded-full bg-primary text-white py-1 px-3 text-sm mt-4 font-thin"><a
+                    href="{% url 'quiz:quiz-details' quiz.id %}"> <i class="fa-regular fa-eye"></i> see
+                    details</a></button>
               </div>
+            </div>
             {% endfor %}
 
             <!-- {% for quiz in upcoming_quizzes %}
@@ -120,8 +130,8 @@
               </div>
             {% endfor %} -->
           </div>
-        </section>
-      </div>
-    </main>
-  </div>
+      </section>
+    </div>
+  </main>
+</div>
 {% endblock %}

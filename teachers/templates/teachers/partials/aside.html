@@ -5,7 +5,7 @@
 {% load static %}
 
 {% block content %}
-<aside class="hidden lg:block w-full lg:w-64 flex-shrink-0 bg-white dark:bg-background-dark p-4">
+<aside class="hidden lg:block w-full lg:w-64 flex-shrink-0 bg-white dark:bg-background-dark p-4 lg:relative fixed top-0 left-0 h-screen lg:h-auto z-40" id="teacher-sidebar">
     <div class="flex flex-col">
       <div class="flex items-center gap-3 mb-8">
         <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-12">
@@ -59,5 +59,8 @@
       </a>
     </div>
   </aside>
+
+  <!-- Overlay for mobile/tablet -->
+  <div id="sidebar-overlay" class="hidden fixed inset-0 bg-black/50 z-30 lg:hidden" onclick="document.getElementById('teacher-sidebar').classList.add('hidden'); document.body.classList.remove('overflow-hidden'); this.classList.add('hidden');"></div>
 
 {% endblock %}

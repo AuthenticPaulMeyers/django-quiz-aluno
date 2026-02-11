@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block content %}
-<aside class="hidden sm:block w-64 flex-shrink-0 bg-white dark:bg-gray-900/50 p-6 flex flex-col justify-between">
+<aside class="hidden sm:block w-64 flex-shrink-0 bg-white dark:bg-gray-900/50 p-6 flex flex-col justify-between fixed sm:static top-0 left-0 h-screen sm:h-auto z-40 sidebar" id="student-sidebar">
       <div>
         <div class="flex items-center gap-3 mb-8">
           <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-12">
@@ -65,6 +65,9 @@
         </a>
       </div>
     </aside>
+
+    <!-- Overlay for mobile -->
+    <div id="sidebar-overlay" class="hidden fixed inset-0 bg-black/50 z-30 sm:hidden" onclick="document.getElementById('student-sidebar').classList.add('hidden'); document.body.classList.remove('overflow-hidden'); this.classList.add('hidden');"></div>
 
     <script src="{% static 'js/sidebar.js' %}" defer></script>
 
