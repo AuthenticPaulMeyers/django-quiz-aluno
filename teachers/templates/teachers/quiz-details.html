@@ -25,26 +25,54 @@
 				<form method="post">
 					{% csrf_token %}
 					<input type="hidden" name="action" value="save_quiz" />
+					<!-- Show non-field form errors -->
+					{% if quiz_form.non_field_errors %}
+					<div class="mb-3 text-sm text-red-700">
+						{{ quiz_form.non_field_errors }}
+					</div>
+					{% endif %}
 					<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 						<div>
 							<label class="block text-sm font-medium">Title</label>
 							{{ quiz_form.title|add_class:"mt-1 block w-full rounded border-border-light bg-white" }}
+							{% if quiz_form.title.errors %}
+							<div class="text-sm text-red-700 mt-1">{{ quiz_form.title.errors|join:", " }}</div>
+							{% endif %}
 						</div>
 						<div>
 							<label class="block text-sm font-medium">Duration (mins)</label>
 							{{ quiz_form.duration|add_class:"mt-1 block w-full rounded border-border-light bg-white" }}
+							{% if quiz_form.duration.errors %}
+							<div class="text-sm text-red-700 mt-1">{{ quiz_form.duration.errors|join:", " }}</div>
+							{% endif %}
+						</div>
+						<div>
+							<label class="block text-sm font-medium">Class / Subject</label>
+							{{ quiz_form.teacher_subject_class|add_class:"mt-1 block w-full rounded border-border-light bg-white" }}
+							{% if quiz_form.teacher_subject_class.errors %}
+							<div class="text-sm text-red-700 mt-1">{{ quiz_form.teacher_subject_class.errors|join:", " }}</div>
+							{% endif %}
 						</div>
 						<div class="md:col-span-2">
 							<label class="block text-sm font-medium">Description</label>
 							{{ quiz_form.description|add_class:"mt-1 block w-full rounded border-border-light bg-white" }}
+							{% if quiz_form.description.errors %}
+							<div class="text-sm text-red-700 mt-1">{{ quiz_form.description.errors|join:", " }}</div>
+							{% endif %}
 						</div>
 						<div>
 							<label class="block text-sm font-medium">Start Date</label>
 							{{ quiz_form.start_date|add_class:"mt-1 block w-full rounded border-border-light bg-white" }}
+							{% if quiz_form.start_date.errors %}
+							<div class="text-sm text-red-700 mt-1">{{ quiz_form.start_date.errors|join:", " }}</div>
+							{% endif %}
 						</div>
 						<div>
 							<label class="block text-sm font-medium">Due Date</label>
 							{{ quiz_form.due_date|add_class:"mt-1 block w-full rounded border-border-light bg-white" }}
+							{% if quiz_form.due_date.errors %}
+							<div class="text-sm text-red-700 mt-1">{{ quiz_form.due_date.errors|join:", " }}</div>
+							{% endif %}
 						</div>
 					</div>
 					<div class="mt-4 flex gap-2">
@@ -67,7 +95,7 @@
 
 				{% for question in questions %}
 				<div class="rounded-lg border bg-white p-4">
-					<form method="post">
+					<form method="post" enctype="multipart/form-data">
 						{% csrf_token %}
 						<input type="hidden" name="action" value="save_question" />
 						<input type="hidden" name="question_id" value="{{ question.id }}" />
@@ -75,7 +103,25 @@
 							<label class="block text-sm font-medium">Question {{ forloop.counter }}</label>
 							<textarea name="question_text_{{ question.id }}" rows="2" class="w-full mt-1 p-2 border rounded">{{ question.question_text }}</textarea>
 						</div>
+                        
+						<!-- Display existing question image if present -->
+						{% if question.image %}
+						<div class="mb-3">
+							<label class="block text-sm font-medium">Current Image</label>
+							<img src="{{ question.image.url }}" alt="Question image" class="mt-1 mb-2 max-h-48 object-contain rounded">
+							<div class="text-sm">
+								<label class="inline-flex items-center gap-2">
+									<input type="checkbox" name="remove_image_{{ question.id }}" />
+									<span>Remove image</span>
+								</label>
+							</div>
+						</div>
+						{% endif %}
 
+						<div class="mb-3">
+							<label class="block text-sm font-medium">Upload / Replace Image</label>
+							<input type="file" name="question_image_{{ question.id }}" accept="image/*" class="mt-1 block" />
+						</div>
 						<div class="grid grid-cols-1 md:grid-cols-2 gap-3">
 							{% for choice in choices_map|get_item:question.id %}
 							<div class="flex items-center gap-2">

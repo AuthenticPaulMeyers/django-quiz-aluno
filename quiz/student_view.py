@@ -21,7 +21,7 @@ def student_dashboard_view(request):
         return redirect('quiz:login')
     
     try:
-        student_obj = user.student
+        student_obj = getattr(user, 'student', None)
         if student_obj is None:
             messages.error(request, 'Student record not found.')
             return redirect('quiz:login')
@@ -67,6 +67,13 @@ def student_dashboard_view(request):
         quizzes_taken = student_obj.total_quizzes_taken()
         subjects_count = student_obj.subjects_covered_count()
 
+        # compute a safe student name for templates to avoid attribute errors
+        student_name = ''
+        try:
+            student_name = student_obj.get_full_name() if student_obj else ''
+        except Exception:
+            student_name = ''
+
         context = {
             'user': user,
             'active_quizzes': active_quizzes,
@@ -75,6 +82,7 @@ def student_dashboard_view(request):
             'average_score': f"{avg_score}%" if avg_score is not None else '0',
             'quizzes_taken': quizzes_taken,
             'subjects_covered': subjects_count,
+            'student_name': student_name,
             'title': 'Dashboard',
         }
         return render(request, 'students/student-dashboard.html', context)

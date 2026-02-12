@@ -9,19 +9,32 @@ class QuizForm(forms.ModelForm):
         fields = ['title', 'description', 'teacher_subject_class', 'duration', 'start_date', 'due_date']
         widgets = {
             'description': forms.Textarea(attrs={'rows': 3, 'placeholder': 'Add quiz instructions...'}),
-            'start_date': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
-            'due_date': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+            'start_date': forms.DateTimeInput(format='%Y-%m-%dT%H:%M', attrs={'type': 'datetime-local'}),
+            'due_date': forms.DateTimeInput(format='%Y-%m-%dT%H:%M', attrs={'type': 'datetime-local'}),
             'title': forms.TextInput(attrs={'placeholder': 'Enter quiz title'}),
             'duration': forms.TextInput(attrs={'placeholder': 'Enter time allowed'}),
         }
 
     def __init__(self, *args, teacher=None, **kwargs):
+        # Pop instance to access initial datetimes for formatting
+        instance = kwargs.get('instance', None)
         super().__init__(*args, **kwargs)
         if teacher:
             # Filter teacher_subject_class choices to only show classes taught by this teacher
             self.fields['teacher_subject_class'].queryset = TeacherSubjectClass.objects.filter(
                 subject_teacher__teacher=teacher
             )
+
+        # When editing existing quiz, format datetime values for datetime-local inputs
+        if instance is not None:
+            try:
+                if getattr(instance, 'start_date', None):
+                    self.initial['start_date'] = instance.start_date.strftime('%Y-%m-%dT%H:%M')
+                if getattr(instance, 'due_date', None):
+                    self.initial['due_date'] = instance.due_date.strftime('%Y-%m-%dT%H:%M')
+            except Exception:
+                # If formatting fails, leave initial values unset
+                pass
 
 class QuestionForm(forms.ModelForm):
     class Meta:

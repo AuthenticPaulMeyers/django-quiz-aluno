@@ -4,41 +4,50 @@ from .forms import LoginForm, ChangePasswordForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django_ratelimit.decorators import ratelimit
+import logging
+
+logger = logging.getLogger(__name__)
 
 # define the custom user model
 User = get_user_model()
 
 def login_view(request):
     if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            
-            if not username or not password:
-                messages.error(request, 'Wrong username or password.')
-                return redirect('quiz:login')
-            
-            # Check if the user exists
-            if not User.objects.filter(username=username).exists():
-                messages.error(request, 'Wrong username or password.')
-                return redirect('quiz:login')
+        try:
+            form = LoginForm(request.POST)
+            if form.is_valid():
+                username = form.cleaned_data['username']
+                password = form.cleaned_data['password']
 
-            user = authenticate(request, username=username, password=password)
+                if not username or not password:
+                    messages.error(request, 'Wrong username or password.')
+                    return redirect('quiz:login')
 
-            if user is None:
-                messages.error(request, 'Wrong username or password.')
-                return redirect('quiz:login')
+                # Check if the user exists
+                if not User.objects.filter(username=username).exists():
+                    messages.error(request, 'Wrong username or password.')
+                    return redirect('quiz:login')
 
-            login(request, user)
-            
-            if user.role == 'student':
-                # Redirect the student to the student dashboard
-                return redirect('quiz:student-dashboard')
-            
-            elif user.role == 'teacher':
-                # Redirect the teacher to the teacher-dashboard
-                return redirect('teachers:dashboard')
+                user = authenticate(request, username=username, password=password)
+
+                if user is None:
+                    messages.error(request, 'Wrong username or password.')
+                    return redirect('quiz:login')
+
+                login(request, user)
+
+                # Redirect based on role; default to home if unknown
+                if getattr(user, 'role', None) == 'student':
+                    return redirect('quiz:student-dashboard')
+                elif getattr(user, 'role', None) == 'teacher':
+                    return redirect('teachers:dashboard')
+                else:
+                    logger.warning(f"User {user.username} has unexpected role '{getattr(user, 'role', None)}' on login")
+                    return redirect('quiz:index')
+        except Exception as e:
+            logger.exception(f"Error during login for request: {e}")
+            messages.error(request, 'An error occurred while trying to log you in. Please try again.')
+            return redirect('quiz:login')
     else:
         form = LoginForm()
     return render(request, 'students/login.html', {'form': form, 'title': 'Login'})

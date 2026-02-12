@@ -425,6 +425,23 @@ def view_quiz_details(request, quiz_id):
 					choice.is_correct = bool(is_corr)
 					choice.save()
 
+				# handle image upload / removal
+				# remove image if requested
+				if request.POST.get(f'remove_image_{question.id}') == 'on':
+					if question.image:
+						try:
+							question.image.delete(save=False)
+						except Exception:
+							pass
+					question.image = None
+					question.save()
+
+				# process uploaded file
+				uploaded = request.FILES.get(f'question_image_{question.id}') if request.FILES else None
+				if uploaded:
+					question.image = uploaded
+					question.save()
+
 				messages.success(request, 'Question updated.')
 				return redirect('teachers:quiz-details', quiz_id=quiz.id)
 
