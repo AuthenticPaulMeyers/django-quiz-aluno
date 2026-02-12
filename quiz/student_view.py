@@ -1,5 +1,6 @@
 import logging
 from django.shortcuts import render, redirect
+import random
 
 logger = logging.getLogger(__name__)
 from .models import Quiz, Student, Question, Attempt, MultipleChoice, AttemptAnswer
@@ -211,13 +212,48 @@ def attempt_quiz_view(request, quiz_id):
 
     # get question and choices for the quiz
     questions = quiz.get_questions_with_choices()
-
-    questions_count = len(questions)
+    
+    # Randomize questions order
+    randomized_questions = list(questions)
+    random.shuffle(randomized_questions)
+    
+    # Store randomized question IDs and choices order
+    randomized_question_ids = [q['question'].id for q in randomized_questions]
+    randomized_choices_order = {}
+    
+    # For each question, randomize the answer choices
+    for q in randomized_questions:
+        question_id = q['question'].id
+        choices_list = list(q['choices'])
+        random.shuffle(choices_list)
+        randomized_choices_order[str(question_id)] = [c.id for c in choices_list]
+        q['choices'] = choices_list  # Update the question dict with randomized choices
+    
+    # Create or get an attempt record and store randomization
+    attempt, created = Attempt.objects.get_or_create(
+        student=student_obj, 
+        quiz=quiz,
+        is_completed=False,
+        defaults={
+            'score': 0,
+            'randomized_questions_order': randomized_question_ids,
+            'randomized_choices_order': randomized_choices_order
+        }
+    )
+    
+    # If attempt already exists but not completed, update randomization
+    if not created:
+        attempt.randomized_questions_order = randomized_question_ids
+        attempt.randomized_choices_order = randomized_choices_order
+        attempt.save()
+    
+    questions_count = len(randomized_questions)
  
     context = {
         'quiz': quiz,
-        'questions': questions,
+        'questions': randomized_questions,
         'questions_count': questions_count,
+        'attempt_id': attempt.id,
         'title': 'Attempt Exam',
     }
 
@@ -300,8 +336,10 @@ def quiz_results_view(request, quiz_id):
         }
         return render(request, 'students/quiz-results.html', context)
 
-    # Create an Attempt record (initial score 0, will update after grading)
-    attempt = Attempt.objects.create(student=student_obj, quiz=quiz, score=0, is_completed=False)
+    # Get the existing in-progress attempt or create one if not found
+    attempt = Attempt.objects.filter(student=student_obj, quiz=quiz, is_completed=False).first()
+    if not attempt:
+        attempt = Attempt.objects.create(student=student_obj, quiz=quiz, score=0, is_completed=False)
 
     questions = quiz.get_questions_with_choices()
     total_questions = len(questions)

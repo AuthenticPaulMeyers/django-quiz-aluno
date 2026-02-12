@@ -74,20 +74,20 @@
               </div>
               {% endif %}
               <div class="flex-grow">
-                <p class="font-medium text-gray-700 dark:text-foreground-dark">
+                <p class="font-medium text-gray-700 dark:text-foreground-dark no-copy">
                   {{ forloop.counter }}. {{ a.question }}
                 </p>
 
                 {% if not a.is_correct %}
                 <p class="text-sm text-subtle-light dark:text-subtle-dark">
-                  <b>Your answer:</b> <span class="line-through">{{ a.your_answer|default:'No answer' }}</span>
+                  <b>Your answer:</b> <span class="line-through no-copy">{{ a.your_answer|default:'No answer' }}</span>
                 </p>
                 <p class="text-sm text-subtle-light dark:text-subtle-dark">
                   <b>Correct answer:</b> {{ a.correct_answer|default:'-' }}
                 </p>
                 {% else %}
                 <p class="text-sm text-subtle-light dark:text-subtle-dark">
-                  <b>Your answer:</b> <span>{{ a.your_answer|default:'No answer' }}</span>
+                  <b>Your answer:</b> <span class="no-copy">{{ a.your_answer|default:'No answer' }}</span>
                 </p>
                 {% endif %}
               </div>

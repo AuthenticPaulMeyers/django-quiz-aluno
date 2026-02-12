@@ -341,6 +341,8 @@ class Attempt(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.SET_NULL, null=True, db_index=True)
     score = models.IntegerField()
     is_completed = models.BooleanField(default=False, db_index=True)
+    randomized_questions_order = models.JSONField(default=list, blank=True, help_text="Stores the randomized order of question IDs")
+    randomized_choices_order = models.JSONField(default=dict, blank=True, help_text="Stores the randomized order of choices for each question")
 
     def __str__(self):
         if self.quiz:
