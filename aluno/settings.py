@@ -137,7 +137,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Register the custom user model to be used for authentication
 AUTH_USER_MODEL = 'quiz.CustomUser'
 
-LOGIN_URL = 'login'
+LOGIN_URL = 'quiz:login'
 
 # Jazzmin settings
 JAZZMIN_SETTINGS = {
